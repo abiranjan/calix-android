@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scan_qr_bar_code_lay"
+    style="@style/LayoutMatch">
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        style="@style/LayoutMatch" />
+
+    <TextView
+        android:id="@+id/txtBarcodeValue"
+        style="@style/TextRobotoRegular"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/size5"
+        android:text="@string/no_barcode_detected"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

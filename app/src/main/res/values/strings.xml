@@ -1,0 +1,73 @@
+<resources>
+
+    <string name="app_name">Calix Gigaspire App</string>
+
+
+    <!--Login Screen-->
+    <string name="login">Login</string>
+    <string name="email_id">Email Id</string>
+    <string name="pwd">Password</string>
+    <string name="forgot_pwd_ques">Forgot Password?</string>
+    <string name="new_user">New User?</string>
+    <string name="submit">Submit</string>
+
+    <string name="forgot_pwd">Forgot Password</string>
+    <string name="enter_email_id">Please Enter Email Id</string>
+    <string name="enter_valid_email_id">Please Enter Valid Email Id</string>
+    <string name="enter_pwd">Please Enter Password</string>
+    <string name="enter_your_email_id">Enter your email id to reset the password.</string>
+
+    <!--Forgot pwd-->
+    <string name="cancel">Cancel</string>
+    <string name="send">Send</string>
+
+    <!--Registration Screen-->
+    <string name="registration">Registration</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="confirm_pwd">Confirm Password</string>
+    <string name="mob_num">Mobile Number</string>
+    <string name="router_default_name">%1$s\'s Router</string>
+
+    <string name="enter_first_name">Please Enter First Name</string>
+    <string name="enter_last_name">Please Enter Last Name</string>
+    <string name="pass_contains_eight_char">Password must have at least Eight Characters</string>
+    <string name="pwd_does_not_match">Password and Confirm Password Does Not Match</string>
+
+    <!--Router Configuration Screen-->
+    <string name="router_config">Router-Configuration</string>
+    <string name="config_qr_code">Config with QR Code</string>
+    <string name="or">Or</string>
+    <string name="enter_detail_below">Enter the router details below</string>
+    <string name="mac_address">MAC Address</string>
+    <string name="serial_number">Serial Number</string>
+    <string name="invalid_code">Invalid QR Code or Bar Code</string>
+    <string name="colon_sym">:</string>
+
+    <string name="enter_mac_address">Please Enter MAC Address</string>
+    <string name="enter_serial_number">Please Enter Serial Number</string>
+
+    <!--Bar code Scanner-->
+    <string name="no_barcode_detected">No Barcode Detected</string>
+    <string name="scanner_started">Scanner started</string>
+
+  <!--Router Detected Screen-->
+    <string name="network_detected">Network Successfully Detected</string>
+    <string name="router_name">Router Name</string>
+    <string name="network_name_ssid">Network Name (SSID)</string>
+
+    <string name="enter_router_name">Please Enter Router Name</string>
+    <string name="enter_network_name">Please Enter Network Name</string>
+    <string name="none">None</string>
+
+    <!--Dialog box-->
+    <string name="no_internet"> Please Verify Your Internet Connection.</string>
+    <string name="retry">Retry</string>
+    <string name="connect_time_out">Could not connect to Gigaspire App Server. Please try again.</string>
+    <string name="go_settings_per">Go to Settings and Enable the Permissions</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+
+</resources>
