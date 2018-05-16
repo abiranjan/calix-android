@@ -93,7 +93,6 @@
     </style>
 
 
-
     <!--Button text style OpenSans-Bold-->
     <style name="ButtonRobotoMedium" parent="android:Widget.Button">
         <item name="android:layout_width">match_parent</item>
@@ -114,6 +113,10 @@
         <item name="android:windowEnterAnimation">@anim/anim_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/anim_in_top</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

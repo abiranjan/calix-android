@@ -51,7 +51,7 @@
     <string name="no_barcode_detected">No Barcode Detected</string>
     <string name="scanner_started">Scanner started</string>
 
-  <!--Router Detected Screen-->
+    <!--Router Detected Screen-->
     <string name="network_detected">Network Successfully Detected</string>
     <string name="router_name">Router Name</string>
     <string name="network_name_ssid">Network Name (SSID)</string>
@@ -68,6 +68,13 @@
     <string name="ok">OK</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Sam</string>
+    <string name="nav_header_subtitle">sam123@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 
 
 </resources>

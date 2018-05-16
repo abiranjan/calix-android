@@ -1,0 +1,59 @@
+<RelativeLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_centerHorizontal="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.calix.calixgigaspireapp.utils.CircularLayout
+        android:id="@+id/circular_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/hexagonal-icon-devices"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/hexgonal_icon"/>
+
+        <TextView
+            android:id="@+id/deviceCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:padding="2dp"
+            android:gravity="center"
+            android:minWidth="17sp"
+            android:adjustViewBounds="true"
+            android:minHeight="17sp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="0"
+            android:background="@drawable/badge_background"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/center_device"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:layout_below="@id/hexagonal-icon-devices"
+            android:text="Devices"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

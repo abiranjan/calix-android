@@ -1,5 +1,6 @@
 package com.calix.calixgigaspireapp.main;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -54,6 +55,7 @@ public class BaseActivity extends AppCompatActivity implements InterfaceTwoBtnCa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_base);
 
         /*Default Init*/
         requestWindowFeature(Window.FEATURE_NO_TITLE);

@@ -208,7 +208,8 @@ public class Login extends BaseActivity {
             LoginResponse loginResponse = ( LoginResponse) resObj;
             PreferenceUtil.storeStringValue(this, AppConstants.AUTHORIZATION, loginResponse.getToken());
             PreferenceUtil.storeBoolPreferenceValue(this, AppConstants.LOGIN_STATUS, true);
-//            nextScreen(Dashboard.class);
+            nextScreen(Dashboard.class);
+
         } else if (resObj instanceof CommonResponse) {
             DialogManager.getInstance().showAlertPopup(this, "Success", this);
         }
