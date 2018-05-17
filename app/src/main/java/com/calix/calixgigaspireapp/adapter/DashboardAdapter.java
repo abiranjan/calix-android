@@ -7,7 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.calix.calixgigaspireapp.R;
 import com.calix.calixgigaspireapp.output.model.CategoryEntity;
@@ -34,7 +36,7 @@ public class DashboardAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(View collection, int position) {
+    public Object instantiateItem(View collection, final int position) {
         LayoutInflater inflater = (LayoutInflater) collection.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View hcRow =inflater.inflate(R.layout.adapter_dashboard,null);
@@ -47,11 +49,55 @@ public class DashboardAdapter extends PagerAdapter {
             LayoutInflater factory = LayoutInflater.from(context);
             View myView = factory.inflate(R.layout.honey_comb_view, null);
 
+            ImageView deviceIcon = myView.findViewById(R.id.deviceIcon);
+            switch (categories.get(position).get(i).getType()){
+                case 1 :
+                    deviceIcon.setImageDrawable(context.getDrawable(R.drawable.ic_phone));
+                    break;
+                case 2 :
+                    deviceIcon.setImageDrawable(context.getDrawable(R.drawable.ic_computer));
+                    break;
+                case 3 :
+                    deviceIcon.setImageDrawable(context.getDrawable(R.drawable.ic_console));
+                    break;
+                case 4 :
+                    deviceIcon.setImageDrawable(context.getDrawable(R.drawable.ic_storage));
+                    break;
+                case 5 :
+                    deviceIcon.setImageDrawable(context.getDrawable(R.drawable.ic_printer));
+                    break;
+                case 6 :
+                    deviceIcon.setImageDrawable(context.getDrawable(R.drawable.ic_television));
+                    break;
+                case 7 :
+                    deviceIcon.setImageDrawable(context.getDrawable(R.drawable.ic_iot_device));
+                    break;
+                case 8 :
+                    deviceIcon.setImageDrawable(context.getDrawable(R.drawable.ic_camera));
+                    break;
+            }
+
+            final int finalI = i;
+            deviceIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context,categories.get(position).get(finalI).getName(),Toast.LENGTH_SHORT).show();
+                }
+            });
+
             TextView deviceLabel = myView.findViewById(R.id.deviceLabel);
             deviceLabel.setText(categories.get(position).get(i).getName());
 
-            TextView deviceCount = myView.findViewById(R.id.deviceCount);
-            deviceCount.setText(String.valueOf(categories.get(position).get(i).getCount()));
+            TextView deviceCountTxtView = myView.findViewById(R.id.deviceCount);
+            if(categories.get(position).get(i).getCount() > 0) {
+                ImageView hexagonBg = myView.findViewById(R.id.hexagonal_icon_devices);
+                hexagonBg.setColorFilter(context.getResources().getColor(R.color.sky_blue));
+                deviceCountTxtView.setText(String.valueOf(categories.get(position).get(i).getCount()));
+            }
+            else {
+                //Hide Device count if 0
+                deviceCountTxtView.setVisibility(View.INVISIBLE);
+            }
 
             circularLayout.addView(myView);
         }

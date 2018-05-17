@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_dashboard"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Parental Control" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Guest Network" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Device List" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="IOT Device" />
+        <item
+            android:id="@+id/network_usage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Network Usage" />
+        <item
+            android:id="@+id/wifi_speed"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Wi-fi Speed" />
+        <item
+            android:id="@+id/alexa"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Alex" />
+        <item
+            android:id="@+id/calix_settings"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Settings" />
+    </group>
+
+</menu>

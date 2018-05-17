@@ -42,6 +42,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:id="@+id/img_fixed_center_device"
             android:padding="5dp"
             android:layout_centerInParent="true"
             app:srcCompat="@drawable/center_device"/>

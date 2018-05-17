@@ -1,10 +1,13 @@
 package com.calix.calixgigaspireapp.services;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.calix.calixgigaspireapp.fragment.DashboardFragment;
 import com.calix.calixgigaspireapp.input.model.LoginRegistrationInputModel;
 import com.calix.calixgigaspireapp.main.BaseActivity;
+import com.calix.calixgigaspireapp.main.BaseFragment;
 import com.calix.calixgigaspireapp.output.model.CommonResponse;
 import com.calix.calixgigaspireapp.output.model.DashboardResponse;
 import com.calix.calixgigaspireapp.output.model.EncryptionTypeResponse;
@@ -75,14 +78,14 @@ public class APIRequestHandler {
     }
 
     /*Dashboard API*/
-    public void dashboardTypeAPICall(final BaseActivity baseActivity) {
-        DialogManager.getInstance().showProgress(baseActivity);
-        mServiceInterface.dashboardAPI(PreferenceUtil.getAuthorization(baseActivity)).enqueue(new Callback<DashboardResponse>() {
+    public void dashboardTypeAPICall(final Context mContext, final NodeDetector nodeDetector) {
+        DialogManager.getInstance().showProgress(mContext);
+        mServiceInterface.dashboardAPI(PreferenceUtil.getAuthorization(mContext)).enqueue(new Callback<DashboardResponse>() {
             @Override
             public void onResponse(@NonNull Call<DashboardResponse> call, @NonNull Response<DashboardResponse> response) {
                 DialogManager.getInstance().hideProgress();
                 if (response.isSuccessful() && response.body() != null) {
-                    baseActivity.onRequestSuccess(response.body());
+                    nodeDetector.onRequestSuccess(response.body());
                 } else {
                     String errorMsgStr = response.raw().message();
                     try {
@@ -91,14 +94,14 @@ public class APIRequestHandler {
                     } catch (IOException | JsonParseException e) {
                         e.printStackTrace();
                     }
-                    baseActivity.onRequestFailure(new DashboardResponse(), new Throwable(errorMsgStr));
+                    nodeDetector.onRequestFailure(new DashboardResponse(), new Throwable(errorMsgStr));
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<DashboardResponse> call, @NonNull Throwable t) {
                 DialogManager.getInstance().hideProgress();
-                baseActivity.onRequestFailure(new DashboardResponse(), t);
+                nodeDetector.onRequestFailure(new DashboardResponse(), t);
             }
         });
     }

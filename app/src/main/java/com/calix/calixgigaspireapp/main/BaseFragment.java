@@ -83,7 +83,6 @@ public class BaseFragment extends Fragment {
     public void onFragmentBackPressed() {
     }
 
-
     /*API call back success*/
     public void onRequestSuccess(Object resObj) {
 

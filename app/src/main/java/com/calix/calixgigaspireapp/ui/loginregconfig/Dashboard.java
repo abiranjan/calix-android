@@ -36,9 +36,6 @@ import butterknife.ButterKnife;
 public class Dashboard extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-//    @BindView(R.id.circular_layout)
-//    CircularLayout circularLayout;
-
     @BindView(R.id.download)
     TextView download;
 
@@ -134,7 +131,7 @@ public class Dashboard extends BaseActivity
 
     /*API calls*/
     private void dashboardAPICall() {
-        APIRequestHandler.getInstance().dashboardTypeAPICall(this);
+//        APIRequestHandler.getInstance().dashboardTypeAPICall(this);
     }
 
     /*API request success and failure*/
@@ -169,22 +166,6 @@ public class Dashboard extends BaseActivity
 
             pager.setAdapter(new DashboardAdapter(this,splittedArray,dashboardResponse.getDeviceCount()));
             tabLayout.setupWithViewPager(pager, true);
-//
-//            circularLayout.setCapacity(categories.size());
-//            for (int i = 0; i < categories.size(); i++) {
-//                LayoutInflater factory = LayoutInflater.from(this);
-//                View myView = factory.inflate(R.layout.honey_comb_view, null);
-//
-//                TextView deviceLabel = myView.findViewById(R.id.deviceLabel);
-//                deviceLabel.setText(categories.get(i).getName());
-//
-//                TextView deviceCount = myView.findViewById(R.id.deviceCount);
-//                deviceCount.setText(String.valueOf(categories.get(i).getCount()));
-//
-//
-//                circularLayout.addView(myView);
-//            }
-//
 
         } else if (resObj instanceof CommonResponse) {
             DialogManager.getInstance().showAlertPopup(this, "Success", this);

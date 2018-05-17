@@ -323,6 +323,50 @@ public class DialogManager {
 
     }
 
+    public void showLogoutPopup(final Context context,final InterfaceEdtBtnCallback dialogAlertInterface) {
+        alertDismiss(mForgotPwdDialog);
+        mForgotPwdDialog = getDialog(context, R.layout.popup_logout_alert);
+
+        WindowManager.LayoutParams LayoutParams = new WindowManager.LayoutParams();
+        Window window = mForgotPwdDialog.getWindow();
+
+        if (window != null) {
+            LayoutParams.copyFrom(window.getAttributes());
+            LayoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+            LayoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            window.setAttributes(LayoutParams);
+            window.setGravity(Gravity.CENTER);
+        }
+
+        Button noBtn, yesBtn;
+
+        /*Init view*/
+        yesBtn = mForgotPwdDialog.findViewById(R.id.submit_btn);
+        noBtn = mForgotPwdDialog.findViewById(R.id.cancel_btn);
+
+
+        noBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mForgotPwdDialog.dismiss();
+                dialogAlertInterface.onNegativeClick();
+            }
+        });
+
+        yesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mForgotPwdDialog.dismiss();
+                dialogAlertInterface.onPositiveClick("");
+            }
+        });
+
+
+
+        alertShowing(mForgotPwdDialog);
+
+    }
+
 
 
 

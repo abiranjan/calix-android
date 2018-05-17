@@ -70,6 +70,10 @@
         <activity
             android:name=".ui.loginregconfig.Dashboard"
             android:label="@string/title_activity_dashboard"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.loginregconfig.HomeActivity"
+            android:label="@string/title_activity_home"
             android:theme="@style/AppTheme"></activity>
     </application>
 

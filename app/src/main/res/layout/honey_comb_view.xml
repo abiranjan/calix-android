@@ -7,6 +7,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:id="@+id/hexagonal-icon-devices"
+        android:tint="@color/gray_light"
         android:layout_centerInParent="true"
         app:srcCompat="@drawable/hexgonal_icon"/>
 
@@ -32,6 +33,7 @@
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:id="@+id/deviceIcon"
         android:padding="5dp"
         android:layout_centerInParent="true"
         app:srcCompat="@drawable/center_device"/>

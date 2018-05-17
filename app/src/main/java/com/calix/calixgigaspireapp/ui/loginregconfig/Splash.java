@@ -59,7 +59,7 @@ public class Splash extends BaseActivity {
                 Class<?> nextScreenClass = Login.class;
 
                 if (PreferenceUtil.getBoolPreferenceValue(Splash.this, AppConstants.LOGIN_STATUS)) {
-                    nextScreenClass = Dashboard.class;
+                    nextScreenClass = HomeActivity.class;
                 }
 
                 nextScreen(nextScreenClass);
