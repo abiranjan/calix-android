@@ -116,10 +116,6 @@ public class CircularLayout extends ViewGroup {
         int width = right - left;
         int height = bottom - top;
 
-        Log.d("width ", String.valueOf(width));
-        Log.d("height ", String.valueOf(height));
-
-
         if (width != height) {
             throw new IllegalStateException("width should be the same as height");
         }

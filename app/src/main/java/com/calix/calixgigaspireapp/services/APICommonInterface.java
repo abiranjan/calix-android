@@ -4,6 +4,8 @@ package com.calix.calixgigaspireapp.services;
 import com.calix.calixgigaspireapp.input.model.LoginRegistrationInputModel;
 import com.calix.calixgigaspireapp.output.model.CommonResponse;
 import com.calix.calixgigaspireapp.output.model.DashboardResponse;
+import com.calix.calixgigaspireapp.output.model.DeviceListEntity;
+import com.calix.calixgigaspireapp.output.model.DeviceListResponse;
 import com.calix.calixgigaspireapp.output.model.EncryptionTypeResponse;
 import com.calix.calixgigaspireapp.output.model.LoginResponse;
 import com.calix.calixgigaspireapp.output.model.RegistrationResponse;
@@ -18,6 +20,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
 public interface APICommonInterface {
 
@@ -55,5 +58,9 @@ public interface APICommonInterface {
     /*Dashboard API*/
     @GET("dashboard")
     Call<DashboardResponse> dashboardAPI(@Header("Authorization") String authorizationStr);
+
+    /*Dashboard API*/
+    @GET("device/list")
+    Call<DeviceListResponse> deviceListAPI(@Header("Authorization") String authorizationStr, @Query("type") String deviceType);
 
 }

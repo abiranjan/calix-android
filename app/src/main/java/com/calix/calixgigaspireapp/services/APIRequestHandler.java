@@ -1,13 +1,13 @@
 package com.calix.calixgigaspireapp.services;
 
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.calix.calixgigaspireapp.input.model.LoginRegistrationInputModel;
 import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.output.model.CommonResponse;
 import com.calix.calixgigaspireapp.output.model.DashboardResponse;
+import com.calix.calixgigaspireapp.output.model.DeviceListResponse;
 import com.calix.calixgigaspireapp.output.model.EncryptionTypeResponse;
 import com.calix.calixgigaspireapp.output.model.ErrorResponse;
 import com.calix.calixgigaspireapp.output.model.LoginResponse;
@@ -283,6 +283,35 @@ public class APIRequestHandler {
             public void onFailure(@NonNull Call<DashboardResponse> call, @NonNull Throwable t) {
                 DialogManager.getInstance().hideProgress();
                 baseActivity.onRequestFailure(new DashboardResponse(), t);
+            }
+        });
+    }
+
+    /*Device List API*/
+    public void deviceListAPICall(final BaseActivity baseActivity, String deviceType) {
+        DialogManager.getInstance().showProgress(baseActivity);
+        mServiceInterface.deviceListAPI(PreferenceUtil.getAuthorization(baseActivity),deviceType).enqueue(new Callback<DeviceListResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<DeviceListResponse> call, @NonNull Response<DeviceListResponse> response) {
+                DialogManager.getInstance().hideProgress();
+                if (response.isSuccessful() && response.body() != null) {
+                    baseActivity.onRequestSuccess(response.body());
+                } else {
+                    String errorMsgStr = response.raw().message();
+                    try {
+                        ErrorResponse errorBodyRes = new Gson().fromJson(Objects.requireNonNull(response.errorBody()).string(), ErrorResponse.class);
+                        errorMsgStr = errorBodyRes.getErrorDesc().isEmpty() ? errorMsgStr : errorBodyRes.getErrorDesc();
+                    } catch (IOException | JsonParseException e) {
+                        e.printStackTrace();
+                    }
+                    baseActivity.onRequestFailure(new DeviceListResponse(), new Throwable(errorMsgStr));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DeviceListResponse> call, @NonNull Throwable t) {
+                DialogManager.getInstance().hideProgress();
+                baseActivity.onRequestFailure(new DeviceListResponse(), t);
             }
         });
     }

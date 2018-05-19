@@ -243,9 +243,8 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
         tabLayout.setupWithViewPager(pager, true);
     }
 
-    /*Dashboard API calls*/
+    /*Dashboard API call*/
     private void dashboardAPICall() {
-        sysOut(PreferenceUtil.getAuthorization(this));
         APIRequestHandler.getInstance().dashboardTypeAPICall(this);
     }
 
@@ -268,9 +267,8 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                             .connect_time_out)), new InterfaceBtnCallback() {
                         @Override
                         public void onPositiveClick() {
-//                            if (resObj instanceof DashboardResponse)
-//                                dashBoardAPICall();
-//                            else routerMapAPICall();
+                            if (resObj instanceof DashboardResponse)
+                                dashboardAPICall();
                         }
                     });
         }
