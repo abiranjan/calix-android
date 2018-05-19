@@ -21,6 +21,7 @@ import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.output.model.CommonResponse;
 import com.calix.calixgigaspireapp.output.model.LoginResponse;
 import com.calix.calixgigaspireapp.services.APIRequestHandler;
+import com.calix.calixgigaspireapp.ui.dashboard.Dashboard;
 import com.calix.calixgigaspireapp.utils.AppConstants;
 import com.calix.calixgigaspireapp.utils.DialogManager;
 import com.calix.calixgigaspireapp.utils.InterfaceBtnCallback;
@@ -208,7 +209,7 @@ public class Login extends BaseActivity {
             LoginResponse loginResponse = ( LoginResponse) resObj;
             PreferenceUtil.storeStringValue(this, AppConstants.AUTHORIZATION, loginResponse.getToken());
             PreferenceUtil.storeBoolPreferenceValue(this, AppConstants.LOGIN_STATUS, true);
-//            nextScreen(Dashboard.class);
+            nextScreen(Dashboard.class);
         } else if (resObj instanceof CommonResponse) {
             DialogManager.getInstance().showAlertPopup(this, "Success", this);
         }

@@ -24,7 +24,7 @@ import com.calix.calixgigaspireapp.R;
 public class DialogManager {
 
     /*Init variable*/
-    private Dialog mProgressDialog, mNetworkErrorDialog, mAlertDialog, mOptionDialog,mForgotPwdDialog;
+    private Dialog mProgressDialog, mNetworkErrorDialog, mAlertDialog, mLogoutDialog, mOptionDialog,mForgotPwdDialog;
     private Toast mToast;
 
 
@@ -364,6 +364,49 @@ public class DialogManager {
 
         alertShowing(mNetworkErrorDialog);
     }
+
+    public void showLogoutPopup(final Context context, final InterfaceTwoBtnCallback dialogAlertInterface) {
+        alertDismiss(mLogoutDialog);
+        mLogoutDialog = getDialog(context, R.layout.popup_logout_alert);
+
+        WindowManager.LayoutParams LayoutParams = new WindowManager.LayoutParams();
+        Window window = mLogoutDialog.getWindow();
+
+        if (window != null) {
+            LayoutParams.copyFrom(window.getAttributes());
+            LayoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+            LayoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            window.setAttributes(LayoutParams);
+            window.setGravity(Gravity.CENTER);
+        }
+
+        Button yesBtn, noBtn;
+
+        /*Init view*/
+        yesBtn = mLogoutDialog.findViewById(R.id.yes_btn);
+        noBtn = mLogoutDialog.findViewById(R.id.no_btn);
+
+
+        yesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLogoutDialog.dismiss();
+                dialogAlertInterface.onPositiveClick();
+            }
+        });
+
+        noBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLogoutDialog.dismiss();
+                dialogAlertInterface.onNegativeClick();
+            }
+        });
+
+        alertShowing(mLogoutDialog);
+
+    }
+
 
 
     private void alertShowing(Dialog dialog) {

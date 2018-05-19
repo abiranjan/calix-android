@@ -11,10 +11,10 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
-   <!--App permissions-->
+    <!-- App permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -41,33 +41,41 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.loginregconfig.Login"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-
         <activity
             android:name=".ui.loginregconfig.Registration"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-
         <activity
             android:name=".ui.loginregconfig.RouterConfiguration"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-
         <activity
             android:name=".ui.loginregconfig.QRBarcodeScanner"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-
         <activity
             android:name=".ui.loginregconfig.RouterDetected"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
-        <!--Google vision plugin-->
+        <!-- Dashboard Screens -->
+        <activity
+            android:name=".ui.dashboard.Dashboard"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name=".ui.devices.Devices"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name=".ui.router.Router"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <!-- Google vision plugin -->
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-        <!--Fabric plugin-->
+        <!-- Fabric plugin -->
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="4ed2936e78c0de47af5684f24a561bd1618ae511" />

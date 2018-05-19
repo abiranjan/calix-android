@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 
 import com.calix.calixgigaspireapp.R;
 import com.calix.calixgigaspireapp.main.BaseActivity;
+import com.calix.calixgigaspireapp.ui.dashboard.Dashboard;
+import com.calix.calixgigaspireapp.utils.AppConstants;
+import com.calix.calixgigaspireapp.utils.PreferenceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,14 +59,11 @@ public class Splash extends BaseActivity {
 
                 Class<?> nextScreenClass = Login.class;
 
-//                if (PreferenceUtil.getBoolPreferenceValue(Splash.this, AppConstants.PASS_CODE_ENABLE_STATUS)) {
-//                    nextScreenClass = PinCodeFingerPrintLogin.class;
-//                } else if (PreferenceUtil.getBoolPreferenceValue(Splash.this, AppConstants.LOGIN_STATUS)) {
-//                    nextScreenClass = Dashboard.class;
-//                }
+                if (PreferenceUtil.getBoolPreferenceValue(Splash.this, AppConstants.LOGIN_STATUS)) {
+                    nextScreenClass = Dashboard.class;
+                }
 
                 nextScreen(nextScreenClass);
-//                nextScreen(RouterDetected.class);
 
             }
         };

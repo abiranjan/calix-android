@@ -3,6 +3,7 @@ package com.calix.calixgigaspireapp.services;
 
 import com.calix.calixgigaspireapp.input.model.LoginRegistrationInputModel;
 import com.calix.calixgigaspireapp.output.model.CommonResponse;
+import com.calix.calixgigaspireapp.output.model.DashboardResponse;
 import com.calix.calixgigaspireapp.output.model.EncryptionTypeResponse;
 import com.calix.calixgigaspireapp.output.model.LoginResponse;
 import com.calix.calixgigaspireapp.output.model.RegistrationResponse;
@@ -50,5 +51,9 @@ public interface APICommonInterface {
     @FormUrlEncoded
     @POST("router/update")
     Call<CommonResponse> routerUpdateAPI(@Header("Authorization") String authorizationStr, @Field("routerId") String routerIdStr, @Field("routerName") String routerNameStr, @Field("ssid") String ssidStr, @Field("password") String passwordStr, @Field("encryptionType") String encryptionTypeStr);
+
+    /*Dashboard API*/
+    @GET("dashboard")
+    Call<DashboardResponse> dashboardAPI(@Header("Authorization") String authorizationStr);
 
 }

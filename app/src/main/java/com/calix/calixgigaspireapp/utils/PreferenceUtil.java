@@ -85,4 +85,14 @@ public class PreferenceUtil {
         return (String) getValueFromPreference(context, STRING_PREFERENCE, key);
     }
 
+    /*delete preference*/
+    public static void deleteValuesFromPreference(Context context) {
+        if (context != null) {
+            SharedPreferences sharedPreference = context.getSharedPreferences(
+                    AppConstants.SHARE_PREFERENCE, Context.MODE_PRIVATE);
+            SharedPreferences.Editor edit = sharedPreference.edit();
+            edit.clear();
+            edit.apply();
+        }
+    }
 }

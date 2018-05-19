@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/LayoutWrap"
+    android:layout_centerInParent="true">
+
+    <ImageView
+        android:id="@+id/hexagonal-icon-devices"
+        android:layout_width="@dimen/size60"
+        android:layout_height="@dimen/size60"
+        android:layout_centerInParent="true"
+        android:tint="@color/gray_light"
+        app:srcCompat="@drawable/hexgonal_icon" />
+
+    <TextView
+        android:id="@+id/deviceCount"
+        style="@style/LayoutWrap"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/size40"
+        android:adjustViewBounds="true"
+        android:background="@drawable/badge_background"
+        android:gravity="center"
+        android:minHeight="@dimen/text17"
+        android:minWidth="@dimen/text17"
+        android:padding="@dimen/size2"
+        android:paddingLeft="@dimen/size4"
+        android:paddingRight="@dimen/size4"
+        android:text="@string/default_count"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text12" />
+
+    <ImageView
+        android:id="@+id/deviceIcon"
+        android:layout_width="@dimen/size40"
+        android:layout_height="@dimen/size40"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/size5"
+         />
+
+    <TextView
+        android:id="@+id/deviceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hexagonal-icon-devices"
+        android:layout_centerHorizontal="true"
+        android:text="@string/devices"
+        android:textColor="@color/black" />
+</RelativeLayout>

@@ -10,4 +10,8 @@
     <color name="gray_btn">#ECECEC</color>
     <color name="sky_blue">#64B5F6</color>
 
+    <color name="green">#26c117</color>
+    <color name="orange">#ec851d</color>
+
+
 </resources>

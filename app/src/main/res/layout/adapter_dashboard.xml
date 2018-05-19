@@ -1,0 +1,57 @@
+<RelativeLayout
+    style="@style/LayoutWrap"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_centerHorizontal="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.calix.calixgigaspireapp.utils.CircularLayout
+        android:id="@+id/circular_layout"
+        style="@style/LayoutMatch"
+        />
+
+    <RelativeLayout
+        style="@style/LayoutWrap"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:layout_width="@dimen/size60"
+            android:layout_height="@dimen/size60"
+            android:id="@+id/hexagonal-icon-devices"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/hexgonal_icon"/>
+
+        <TextView
+            android:id="@+id/deviceCount"
+            style="@style/LayoutWrap"
+            android:layout_marginStart="@dimen/size40"
+            android:padding="@dimen/size2"
+            android:gravity="center"
+            android:minWidth="@dimen/text17"
+            android:adjustViewBounds="true"
+            android:minHeight="@dimen/text17"
+            android:paddingLeft="@dimen/size4"
+            android:paddingRight="@dimen/size4"
+            android:text="@string/default_count"
+            android:background="@drawable/badge_background"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text12"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/size40"
+            android:layout_height="@dimen/size40"
+            android:id="@+id/img_fixed_center_device"
+            android:padding="@dimen/size5"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/center_device"/>
+
+        <TextView
+            style="@style/LayoutWrap"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:layout_below="@id/hexagonal-icon-devices"
+            android:text="@string/devices"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
