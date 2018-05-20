@@ -4,6 +4,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,6 +37,35 @@ public class DevicesList extends BaseActivity {
     @BindView(R.id.devices_header_bg_lay)
     RelativeLayout mDevicesHeaderBgLay;
 
+
+    /* Footer Variables */
+    @BindView(R.id.footer_right_btn)
+    ImageButton mFooterRightBtn;
+
+    @BindView(R.id.footer_right_ic)
+    ImageView mFooterRightIcon;
+
+    @BindView(R.id.footer_right_txt)
+    TextView mFooterRightTxt;
+
+    @BindView(R.id.footer_center_btn)
+    ImageButton mFooterCenterBtn;
+
+    @BindView(R.id.footer_center_ic)
+    ImageView mFooterCenterIcon;
+
+    @BindView(R.id.footer_center_txt)
+    TextView mFooterCenterTxt;
+
+    @BindView(R.id.footer_left_btn)
+    ImageButton mFooterLeftBtn;
+
+    @BindView(R.id.footer_left_ic)
+    ImageView mFooterLeftIcon;
+
+    @BindView(R.id.footer_left_txt)
+    TextView mFooterLeftTxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +83,7 @@ public class DevicesList extends BaseActivity {
         ButterKnife.bind(this);
 
         setHeaderView();
+        setFooterVIew();
 
         deviceListAPICall();
 
@@ -76,17 +108,30 @@ public class DevicesList extends BaseActivity {
         }
     }
 
+    /*Set Footer View */
+    private void setFooterVIew(){
+        mFooterLeftBtn.setBackground(getResources().getDrawable(R.drawable.footer_selection));
+        mFooterLeftIcon.setBackground(getResources().getDrawable(R.drawable.ic_default_device));
+        mFooterLeftTxt.setText(getString(R.string.devices));
+
+        mFooterCenterIcon.setBackground(getResources().getDrawable(R.drawable.ic_dashboard));
+        mFooterCenterTxt.setText(getString(R.string.dashboard));
+
+        mFooterRightIcon.setBackground(getResources().getDrawable(R.drawable.ic_router_map));
+        mFooterRightTxt.setText(getString(R.string.footer_router_map));
+    }
+
     /*View onClick*/
-    @OnClick({R.id.header_left_img_lay, R.id.footer_dashboard_btn, R.id.footer_router_btn})
+    @OnClick({R.id.header_left_img_lay, R.id.footer_center_btn, R.id.footer_right_btn})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.header_left_img_lay:
                 onBackPressed();
                 break;
-            case R.id.footer_dashboard_btn:
+            case R.id.footer_center_btn:
                 previousScreen(Dashboard.class);
                 break;
-            case R.id.footer_router_btn:
+            case R.id.footer_right_btn:
                 nextScreen(Router.class);
                 break;
         }

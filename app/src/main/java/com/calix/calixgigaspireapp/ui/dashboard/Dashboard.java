@@ -1,5 +1,6 @@
 package com.calix.calixgigaspireapp.ui.dashboard;
 
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -49,11 +51,20 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.header_left_img)
     ImageView mHeaderLeftImg;
 
+    @BindView(R.id.header_right_img)
+    ImageView mHeaderRightImg;
+
     @BindView(R.id.header_txt)
     TextView mHeaderTxt;
 
+    @BindView(R.id.header_right_img_lay)
+    RelativeLayout mHeaderRightImgLay;
+
     @BindView(R.id.dashboard_header_bg_lay)
     RelativeLayout mDashboardHeaderBgLay;
+
+    @BindView(R.id.dashboard_header_msg_lay)
+    RelativeLayout mDashboardHeaderMsgLay;
 
     @BindView(R.id.upload_speed_txt)
     TextView mUploadSpeedTxt;
@@ -73,6 +84,33 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
 
+    /* Footer Variables */
+    @BindView(R.id.footer_right_btn)
+    ImageButton mFooterRightBtn;
+
+    @BindView(R.id.footer_right_ic)
+    ImageView mFooterRightIcon;
+
+    @BindView(R.id.footer_right_txt)
+    TextView mFooterRightTxt;
+
+    @BindView(R.id.footer_center_btn)
+    ImageButton mFooterCenterBtn;
+
+    @BindView(R.id.footer_center_ic)
+    ImageView mFooterCenterIcon;
+
+    @BindView(R.id.footer_center_txt)
+    TextView mFooterCenterTxt;
+
+    @BindView(R.id.footer_left_btn)
+    ImageButton mFooterLeftBtn;
+
+    @BindView(R.id.footer_left_ic)
+    ImageView mFooterLeftIcon;
+
+    @BindView(R.id.footer_left_txt)
+    TextView mFooterLeftTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +133,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 
 
         setHeaderView();
+        setFooterVIew();
 
         dashboardAPICall();
 
@@ -102,21 +141,29 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 
 
     /*Set header*/
+
     private void setHeaderView() {
 
-        /*Header*/
-        mHeaderTxt.setVisibility(View.VISIBLE);
+        /*set header changes*/
+        mDashboardHeaderMsgLay.setVisibility(IsScreenModePortrait() ? View.VISIBLE : View.GONE);
         mHeaderLeftImg.setImageResource(R.drawable.menu_icon);
-        mHeaderTxt.setText(getString(R.string.dashboard));
+        mHeaderRightImgLay.setVisibility(View.VISIBLE);
+        mHeaderRightImg.setImageResource(R.drawable.ic_notification);
+        mHeaderTxt.setVisibility(View.VISIBLE);
+        if (IsScreenModePortrait())
+            mHeaderTxt.setText(getString(R.string.dashboard));
+        else
+            mHeaderTxt.setText(String.format(getString(R.string.dashboard_header), mNameTxt.getText()));
+
 
         /*Set header adjustment - status bar we applied transparent color so header tack full view*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mDashboardHeaderBgLay.post(new Runnable() {
                 public void run() {
-                    int heightInt = getResources().getDimensionPixelSize(R.dimen.size140);
+                    int heightInt = getResources().getDimensionPixelSize(IsScreenModePortrait() ? R.dimen.size120 : R.dimen.size45);
                     mDashboardHeaderBgLay.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, heightInt + NumberUtil.getInstance().getStatusBarHeight(Dashboard.this)));
                     mDashboardHeaderBgLay.setPadding(0, NumberUtil.getInstance().getStatusBarHeight(Dashboard.this), 0, 0);
-                    mDashboardHeaderBgLay.setBackground(getResources().getDrawable(R.drawable.header_bg));
+                    mDashboardHeaderBgLay.setBackground(IsScreenModePortrait() ? getResources().getDrawable(R.drawable.header_bg) : getResources().getDrawable(R.color.blue));
                 }
 
             });
@@ -124,11 +171,31 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 
     }
 
+    /*Set Footer View */
+    private void setFooterVIew() {
+        mFooterLeftIcon.setBackground(getResources().getDrawable(R.drawable.ic_default_device));
+        mFooterLeftTxt.setText(getString(R.string.devices));
+
+        mFooterCenterBtn.setBackground(getResources().getDrawable(R.drawable.footer_selection));
+        mFooterCenterIcon.setBackground(getResources().getDrawable(R.drawable.ic_dashboard));
+        mFooterCenterTxt.setText(getString(R.string.dashboard));
+
+        mFooterRightIcon.setBackground(getResources().getDrawable(R.drawable.ic_router_map));
+        mFooterRightTxt.setText(getString(R.string.footer_router_map));
+    }
+
+    /*Screen orientation Changes*/
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setHeaderView();
+    }
+
 
     /*View onClick*/
     @OnClick({R.id.header_left_img_lay, R.id.dashboard_lay, R.id.iot_device_lay, R.id.device_list_lay,
             R.id.my_media_lay, R.id.speed_test_lay, R.id.network_usage_lay, R.id.parental_control_lay,
-            R.id.guest_network_lay, R.id.settings_lay, R.id.alexa_lay, R.id.logout_lay, R.id.footer_devices_btn, R.id.footer_router_btn})
+            R.id.guest_network_lay, R.id.settings_lay, R.id.alexa_lay, R.id.logout_lay, R.id.footer_left_btn, R.id.footer_right_btn})
     public void onClick(final View v) {
         runOnUiThread(new Runnable() {
             @Override
@@ -177,11 +244,11 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         logoutFromApp();
                         break;
-                    case R.id.footer_devices_btn:
+                    case R.id.footer_left_btn:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         nextScreen(DevicesList.class);
                         break;
-                    case R.id.footer_router_btn:
+                    case R.id.footer_right_btn:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         nextScreen(Router.class);
                         break;
@@ -195,9 +262,9 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
     /*Populate the values*/
     private void setData(DashboardResponse dashboardResponse) {
 
-        mNameTxt.setText(dashboardResponse.getUser().getFirstName()+" "+dashboardResponse.getUser().getLastName());
-        mUploadSpeedTxt.setText(dashboardResponse.getSpeed().getUpload()+" "+getString(R.string.speed_unit));
-        mDownloadSpeedTxt.setText(dashboardResponse.getSpeed().getDownload()+" "+getString(R.string.speed_unit));
+        mNameTxt.setText(dashboardResponse.getUser().getFirstName() + " " + dashboardResponse.getUser().getLastName());
+        mUploadSpeedTxt.setText(dashboardResponse.getSpeed().getUpload() + " " + getString(R.string.speed_unit));
+        mDownloadSpeedTxt.setText(dashboardResponse.getSpeed().getDownload() + " " + getString(R.string.speed_unit));
 
         if (dashboardResponse.getUser().getAvatarURL().isEmpty()) {
             mUserProfileImg.setImageResource(R.drawable.default_profile_white);
@@ -213,24 +280,23 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
             }
         }
 
-        setAdapter(dashboardResponse.getCategories(),dashboardResponse.getDeviceCount());
+        setAdapter(dashboardResponse.getCategories(), dashboardResponse.getDeviceCount());
 
     }
 
     /*Set adapter*/
-    private void setAdapter(ArrayList<CategoryEntity> categories,final int deviceCount) {
+    private void setAdapter(ArrayList<CategoryEntity> categories, final int deviceCount) {
         ArrayList<List<CategoryEntity>> splittedArray = new ArrayList<>();//This list will contain all the splitted arrays.
         int lengthToSplit = 8;
 
         for (int i = 0; i < categories.size(); i += 8) {
             int start = i;
             int end = 0;
-            if (i+8 < categories.size()) {
+            if (i + 8 < categories.size()) {
                 end = (start + 8);
                 Log.d("start", String.valueOf(start));
                 Log.d("end", String.valueOf(end));
-            }
-            else {
+            } else {
                 end = categories.size();
                 Log.d("start1", String.valueOf(start));
                 Log.d("end1", String.valueOf(end));
@@ -238,7 +304,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
             splittedArray.add(categories.subList(start, end));
         }
 
-        pager.setAdapter(new DashboardAdapter(this,splittedArray,deviceCount));
+        pager.setAdapter(new DashboardAdapter(this, splittedArray, deviceCount));
         tabLayout.setupWithViewPager(pager, true);
     }
 

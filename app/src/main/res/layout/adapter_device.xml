@@ -22,16 +22,16 @@
 
             <LinearLayout
                 style="@style/LayoutWidMatch_HeiWrap"
-                android:layout_toStartOf="@+id/adapter_device_connect_lay">
+                android:layout_alignParentStart="true">
 
                 <ImageView
                     android:id="@+id/device_img"
                     android:layout_width="@dimen/size40"
                     android:layout_height="@dimen/size40"
-                    android:layout_marginStart="@dimen/size5"
+                    android:layout_marginStart="@dimen/size2"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/app_name"
-                    android:padding="@dimen/size6"
+                    android:padding="@dimen/size3"
                     android:src="@drawable/ic_devices_phone" />
 
                 <LinearLayout
@@ -47,59 +47,34 @@
                         android:layout_width="wrap_content"
                         android:ellipsize="end"
                         android:gravity="start"
-                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:maxWidth="@dimen/size100"
                         android:textColor="@color/black"
                         android:textSize="@dimen/size11" />
 
-                    <TextView
-                        android:id="@+id/device_sub_type_txt"
-                        style="@style/TextRobotoRegular"
-                        android:ellipsize="end"
-                        android:gravity="start"
-                        android:singleLine="true"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/size10" />
                 </LinearLayout>
             </LinearLayout>
 
 
             <LinearLayout
-                android:id="@+id/adapter_device_connect_lay"
-                style="@style/LayoutWrap"
-                android:layout_centerInParent="true"
-                android:orientation="vertical"
-                tools:ignore="UseCompoundDrawables">
-
-                <ImageView
-                    android:id="@+id/connection_status_img"
-                    android:layout_width="@dimen/size18"
-                    android:layout_height="@dimen/size18"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/app_name"/>
-
-                <TextView
-                    android:id="@+id/connection_status_txt"
-                    style="@style/TextRobotoRegular"
-                    android:layout_width="wrap_content"
-                    android:ellipsize="end"
-                    android:gravity="start"
-                    android:maxLines="2"
-                    android:text="@string/connected_to"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/size9" />
-            </LinearLayout>
-
-            <LinearLayout
                 style="@style/LayoutWidMatch_HeiWrap"
-                android:layout_toEndOf="@+id/adapter_device_connect_lay"
+                android:layout_alignParentEnd="true"
                 android:gravity="end"
                 android:padding="@dimen/size3"
                 tools:ignore="UseCompoundDrawables">
 
+                <ImageView
+                    android:id="@+id/connected_device_img"
+                    android:layout_width="@dimen/size30"
+                    android:layout_height="@dimen/size30"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_signal_strength" />
+
                 <TextView
-                    android:id="@+id/connected_device_name_txt"
                     style="@style/TextRobotoMedium"
+                    android:text="@string/signal_strength"
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/size3"
@@ -109,14 +84,17 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text9" />
 
-                <ImageView
-                    android:id="@+id/connected_device_img"
-                    android:layout_width="@dimen/size30"
-                    android:layout_height="@dimen/size30"
+                <TextView
+                    android:id="@+id/connected_device_signal_txt"
+                    style="@style/TextRobotoMedium"
+                    android:layout_width="wrap_content"
                     android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_up_arrow" />
+                    android:layout_marginEnd="@dimen/size3"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text9" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -136,53 +114,6 @@
             <RelativeLayout
                 style="@style/LayoutWidMatch_HeiWrap"
                 android:visibility="visible">
-
-
-                <ImageView
-                    android:id="@+id/wifi_img"
-                    android:layout_width="@dimen/size40"
-                    android:layout_height="@dimen/size40"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/app_name"
-                    android:padding="@dimen/size7"
-                    android:src="@drawable/ic_up_arrow" />
-
-                <TextView
-                    style="@style/TextRobotoRegular"
-                    android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/wifi_img"
-                    android:layout_toStartOf="@+id/signal_strength_txt"
-                    android:ellipsize="end"
-                    android:gravity="start"
-                    android:maxLines="2"
-                    android:text="@string/speed_unit"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text10" />
-
-                <TextView
-                    android:id="@+id/signal_strength_txt"
-                    style="@style/TextRobotoMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/text15" />
-
-            </RelativeLayout>
-
-            <View
-                style="@style/LayoutWidMatch_HeiWrap"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size0.25"
-                android:background="@color/gray" />
-
-            <RelativeLayout
-                style="@style/LayoutWidMatch_HeiWrap"
-                android:visibility="visible">
-
 
                 <ImageView
                     android:id="@+id/connect_disconnect_img"
@@ -216,135 +147,16 @@
                     android:padding="@dimen/size5"
                     android:scaleX="0.8"
                     android:scaleY="0.8"
-                    app:switchMinWidth="@dimen/size5" />
+                    app:switchMinWidth="@dimen/size5"
+                    android:textColor="@color/white"
+                    android:textOff="@string/off"
+                    android:textOn="@string/on"
+                    app:showText="true"/>
 
             </RelativeLayout>
 
-            <View
-                style="@style/LayoutWidMatch_HeiWrap"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size0.25"
-                android:background="@color/gray" />
-
-            <LinearLayout style="@style/LayoutWidMatch_HeiWrap">
-
-                <LinearLayout
-                    style="@style/LayoutWidWei_HeiWrap"
-                    android:layout_weight="1.2"
-                    tools:ignore="UseCompoundDrawables">
-
-                    <ImageView
-                        android:layout_width="@dimen/size40"
-                        android:layout_height="@dimen/size40"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@string/app_name"
-                        android:padding="@dimen/size7"
-                        android:src="@drawable/ic_up_arrow" />
-
-                    <TextView
-                        style="@style/TextRobotoRegular"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center"
-                        android:ellipsize="end"
-                        android:gravity="start"
-                        android:maxLines="2"
-                        android:text="@string/speed_unit"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text10" />
-                </LinearLayout>
-
-                <LinearLayout
-                    style="@style/LayoutWidWei_HeiWrap"
-                    android:layout_gravity="center"
-                    tools:ignore="UseCompoundDrawables">
-
-                    <ImageView
-                        android:layout_width="@dimen/size20"
-                        android:layout_height="@dimen/size20"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@string/app_name"
-                        android:padding="@dimen/size3"
-                        android:src="@drawable/ic_down_arrow" />
-
-                    <TextView
-                        android:id="@+id/download_speed_txt"
-                        style="@style/TextRobotoMedium"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center"
-                        android:ellipsize="end"
-                        android:gravity="start"
-                        android:maxLines="2"
-                        android:textColor="@color/blue"
-                        android:textSize="@dimen/text12" />
-
-                    <TextView
-                        style="@style/TextRobotoRegular"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/size5"
-                        android:ellipsize="end"
-                        android:gravity="start"
-                        android:maxLines="2"
-                        android:text="@string/speed_unit"
-                        android:textColor="@color/orange"
-                        android:textSize="@dimen/text6" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="@dimen/size0.25"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/size3"
-                    android:layout_marginEnd="@dimen/size5"
-                    android:layout_marginStart="@dimen/size5"
-                    android:layout_marginTop="@dimen/size3"
-                    android:background="@color/gray" />
-
-                <LinearLayout
-                    style="@style/LayoutWidWei_HeiWrap"
-                    android:layout_gravity="center"
-                    tools:ignore="UseCompoundDrawables">
-
-                    <ImageView
-                        android:layout_width="@dimen/size20"
-                        android:layout_height="@dimen/size20"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@string/app_name"
-                        android:padding="@dimen/size3"
-                        android:src="@drawable/ic_up_arrow" />
-
-                    <TextView
-                        android:id="@+id/upload_speed_txt"
-                        style="@style/TextRobotoMedium"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center"
-                        android:ellipsize="end"
-                        android:gravity="start"
-                        android:maxLines="2"
-                        android:textColor="@color/blue"
-                        android:textSize="@dimen/text12" />
-
-                    <TextView
-                        style="@style/TextRobotoRegular"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/size5"
-                        android:ellipsize="end"
-                        android:gravity="start"
-                        android:maxLines="2"
-                        android:text="@string/speed_unit"
-                        android:textColor="@color/orange"
-                        android:textSize="@dimen/text6" />
-                </LinearLayout>
-            </LinearLayout>
-
         </LinearLayout>
 
-
-        <View
-            style="@style/LayoutWidMatch_HeiWrap"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size0.25"
-            android:background="@color/gray" />
 
         <ImageView
             android:id="@+id/visible_invisible_img"

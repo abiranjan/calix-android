@@ -39,7 +39,7 @@ public class ImageUtil {
     /*find the device Image*/
     public int connectedStatusViaRouterImg(boolean isDeviceConnectedStatusBool, String deviceConnectedStr) {
 //        return deviceConnectedStr.contains(AppConstants.ETHER_NET) ? (isDeviceConnectedStatusBool ? (R.drawable.ethernet_connection) : (R.drawable.ethernet_disconnection)):(isDeviceConnectedStatusBool ? (R.drawable.wifi_connected) : (R.drawable.wifi_disconnected));
-        return R.drawable.wifi_connected;
+        return isDeviceConnectedStatusBool ? R.drawable.wifi_disconnected : (R.drawable.wifi_connected);
     }
 
 

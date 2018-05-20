@@ -8,7 +8,7 @@
 
     <android.support.v4.widget.NestedScrollView
         style="@style/LayoutMatch"
-        android:layout_above="@id/bottom_bar_lay"
+        android:layout_above="@id/tablayoutDots"
         android:background="@color/white">
 
         <LinearLayout
@@ -19,7 +19,7 @@
             <RelativeLayout
                 android:id="@+id/dashboard_header_bg_lay"
                 style="@style/LayoutWidMatch_HeiWrap"
-                android:layout_height="@dimen/size140"
+                android:layout_height="@dimen/size120"
                 android:background="@drawable/header_bg">
 
                 <RelativeLayout
@@ -37,8 +37,8 @@
 
                     <com.calix.calixgigaspireapp.utils.RoundedImageView
                         android:id="@+id/user_profile_img"
-                        android:layout_width="@dimen/size50"
-                        android:layout_height="@dimen/size50"
+                        android:layout_width="@dimen/size40"
+                        android:layout_height="@dimen/size40"
                         android:layout_centerHorizontal="true"
                         android:layout_margin="@dimen/size4"
                         android:contentDescription="@string/app_name"
@@ -50,7 +50,7 @@
                         android:layout_below="@id/user_profile_img"
                         android:layout_marginTop="@dimen/size2"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text11" />
+                        android:textSize="@dimen/text10" />
 
                 </RelativeLayout>
             </RelativeLayout>
@@ -65,7 +65,7 @@
                     android:layout_margin="@dimen/size1"
                     android:layout_weight="1"
                     android:background="@color/green"
-                    android:padding="@dimen/size5">
+                    android:padding="@dimen/size2">
 
                     <TextView
                         android:id="@+id/download_speed_txt"
@@ -74,7 +74,7 @@
                         android:layout_centerHorizontal="true"
                         android:text="@string/defaultSpeed"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text15" />
+                        android:textSize="@dimen/text13" />
 
                     <TextView
                         style="@style/TextRobotoRegular"
@@ -83,13 +83,13 @@
                         android:layout_centerHorizontal="true"
                         android:text="@string/download"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text13" />
+                        android:textSize="@dimen/text11" />
 
                     <ImageView
                         android:layout_width="@dimen/size40"
                         android:layout_height="@dimen/size20"
                         android:layout_alignParentEnd="true"
-                        android:layout_margin="@dimen/size5"
+                        android:layout_margin="@dimen/size2"
                         android:tint="@color/white"
                         app:srcCompat="@drawable/download" />
 
@@ -100,7 +100,7 @@
                     android:layout_margin="@dimen/size1"
                     android:layout_weight="1"
                     android:background="@color/green"
-                    android:padding="@dimen/size5">
+                    android:padding="@dimen/size2">
 
                     <TextView
                         android:id="@+id/upload_speed_txt"
@@ -109,7 +109,7 @@
                         android:layout_centerHorizontal="true"
                         android:text="@string/defaultSpeed"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text15" />
+                        android:textSize="@dimen/text13" />
 
                     <TextView
                         style="@style/TextRobotoRegular"
@@ -118,13 +118,13 @@
                         android:layout_centerHorizontal="true"
                         android:text="@string/upload"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text13" />
+                        android:textSize="@dimen/text11" />
 
                     <ImageView
                         android:layout_width="@dimen/size40"
                         android:layout_height="@dimen/size20"
                         android:layout_alignParentEnd="true"
-                        android:layout_margin="@dimen/size5"
+                        android:layout_margin="@dimen/size2"
                         android:tint="@color/white"
                         app:srcCompat="@drawable/upload" />
                 </RelativeLayout>
@@ -132,7 +132,9 @@
             </LinearLayout>
 
             <RelativeLayout
-                style="@style/LayoutWrap">
+                android:layout_width="@dimen/size240"
+                android:layout_height="@dimen/size240"
+                android:layout_gravity="center">
 
                 <RelativeLayout
                     android:id="@+id/pagerLayout"
@@ -143,82 +145,45 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                    <android.support.v4.view.ViewPager
-                        android:id="@+id/devices_viewpager"
-                        style="@style/LayoutWidMatch_HeiWei"
-                        app:layout_constraintDimensionRatio="1:1"
-                        android:layout_centerHorizontal="true" />
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/devices_viewpager"
+                            style="@style/LayoutWidMatch_HeiWei"
+                            android:layout_centerHorizontal="true"
+                            app:layout_constraintDimensionRatio="1:1" />
                     </android.support.constraint.ConstraintLayout>
 
                 </RelativeLayout>
 
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tab_layout"
-                    style="@style/LayoutWidMatch_HeiWrap"
-                    android:layout_below="@id/pagerLayout"
-                    app:tabBackground="@drawable/tab_selector"
-                    app:tabGravity="center"
-                    app:tabIndicatorHeight="0dp" />
-
             </RelativeLayout>
-
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
-        android:id="@+id/bottom_bar_lay"
-        style="@style/LayoutWidMatch_HeiWrap"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:weightSum="3">
+    <LinearLayout style="@style/LayoutWrap"
+        android:orientation="vertical"
+        android:id="@+id/tablayoutDots"
+        android:layout_above="@id/bottom_bar_lay"
+        android:layout_centerHorizontal="true"
+        >
 
-        <Button
-            android:id="@+id/footer_devices_btn"
-            style="@style/LayoutWidMatch_HeiWrap"
-            android:layout_weight="1"
-            android:background="@color/blue"
-            android:padding="@dimen/size10"
-            android:text="@string/footer_devices"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text13" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            style="@style/LayoutWrap"
+            android:layout_height="@dimen/size7"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp" />
 
-        <RelativeLayout
-            style="@style/LayoutMatch"
-            android:layout_weight="1"
-            android:background="@color/blue">
-
-            <ImageButton
-                android:id="@+id/footer_background"
-                android:layout_width="@dimen/size100"
-                android:layout_height="@dimen/size50"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:background="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/footer_selection" />
-
-            <TextView
-                android:id="@+id/imageViewText"
-                style="@style/TextRobotoRegular"
-                android:layout_centerInParent="true"
-                android:padding="@dimen/size10"
-                android:text="@string/footer_dashboard"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text13" />
-
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/footer_router_btn"
-            style="@style/LayoutWidMatch_HeiWrap"
-            android:layout_weight="1"
-            android:background="@color/blue"
-            android:padding="@dimen/size10"
-            android:text="@string/footer_router_map"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text13" />
+        <TextView
+            android:id="@+id/more_txt"
+            style="@style/TextRobotoRegular"
+            android:padding="@dimen/size2"
+            android:text="@string/more"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text10" />
     </LinearLayout>
+
+    <include layout="@layout/ui_general_footer" />
 
 </RelativeLayout>
 

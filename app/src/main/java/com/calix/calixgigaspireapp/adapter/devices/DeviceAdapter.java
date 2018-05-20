@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 
 import com.calix.calixgigaspireapp.R;
+import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.output.model.DeviceEntity;
+import com.calix.calixgigaspireapp.services.APIRequestHandler;
 import com.calix.calixgigaspireapp.utils.ImageUtil;
 
 import java.util.ArrayList;
@@ -51,32 +53,19 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ControlHol
         boolean isDeviceConnectedBool = deviceListResponse.isConnected2network();
         Log.d("adapter data",deviceListResponse.getName());
         holder.mDeviceImg.setImageResource(ImageUtil.getInstance().deviceImg(deviceListResponse.getType()));
-        holder.mDeviceNameTxt.setText(deviceListResponse.getName());
-        holder.mDeviceSubTypeTxt.setText(deviceListResponse.getSubType() == 1 ? mContext.getString(R.string.android) : mContext.getString(R.string.ios));
-        holder.mConnectedDeviceNameTxt.setText(deviceListResponse.getRouter().getName());
-
-        holder.mConnectionStatusImg.setImageResource(ImageUtil.getInstance().connectedStatusViaRouterImg(isDeviceConnectedBool,deviceListResponse.getIfType()));
-        holder.mConnectionStatusTxt.setText(mContext.getString(isDeviceConnectedBool ? R.string.connected_to : R.string.disconnected_from));
-
-
-        holder.mSignalStrengthTxt.setText(deviceListResponse.getSignalStrength() + " " + mContext.getString(R.string.percentage_sys));
-
+        holder.mDeviceNameTxt.setText(String.format(deviceListResponse.getSubType() == 1 ? mContext.getString(R.string.android) : mContext.getString(R.string.ios),deviceListResponse.getName()));
+        holder.mConnectedDeviceSignalTxt.setText(deviceListResponse.getSignalStrength()+mContext.getString(R.string.percentage_sys));
 
         holder.mConnectDisconnectImg.setImageResource(ImageUtil.getInstance().connectedStatusViaRouterImg(!isDeviceConnectedBool,deviceListResponse.getIfType()));
-        holder.mConnectDisconnectTxt.setText(String.format(mContext.getString(isDeviceConnectedBool ? R.string.disconnect_device : R.string.connect_device), deviceListResponse.getRouter().getName()));
+        holder.mConnectDisconnectTxt.setText(String.format(mContext.getString(isDeviceConnectedBool ? R.string.connect_device : R.string.disconnect_device), deviceListResponse.getRouter().getName()));
         holder.mConnectDisconnectSwitchCompat.setChecked(isDeviceConnectedBool);
 
-        holder.mDownloadSpeedTxt.setText(deviceListResponse.getSpeed().getDownload());
-        holder.mUploadSpeedTxt.setText(deviceListResponse.getSpeed().getUpload());
-
-
-        holder.mDeviceSubTypeTxt.setVisibility(deviceListResponse.getSubType() == 0 ? View.GONE : View.VISIBLE);
         holder.mVisibleInvisibleImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean isDetailsShowingBool = holder.mDeviceDetailsLay.getVisibility() == View.VISIBLE;
                 holder.mDeviceDetailsLay.setVisibility(isDetailsShowingBool ? View.GONE : View.VISIBLE);
-                holder.mVisibleInvisibleImg.setImageResource(isDetailsShowingBool ? R.drawable.ic_up_arrow : R.drawable.down_arrow);
+                holder.mVisibleInvisibleImg.setImageResource(isDetailsShowingBool ? R.drawable.ic_up_arrow : R.drawable.ic_down_arrow);
 
             }
         });
@@ -85,17 +74,13 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ControlHol
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                holder.mConnectionStatusImg.setImageResource(ImageUtil.getInstance().connectedStatusViaRouterImg(isChecked,mDeviceListResponse.get(holder.getAdapterPosition()).getIfType()));
-
-                holder.mConnectionStatusTxt.setText(mContext.getString(isChecked ? R.string.connected_to : R.string.disconnected_from));
-
                 holder.mConnectDisconnectImg.setImageResource(ImageUtil.getInstance().connectedStatusViaRouterImg(!isChecked,mDeviceListResponse.get(holder.getAdapterPosition()).getIfType()));
-                holder.mConnectDisconnectTxt.setText(String.format(mContext.getString(isChecked ? R.string.disconnect_device : R.string.connect_device), mDeviceListResponse.get(holder.getAdapterPosition()).getRouter().getName()));
+                holder.mConnectDisconnectTxt.setText(String.format(mContext.getString(isChecked ? R.string.connect_device : R.string.disconnect_device), mDeviceListResponse.get(holder.getAdapterPosition()).getRouter().getName()));
 
-//                if (isChecked)
-//                    APIRequestHandler.getInstance().deviceConnectAPICall(mDeviceListResponse.get(holder.getAdapterPosition()).getDeviceId(), ((BaseActivity) mContext));
-//                else
-//                    APIRequestHandler.getInstance().deviceDisconnectAPICall(mDeviceListResponse.get(holder.getAdapterPosition()).getDeviceId(), ((BaseActivity) mContext));
+                if (isChecked)
+                    APIRequestHandler.getInstance().deviceConnectAPICall(mDeviceListResponse.get(holder.getAdapterPosition()).getDeviceId(), ((BaseActivity) mContext));
+                else
+                    APIRequestHandler.getInstance().deviceDisconnectAPICall(mDeviceListResponse.get(holder.getAdapterPosition()).getDeviceId(), ((BaseActivity) mContext));
 
 
 
@@ -127,23 +112,11 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ControlHol
         @BindView(R.id.device_name_txt)
         TextView mDeviceNameTxt;
 
-        @BindView(R.id.device_sub_type_txt)
-        TextView mDeviceSubTypeTxt;
-
-        @BindView(R.id.connection_status_img)
-        ImageView mConnectionStatusImg;
-
-        @BindView(R.id.connection_status_txt)
-        TextView mConnectionStatusTxt;
-
-        @BindView(R.id.connected_device_name_txt)
-        TextView mConnectedDeviceNameTxt;
+        @BindView(R.id.connected_device_signal_txt)
+        TextView mConnectedDeviceSignalTxt;
 
         @BindView(R.id.connected_device_img)
         ImageView mConnectedDeviceImg;
-
-        @BindView(R.id.signal_strength_txt)
-        TextView mSignalStrengthTxt;
 
         @BindView(R.id.connect_disconnect_img)
         ImageView mConnectDisconnectImg;
@@ -153,12 +126,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ControlHol
 
         @BindView(R.id.connect_disconnect_switch_compat)
         SwitchCompat mConnectDisconnectSwitchCompat;
-
-        @BindView(R.id.download_speed_txt)
-        TextView mDownloadSpeedTxt;
-
-        @BindView(R.id.upload_speed_txt)
-        TextView mUploadSpeedTxt;
 
         @BindView(R.id.device_details_lay)
         LinearLayout mDeviceDetailsLay;

@@ -62,4 +62,14 @@ public interface APICommonInterface {
     @GET("device/list")
     Call<DeviceListResponse> deviceListAPI(@Header("Authorization") String authorizationStr, @Query("type") String deviceType);
 
+    /*Disconnect the DeviceAPI*/
+    @FormUrlEncoded
+    @POST("device/disconnect")
+    Call<CommonResponse> deviceDisconnectAPI(@Header("Authorization") String authorizationStr, @Field("deviceId") String deviceIdStr);
+
+    /*Disconnect the DeviceAPI*/
+    @FormUrlEncoded
+    @POST("device/connect")
+    Call<CommonResponse> deviceConnectAPI(@Header("Authorization") String authorizationStr, @Field("deviceId") String deviceIdStr);
+
 }

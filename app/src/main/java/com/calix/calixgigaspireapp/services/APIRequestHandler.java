@@ -316,6 +316,64 @@ public class APIRequestHandler {
         });
     }
 
+    /*Connect the Device API*/
+    public void deviceConnectAPICall(String deviceIdStr, final BaseActivity baseActivity) {
+        DialogManager.getInstance().showProgress(baseActivity);
+        mServiceInterface.deviceConnectAPI(PreferenceUtil.getAuthorization(baseActivity), deviceIdStr).enqueue(new Callback<CommonResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<CommonResponse> call, @NonNull Response<CommonResponse> response) {
+                DialogManager.getInstance().hideProgress();
+                if (response.isSuccessful() && response.code() == 200) {
+                    baseActivity.onRequestSuccess(response.body());
+                } else {
+                    String errorMsgStr = response.raw().message();
+                    try {
+                        ErrorResponse errorBodyRes = new Gson().fromJson(Objects.requireNonNull(response.errorBody()).string(), ErrorResponse.class);
+                        errorMsgStr = errorBodyRes.getErrorDesc().isEmpty() ? errorMsgStr : errorBodyRes.getErrorDesc();
+                    } catch (IOException | JsonParseException e) {
+                        e.printStackTrace();
+                    }
+                    baseActivity.onRequestFailure(new CommonResponse(), new Throwable(errorMsgStr));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<CommonResponse> call, @NonNull Throwable t) {
+                DialogManager.getInstance().hideProgress();
+                baseActivity.onRequestFailure(new CommonResponse(), t);
+            }
+        });
+    }
+
+    /*Disconnect the Device API*/
+    public void deviceDisconnectAPICall(String deviceIdStr, final BaseActivity baseActivity) {
+        DialogManager.getInstance().showProgress(baseActivity);
+        mServiceInterface.deviceDisconnectAPI(PreferenceUtil.getAuthorization(baseActivity), deviceIdStr).enqueue(new Callback<CommonResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<CommonResponse> call, @NonNull Response<CommonResponse> response) {
+                DialogManager.getInstance().hideProgress();
+                if (response.isSuccessful() && response.code() == 200) {
+                    baseActivity.onRequestSuccess(response.body());
+                } else {
+                    String errorMsgStr = response.raw().message();
+                    try {
+                        ErrorResponse errorBodyRes = new Gson().fromJson(Objects.requireNonNull(response.errorBody()).string(), ErrorResponse.class);
+                        errorMsgStr = errorBodyRes.getErrorDesc().isEmpty() ? errorMsgStr : errorBodyRes.getErrorDesc();
+                    } catch (IOException | JsonParseException e) {
+                        e.printStackTrace();
+                    }
+                    baseActivity.onRequestFailure(new CommonResponse(), new Throwable(errorMsgStr));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<CommonResponse> call, @NonNull Throwable t) {
+                DialogManager.getInstance().hideProgress();
+                baseActivity.onRequestFailure(new CommonResponse(), t);
+            }
+        });
+    }
+
 
 }
 
