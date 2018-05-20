@@ -2,7 +2,7 @@ package com.calix.calixgigaspireapp.output.model;
 
 import java.io.Serializable;
 
-public class DeviceListEntity implements Serializable {
+public class DeviceEntity implements Serializable {
 
     private String deviceId;
     private String name;
@@ -18,7 +18,7 @@ public class DeviceListEntity implements Serializable {
     private int channel;
     private String ifType;
 
-    public DeviceListEntity(){
+    public DeviceEntity(){
         this.speed = new SpeedEntity();
     }
 
@@ -26,7 +26,7 @@ public class DeviceListEntity implements Serializable {
         return deviceId;
     }
 
-    public DeviceListEntity setDeviceId(String deviceId) {
+    public DeviceEntity setDeviceId(String deviceId) {
         this.deviceId = deviceId;
         return this;
     }
@@ -35,7 +35,7 @@ public class DeviceListEntity implements Serializable {
         return name;
     }
 
-    public DeviceListEntity setName(String name) {
+    public DeviceEntity setName(String name) {
         this.name = name;
         return this;
     }
@@ -44,7 +44,7 @@ public class DeviceListEntity implements Serializable {
         return speed;
     }
 
-    public DeviceListEntity setSpeed(SpeedEntity speed) {
+    public DeviceEntity setSpeed(SpeedEntity speed) {
         this.speed = speed;
         return this;
     }
@@ -53,7 +53,7 @@ public class DeviceListEntity implements Serializable {
         return signalStrength;
     }
 
-    public DeviceListEntity setSignalStrength(double signalStrength) {
+    public DeviceEntity setSignalStrength(double signalStrength) {
         this.signalStrength = signalStrength;
         return this;
     }
@@ -62,7 +62,7 @@ public class DeviceListEntity implements Serializable {
         return router;
     }
 
-    public DeviceListEntity setRouter(RouterEntity router) {
+    public DeviceEntity setRouter(RouterEntity router) {
         this.router = router;
         return this;
     }
@@ -71,7 +71,7 @@ public class DeviceListEntity implements Serializable {
         return networkUsage;
     }
 
-    public DeviceListEntity setNetworkUsage(SpeedEntity networkUsage) {
+    public DeviceEntity setNetworkUsage(SpeedEntity networkUsage) {
         this.networkUsage = networkUsage;
         return this;
     }
@@ -80,7 +80,7 @@ public class DeviceListEntity implements Serializable {
         return type;
     }
 
-    public DeviceListEntity setType(int type) {
+    public DeviceEntity setType(int type) {
         this.type = type;
         return this;
     }
@@ -89,7 +89,7 @@ public class DeviceListEntity implements Serializable {
         return subType;
     }
 
-    public DeviceListEntity setSubType(int subType) {
+    public DeviceEntity setSubType(int subType) {
         this.subType = subType;
         return this;
     }
@@ -98,7 +98,7 @@ public class DeviceListEntity implements Serializable {
         return connected2network;
     }
 
-    public DeviceListEntity setConnected2network(boolean connected2network) {
+    public DeviceEntity setConnected2network(boolean connected2network) {
         this.connected2network = connected2network;
         return this;
     }
@@ -107,7 +107,7 @@ public class DeviceListEntity implements Serializable {
         return ipAddress;
     }
 
-    public DeviceListEntity setIpAddress(String ipAddress) {
+    public DeviceEntity setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
         return this;
     }
@@ -116,7 +116,7 @@ public class DeviceListEntity implements Serializable {
         return band;
     }
 
-    public DeviceListEntity setBand(String band) {
+    public DeviceEntity setBand(String band) {
         this.band = band;
         return this;
     }
@@ -125,7 +125,7 @@ public class DeviceListEntity implements Serializable {
         return channel;
     }
 
-    public DeviceListEntity setChannel(int channel) {
+    public DeviceEntity setChannel(int channel) {
         this.channel = channel;
         return this;
     }
@@ -134,7 +134,7 @@ public class DeviceListEntity implements Serializable {
         return ifType;
     }
 
-    public DeviceListEntity setIfType(String ifType) {
+    public DeviceEntity setIfType(String ifType) {
         this.ifType = ifType;
         return this;
     }

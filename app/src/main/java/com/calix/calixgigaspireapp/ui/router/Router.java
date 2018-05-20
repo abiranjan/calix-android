@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.calix.calixgigaspireapp.R;
 import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.ui.dashboard.Dashboard;
-import com.calix.calixgigaspireapp.ui.devices.Devices;
+import com.calix.calixgigaspireapp.ui.devices.DevicesList;
 import com.calix.calixgigaspireapp.utils.AppConstants;
 import com.calix.calixgigaspireapp.utils.NumberUtil;
 
@@ -78,7 +78,7 @@ public class Router extends BaseActivity {
                 previousScreen(Dashboard.class);
                 break;
             case R.id.footer_devices_btn:
-                nextScreen(Devices.class);
+                nextScreen(DevicesList.class);
                 break;
         }
     }

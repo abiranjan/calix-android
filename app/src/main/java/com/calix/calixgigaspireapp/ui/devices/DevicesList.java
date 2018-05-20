@@ -2,8 +2,6 @@ package com.calix.calixgigaspireapp.ui.devices;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -11,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.calix.calixgigaspireapp.R;
-import com.calix.calixgigaspireapp.adapter.devices.DeviceAdapter;
 import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.output.model.DeviceEntity;
 import com.calix.calixgigaspireapp.output.model.DeviceListResponse;
@@ -30,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Devices extends BaseActivity {
+public class DevicesList extends BaseActivity {
 
     @BindView(R.id.header_txt)
     TextView mHeaderTxt;
@@ -38,13 +35,10 @@ public class Devices extends BaseActivity {
     @BindView(R.id.devices_header_bg_lay)
     RelativeLayout mDevicesHeaderBgLay;
 
-    @BindView(R.id.devices_recycler_view)
-    RecyclerView mDeviceListRecyclerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ui_devices);
+        setContentView(R.layout.ui_devices_list);
         initView();
 
     }
@@ -67,15 +61,15 @@ public class Devices extends BaseActivity {
     private void setHeaderView() {
         /*Header*/
         mHeaderTxt.setVisibility(View.VISIBLE);
-        mHeaderTxt.setText(AppConstants.categoryEntity.getName());
+        mHeaderTxt.setText(getString(R.string.devices));
 
         /*Set header adjustment - status bar we applied transparent color so header tack full view*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mDevicesHeaderBgLay.post(new Runnable() {
                 public void run() {
                     int heightInt = getResources().getDimensionPixelSize(R.dimen.size45);
-                    mDevicesHeaderBgLay.setLayoutParams(new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, heightInt + NumberUtil.getInstance().getStatusBarHeight(Devices.this)));
-                    mDevicesHeaderBgLay.setPadding(0, NumberUtil.getInstance().getStatusBarHeight(Devices.this), 0, 0);
+                    mDevicesHeaderBgLay.setLayoutParams(new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, heightInt + NumberUtil.getInstance().getStatusBarHeight(DevicesList.this)));
+                    mDevicesHeaderBgLay.setPadding(0, NumberUtil.getInstance().getStatusBarHeight(DevicesList.this), 0, 0);
                 }
 
             });
@@ -100,7 +94,7 @@ public class Devices extends BaseActivity {
 
     /*Device List API calls*/
     private void deviceListAPICall(){
-        APIRequestHandler.getInstance().deviceListAPICall(String.valueOf(AppConstants.categoryEntity.getType()),this);
+        APIRequestHandler.getInstance().deviceListAPICall("",this);
     }
 
     /*API request success and failure*/
@@ -114,10 +108,7 @@ public class Devices extends BaseActivity {
     }
 
     private void setData(ArrayList<DeviceEntity> deviceList) {
-        Log.d("Device lis",deviceList.get(0).getName());
-        mDeviceListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mDeviceListRecyclerView.setNestedScrollingEnabled(false);
-        mDeviceListRecyclerView.setAdapter(new DeviceAdapter(deviceList, this));
+        Log.d("Device lis",deviceList.get(0).getIpAddress());
     }
 
     @Override

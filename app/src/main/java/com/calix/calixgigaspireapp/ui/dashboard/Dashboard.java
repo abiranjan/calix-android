@@ -7,7 +7,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,12 +17,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.calix.calixgigaspireapp.R;
-import com.calix.calixgigaspireapp.adapter.DashboardAdapter;
+import com.calix.calixgigaspireapp.adapter.dashboard.DashboardAdapter;
 import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.output.model.CategoryEntity;
 import com.calix.calixgigaspireapp.output.model.DashboardResponse;
 import com.calix.calixgigaspireapp.services.APIRequestHandler;
-import com.calix.calixgigaspireapp.ui.devices.Devices;
+import com.calix.calixgigaspireapp.ui.devices.DevicesList;
 import com.calix.calixgigaspireapp.ui.loginregconfig.Login;
 import com.calix.calixgigaspireapp.ui.router.Router;
 import com.calix.calixgigaspireapp.utils.AppConstants;
@@ -180,7 +179,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                         break;
                     case R.id.footer_devices_btn:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
-                        nextScreen(Devices.class);
+                        nextScreen(DevicesList.class);
                         break;
                     case R.id.footer_router_btn:
                         mDrawerLayout.closeDrawer(GravityCompat.START);

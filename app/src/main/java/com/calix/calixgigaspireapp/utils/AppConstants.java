@@ -2,6 +2,7 @@ package com.calix.calixgigaspireapp.utils;
 
 
 import com.calix.calixgigaspireapp.input.model.ScannerInputModel;
+import com.calix.calixgigaspireapp.output.model.CategoryEntity;
 import com.calix.calixgigaspireapp.output.model.RouterMapEntity;
 
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class AppConstants {
     public static ScannerInputModel SCANNED_DETAILS_RES = new ScannerInputModel();
     public static boolean ROUTER_ON_BOARD_FROM_WELCOME = false;
 
+    /*Device Details*/
+    public static CategoryEntity categoryEntity = new CategoryEntity();
 
 }
 

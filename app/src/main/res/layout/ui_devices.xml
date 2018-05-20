@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LayoutMatch"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/devices_header_bg_lay"
+        style="@style/LayoutWidMatch_HeiWrap"
+        android:layout_height="@dimen/size45"
+        android:background="@color/blue">
+
+        <include layout="@layout/ui_general_header"
+            />
+
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/devices_recycler_view"
+        android:layout_below="@id/devices_header_bg_lay"
+        style="@style/LayoutWidMatch_HeiWrap"
+        android:layout_marginBottom="@dimen/size3"
+        android:layout_marginTop="@dimen/size3" />
+
+    <LinearLayout style="@style/LayoutWidMatch_HeiWrap"
+        android:id="@+id/bottom_bar_lay"
+        android:layout_alignParentBottom="true"
+        android:weightSum="3"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            style="@style/LayoutMatch"
+            android:background="@color/blue"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/footer_background"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/size100"
+                android:layout_height="@dimen/size50"
+                android:scaleType="centerCrop"
+                android:background="@null"
+                android:src="@drawable/footer_selection" />
+
+            <TextView
+                android:id="@+id/imageViewText"
+                style="@style/TextRobotoRegular"
+                android:layout_centerInParent="true"
+                android:text="@string/footer_devices"
+                android:textSize="@dimen/text13"
+                android:padding="@dimen/size10"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+
+        <Button
+            style="@style/LayoutWidMatch_HeiWrap"
+            android:background="@color/blue"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:id="@+id/footer_dashboard_btn"
+            android:textSize="@dimen/text13"
+            android:padding="@dimen/size10"
+            android:text="@string/footer_dashboard"/>
+
+        <Button
+            style="@style/LayoutWidMatch_HeiWrap"
+            android:padding="@dimen/size10"
+            android:background="@color/blue"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:id="@+id/footer_router_btn"
+            android:textSize="@dimen/text13"
+            android:text="@string/footer_router_map"/>
+    </LinearLayout>
+
+</RelativeLayout>
+
+

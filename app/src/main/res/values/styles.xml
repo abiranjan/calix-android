@@ -48,6 +48,13 @@
         <item name="android:layout_weight">1</item>
     </style>
 
+    <!-- Layout style - (width match_parent and  height 0dip) -->
+    <style name="LayoutWidHei_HeiMatch" parent="AppTheme">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
     <!-- Layout style - (width 0dip and  height wrap_content) -->
     <style name="LayoutWidWei_HeiWrap" parent="AppTheme">
         <item name="android:layout_width">0dip</item>

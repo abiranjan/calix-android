@@ -61,11 +61,9 @@
         <activity
             android:name=".ui.dashboard.Dashboard"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-
         <activity
-            android:name=".ui.devices.Devices"
+            android:name=".ui.devices.DevicesList"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-
         <activity
             android:name=".ui.router.Router"
             android:configChanges="keyboardHidden|orientation|screenSize" />
@@ -80,6 +78,7 @@
             android:name="io.fabric.ApiKey"
             android:value="4ed2936e78c0de47af5684f24a561bd1618ae511" />
 
+        <activity android:name=".ui.devices.Devices"></activity>
     </application>
 
 </manifest>

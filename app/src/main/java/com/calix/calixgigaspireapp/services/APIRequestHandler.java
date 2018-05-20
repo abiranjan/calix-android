@@ -288,7 +288,7 @@ public class APIRequestHandler {
     }
 
     /*Device List API*/
-    public void deviceListAPICall(final BaseActivity baseActivity, String deviceType) {
+    public void deviceListAPICall(final String deviceType, final BaseActivity baseActivity) {
         DialogManager.getInstance().showProgress(baseActivity);
         mServiceInterface.deviceListAPI(PreferenceUtil.getAuthorization(baseActivity),deviceType).enqueue(new Callback<DeviceListResponse>() {
             @Override

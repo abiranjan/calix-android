@@ -5,17 +5,17 @@ import java.util.ArrayList;
 
 public class DeviceListResponse implements Serializable {
 
-    ArrayList<DeviceListEntity> devices;
+    ArrayList<DeviceEntity> devices;
 
     public DeviceListResponse(){
         devices = new ArrayList<>();
     }
 
-    public ArrayList<DeviceListEntity> getDevices() {
+    public ArrayList<DeviceEntity> getDevices() {
         return devices;
     }
 
-    public DeviceListResponse setDevices(ArrayList<DeviceListEntity> devices) {
+    public DeviceListResponse setDevices(ArrayList<DeviceEntity> devices) {
         this.devices = devices;
         return this;
     }
