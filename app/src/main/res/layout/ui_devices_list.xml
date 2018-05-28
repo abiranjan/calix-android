@@ -16,7 +16,16 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/ui_general_footer" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/devices_list_recycler_view"
+        android:layout_below="@id/devices_header_bg_lay"
+        android:layout_above="@+id/general_footer_devices"
+        style="@style/LayoutWidMatch_HeiWrap"
+        android:layout_marginBottom="@dimen/size3"
+        android:layout_marginTop="@dimen/size3" />
+
+    <include layout="@layout/ui_general_footer"
+        android:id="@+id/general_footer_devices"/>
 
 </RelativeLayout>
 

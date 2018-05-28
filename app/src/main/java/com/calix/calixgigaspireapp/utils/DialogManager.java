@@ -24,7 +24,7 @@ import com.calix.calixgigaspireapp.R;
 public class DialogManager {
 
     /*Init variable*/
-    private Dialog mProgressDialog, mNetworkErrorDialog, mAlertDialog, mLogoutDialog, mOptionDialog,mForgotPwdDialog;
+    private Dialog mProgressDialog, mNetworkErrorDialog, mAlertDialog, mLogoutDialog, mOptionDialog,mForgotPwdDialog, mEdtDeviceNameDialog;
     private Toast mToast;
 
 
@@ -404,6 +404,70 @@ public class DialogManager {
         });
 
         alertShowing(mLogoutDialog);
+
+    }
+
+
+    public void showEdtDeviceNamePopup(final Context context, String deviceNameStr, final InterfaceEdtBtnCallback dialogAlertInterface) {
+        alertDismiss(mEdtDeviceNameDialog);
+        mEdtDeviceNameDialog = getDialog(context, R.layout.popup_edt_device_name_alert);
+
+        WindowManager.LayoutParams LayoutParams = new WindowManager.LayoutParams();
+        Window window = mEdtDeviceNameDialog.getWindow();
+
+        if (window != null) {
+            LayoutParams.copyFrom(window.getAttributes());
+            LayoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+            LayoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            window.setAttributes(LayoutParams);
+            window.setGravity(Gravity.CENTER);
+        }
+
+        final EditText deviceNameEdt;
+        Button positiveBtn, negativeBtn;
+
+        /*Init view*/
+        deviceNameEdt = mEdtDeviceNameDialog.findViewById(R.id.device_name_edt);
+        positiveBtn = mEdtDeviceNameDialog.findViewById(R.id.positive_btn);
+        negativeBtn = mEdtDeviceNameDialog.findViewById(R.id.negative_btn);
+
+        /*Set data*/
+        deviceNameEdt.setText(deviceNameStr);
+        deviceNameEdt.setSelection(deviceNameStr.length());
+
+        negativeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editTextKeyPadHidden(context, deviceNameEdt);
+                mEdtDeviceNameDialog.dismiss();
+                dialogAlertInterface.onNegativeClick();
+            }
+        });
+
+        positiveBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                editTextKeyPadHidden(context, deviceNameEdt);
+                String nameStr = deviceNameEdt.getText().toString().trim();
+                if (nameStr.isEmpty()) {
+                    deviceNameEdt.requestFocus();
+                    deviceNameEdt.setSelection(nameStr.length());
+                    showAlertPopup(context, context.getString(R.string.please_enter_device_name), new InterfaceBtnCallback() {
+                        @Override
+                        public void onPositiveClick() {
+
+                        }
+                    });
+                } else {
+                    mEdtDeviceNameDialog.dismiss();
+                    dialogAlertInterface.onPositiveClick(nameStr);
+                }
+            }
+        });
+
+
+        alertShowing(mEdtDeviceNameDialog);
 
     }
 

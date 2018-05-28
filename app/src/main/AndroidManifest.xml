@@ -21,6 +21,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
+        android:name=".main.CalixApplication"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
@@ -78,7 +79,28 @@
             android:name="io.fabric.ApiKey"
             android:value="4ed2936e78c0de47af5684f24a561bd1618ae511" />
 
-        <activity android:name=".ui.devices.Devices"></activity>
+        <activity android:name=".ui.devices.Devices" />
+        <activity android:name=".ui.devices.DeviceDetails" />
+
+        <activity
+            android:name=".ui.dashboard.Alert"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name=".ui.dashboard.RouterMap"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name=".ui.guest.GuestNetwork"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name=".ui.guest.SetupGuestContact"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name=".ui.guest.SetupGuestNetwork"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
     </application>
 
 </manifest>

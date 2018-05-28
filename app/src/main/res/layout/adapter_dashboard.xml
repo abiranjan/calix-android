@@ -1,7 +1,7 @@
 <RelativeLayout
     style="@style/LayoutWrap"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_centerHorizontal="true"
+    android:layout_centerInParent="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.calix.calixgigaspireapp.utils.CircularLayout
@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="@dimen/size50"
             android:layout_height="@dimen/size50"
-            android:id="@+id/hexagonal-icon-devices"
+            android:id="@+id/center_hex_icon"
             android:layout_centerInParent="true"
             app:srcCompat="@drawable/hexgonal_icon"/>
 
@@ -49,7 +49,8 @@
             style="@style/LayoutWrap"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
-            android:layout_below="@id/hexagonal-icon-devices"
+            android:layout_below="@id/center_hex_icon"
+            android:textSize="@dimen/text10"
             android:text="@string/devices"/>
     </RelativeLayout>
 

@@ -176,6 +176,7 @@ public class DevicesList extends BaseActivity {
     /*Default back button action*/
     @Override
     public void onBackPressed() {
+        Log.d("backscreen","- pressed");
         backScreen();
     }
 }

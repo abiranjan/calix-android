@@ -18,6 +18,8 @@ import com.calix.calixgigaspireapp.R;
 import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.output.model.DeviceEntity;
 import com.calix.calixgigaspireapp.services.APIRequestHandler;
+import com.calix.calixgigaspireapp.ui.devices.DeviceDetails;
+import com.calix.calixgigaspireapp.utils.AppConstants;
 import com.calix.calixgigaspireapp.utils.ImageUtil;
 
 import java.util.ArrayList;
@@ -91,9 +93,8 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ControlHol
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                AppConstants.DEVICE_DETAILS_ENTITY = mDeviceListResponse.get(holder.getAdapterPosition());
-//                ((BaseActivity) mContext).nextScreen(DeviceDetails.class);
-
+                AppConstants.DEVICE_DETAILS_ENTITY = mDeviceListResponse.get(holder.getAdapterPosition());
+                ((BaseActivity) mContext).nextScreen(DeviceDetails.class);
             }
         });
     }

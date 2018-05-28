@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">Calix Gigaspire App</string>
 
@@ -53,7 +53,7 @@
 
     <!--Router Detected Screen-->
     <string name="network_detected">Network Successfully Detected</string>
-    <string name="router_name">Router Name</string>
+    <string name="router_name">Router Map</string>
     <string name="network_name_ssid">Network Name (SSID)</string>
 
     <string name="enter_router_name">Please Enter Router Name</string>
@@ -85,11 +85,15 @@
     <string name="logout">Logout</string>
     <string name="my_media">My Media</string>
     <string name="username">User Name</string>
+    <string name="download">Download</string>
+    <string name="upload">Upload</string>
+
+    <!--Footer-->
     <string name="footer_devices">Devices</string>
     <string name="footer_dashboard">Dashboard</string>
     <string name="footer_router_map">Router Map</string>
-    <string name="download">Download</string>
-    <string name="upload">Upload</string>
+    <string name="footer_search">Search</string>
+    <string name="footer_filter">Filter</string>
 
     <!--Dashboard Screen-->
     <string name="defaultSpeed">0.0 Mbytes</string>
@@ -111,5 +115,103 @@
     <string name="off">OFF</string>
     <string name="on">ON</string>
     <string name="more">More</string>
+
+    <string name="please_enter_device_name">Please Enter Device Name </string>
+
+    <!--Date format Details-->
+    <string name="min">min</string>
+    <string name="mins">mins</string>
+    <string name="hour">hour</string>
+    <string name="current_hour">current hour</string>
+    <string name="hours">hours</string>
+    <string name="day">day</string>
+    <string name="current_day">current day</string>
+    <string name="days">days</string>
+    <string name="week">week</string>
+    <string name="current_week">current week</string>
+    <string name="weeks">weeks</string>
+    <string name="month">month</string>
+    <string name="current_month">current month</string>
+    <string name="months">months</string>
+    <string name="year">year</string>
+    <string name="current_year">current year</string>
+    <string name="years">years</string>
+    <string name="just_now">just now</string>
+
+    <!--Wishes-->
+    <string name="gud_morn">Good Morning</string>
+    <string name="gud_afternoon">Good Afternoon</string>
+    <string name="gud_evn">Good Evening</string>
+
+    <!--Alert-->
+    <string name="done">Done</string>
+
+    <!--Device Details-->
+    <string name="edit_devices">Edit the Device Name</string>
+    <string name="change_the_device_name">Change the Device Name</string>
+    <string name="enter_device_name">Enter Device Name </string>
+    <string name="filter">Filters</string>
+    <string name="downloaded_speed">Download Speed</string>
+    <string name="uploaded_speed">Upload Speed</string>
+    <string name="ip_address">IP Address</string>
+    <string name="band">Band</string>
+    <string name="channel">Channel</string>
+    <string name="data_usage">Data Usage</string>
+
+    <string name="type_android">Android</string>
+    <string name="type_ios">Iphone</string>
+    <string name="band_unit">%1$s Ghz</string>
+    <string name="notify">Notifications</string>
+    <string name="fix_it">Fix it</string>
+    <string name="internet_cap">Internet</string>
+    <string name="mode">Mode</string>
+    <string name="speed">Speed</string>
+    <string name="strong"><i>Strong</i></string>
+
+    <!--Guest Network-->
+    <string name="add_guest">Add a Guest Network</string>
+    <string name="activated_time">Activated time %1$s</string>
+    <string name="hyphen_sym">-</string>
+    <string name="delete">Delete</string>
+    <string name="event_name">Enter the Event Name</string>
+    <string name="enter_event_name">Please Enter the Event Name</string>
+    <string name="enter_guest_network_name">Please Enter Guest Network Name</string>
+    <string name="failed_directory">Oops! Failed create Fautus directory</string>
+    <string name="wpa">WPA</string>
+
+    <!--Setup Guest Network-->
+    <string name="setup_guest_wifi">Setup Guest Network</string>
+    <string name="indefinite_network">Indefinite Network</string>
+    <string name="no_time_limit">No Time Limit</string>
+    <string name="time_duration_cap">TIME DURATION</string>
+    <string name="date">Set-Date</string>
+    <string name="time">Set Time</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
+    <string name="guest_network_name">Guest Network Name (SSID)</string>
+    <string name="password">Password</string>
+    <string name="one_date" tools:ignore="TypographyDashes">01-12-2018</string>
+    <string name="to">To</string>
+    <string name="wifi_point">Wifi Point1</string>
+    <string name="select_feature_date_time">Select Feature Date and Time</string>
+    <string name="select_valid_date_time">Select valid Date and Time</string>
+    <string name="select_one_contact">Select at Least One Contact</string>
+
+
+    <!--SetupWifi Contact-->
+    <string name="search">Search</string>
+    <string name="all_contacts">All Contacts</string>
+    <string name="contact_selected">%1$s Contact Selected</string>
+    <string name="contacts_selected">%1$s Contacts Selected</string>
+    <string name="no_contacts">No Contacts</string>
+
+    <string name="auth_type">Authentication Type</string>
+    <string name="nine_thirty">9:30 PM</string>
+    <string name="seven_thiry">7:30 AM</string>
+    <string name="start_time">Start Time : </string>
+    <string name="end_time">End Time : </string>
+    <string name="start_date">Start Date : </string>
+    <string name="end_date">End Date : </string>
+
 
 </resources>

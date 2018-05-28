@@ -6,170 +6,164 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <android.support.v4.widget.NestedScrollView
-        style="@style/LayoutMatch"
-        android:layout_above="@id/tablayoutDots"
-        android:background="@color/white">
+    <LinearLayout
+        android:id="@+id/header_view_lay"
+        style="@style/LayoutWidMatch_HeiWrap"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/dashboard_header_bg_lay"
             style="@style/LayoutWidMatch_HeiWrap"
-            android:descendantFocusability="blocksDescendants"
-            android:orientation="vertical">
+            android:layout_height="@dimen/size105"
+            android:background="@drawable/header_bg">
 
             <RelativeLayout
-                android:id="@+id/dashboard_header_bg_lay"
+                android:id="@+id/dashboard_header_lay"
                 style="@style/LayoutWidMatch_HeiWrap"
-                android:layout_height="@dimen/size120"
-                android:background="@drawable/header_bg">
+                android:visibility="visible">
 
-                <RelativeLayout
-                    android:id="@+id/dashboard_header_lay"
-                    style="@style/LayoutWidMatch_HeiWrap"
-                    android:visibility="visible">
-
-                    <include layout="@layout/ui_general_header" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/dashboard_header_msg_lay"
-                    style="@style/LayoutWidMatch_HeiWrap"
-                    android:layout_below="@+id/dashboard_header_lay">
-
-                    <com.calix.calixgigaspireapp.utils.RoundedImageView
-                        android:id="@+id/user_profile_img"
-                        android:layout_width="@dimen/size40"
-                        android:layout_height="@dimen/size40"
-                        android:layout_centerHorizontal="true"
-                        android:layout_margin="@dimen/size4"
-                        android:contentDescription="@string/app_name"
-                        android:src="@drawable/default_profile_white" />
-
-                    <TextView
-                        android:id="@+id/name_txt"
-                        style="@style/TextRobotoRegular"
-                        android:layout_below="@id/user_profile_img"
-                        android:layout_marginTop="@dimen/size2"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text10" />
-
-                </RelativeLayout>
+                <include layout="@layout/ui_general_header" />
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/speedLay"
+            <RelativeLayout
+                android:id="@+id/dashboard_header_msg_lay"
                 style="@style/LayoutWidMatch_HeiWrap"
-                android:weightSum="2">
+                android:layout_below="@+id/dashboard_header_lay">
 
-                <RelativeLayout
-                    style="@style/LayoutWrap"
+                <com.calix.calixgigaspireapp.utils.RoundedImageView
+                    android:id="@+id/user_profile_img"
+                    android:layout_width="@dimen/size40"
+                    android:layout_height="@dimen/size40"
+                    android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/size1"
-                    android:layout_weight="1"
-                    android:background="@color/green"
-                    android:padding="@dimen/size2">
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/default_profile_white" />
 
-                    <TextView
-                        android:id="@+id/download_speed_txt"
-                        style="@style/TextRobotoRegular"
-                        android:layout_width="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/defaultSpeed"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text13" />
+                <TextView
+                    android:id="@+id/name_txt"
+                    style="@style/TextRobotoRegular"
+                    android:layout_below="@id/user_profile_img"
+                    android:layout_marginTop="@dimen/size1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text10" />
 
-                    <TextView
-                        style="@style/TextRobotoRegular"
-                        android:layout_width="wrap_content"
-                        android:layout_below="@id/download_speed_txt"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/download"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text11" />
+            </RelativeLayout>
+        </RelativeLayout>
 
-                    <ImageView
-                        android:layout_width="@dimen/size40"
-                        android:layout_height="@dimen/size20"
-                        android:layout_alignParentEnd="true"
-                        android:layout_margin="@dimen/size2"
-                        android:tint="@color/white"
-                        app:srcCompat="@drawable/download" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    style="@style/LayoutWrap"
-                    android:layout_margin="@dimen/size1"
-                    android:layout_weight="1"
-                    android:background="@color/green"
-                    android:padding="@dimen/size2">
-
-                    <TextView
-                        android:id="@+id/upload_speed_txt"
-                        style="@style/TextRobotoRegular"
-                        android:layout_width="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/defaultSpeed"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text13" />
-
-                    <TextView
-                        style="@style/TextRobotoRegular"
-                        android:layout_width="wrap_content"
-                        android:layout_below="@id/upload_speed_txt"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/upload"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text11" />
-
-                    <ImageView
-                        android:layout_width="@dimen/size40"
-                        android:layout_height="@dimen/size20"
-                        android:layout_alignParentEnd="true"
-                        android:layout_margin="@dimen/size2"
-                        android:tint="@color/white"
-                        app:srcCompat="@drawable/upload" />
-                </RelativeLayout>
-
-            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/speedLay"
+            style="@style/LayoutWidMatch_HeiWrap"
+            android:weightSum="2">
 
             <RelativeLayout
-                android:layout_width="@dimen/size240"
-                android:layout_height="@dimen/size240"
-                android:layout_gravity="center">
+                style="@style/LayoutWrap"
+                android:layout_margin="@dimen/size0.25"
+                android:layout_weight="1"
+                android:background="@color/green"
+                android:padding="@dimen/size2">
 
-                <RelativeLayout
-                    android:id="@+id/pagerLayout"
-                    style="@style/LayoutMatch"
-                    android:layout_centerHorizontal="true">
+                <TextView
+                    android:id="@+id/download_speed_txt"
+                    style="@style/TextRobotoRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/defaultSpeed"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text13" />
 
-                    <android.support.constraint.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                <TextView
+                    style="@style/TextRobotoRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@id/download_speed_txt"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/download"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text11" />
 
-                        <android.support.v4.view.ViewPager
-                            android:id="@+id/devices_viewpager"
-                            style="@style/LayoutWidMatch_HeiWei"
-                            android:layout_centerHorizontal="true"
-                            app:layout_constraintDimensionRatio="1:1" />
-                    </android.support.constraint.ConstraintLayout>
+                <ImageView
+                    android:layout_width="@dimen/size40"
+                    android:layout_height="@dimen/size20"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="@dimen/size2"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/download" />
 
-                </RelativeLayout>
+            </RelativeLayout>
 
+            <RelativeLayout
+                style="@style/LayoutWrap"
+                android:layout_margin="@dimen/size0.25"
+                android:layout_weight="1"
+                android:background="@color/green"
+                android:padding="@dimen/size2">
+
+                <TextView
+                    android:id="@+id/upload_speed_txt"
+                    style="@style/TextRobotoRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/defaultSpeed"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text13" />
+
+                <TextView
+                    style="@style/TextRobotoRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@id/upload_speed_txt"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/upload"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text11" />
+
+                <ImageView
+                    android:layout_width="@dimen/size40"
+                    android:layout_height="@dimen/size20"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="@dimen/size2"
+                    android:tint="@color/white"
+                    app:srcCompat="@drawable/upload" />
             </RelativeLayout>
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        style="@style/LayoutMatch"
+        android:layout_above="@id/tablayoutDots"
+        android:layout_below="@+id/header_view_lay"
+        android:layout_centerInParent="true"
+        android:background="@color/white">
+
+        <RelativeLayout
+            style="@style/LayoutMatch"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            >
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/devices_viewpager"
+                android:layout_width="@dimen/size250"
+                android:layout_height="@dimen/size250"
+                 />
+        </RelativeLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout style="@style/LayoutWrap"
-        android:orientation="vertical"
+    <LinearLayout
         android:id="@+id/tablayoutDots"
+        style="@style/LayoutWrap"
         android:layout_above="@id/bottom_bar_lay"
         android:layout_centerHorizontal="true"
-        >
+        android:minWidth="@dimen/size100"
+        android:orientation="vertical">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             style="@style/LayoutWrap"
             android:layout_height="@dimen/size7"
+            android:layout_gravity="center"
             app:tabBackground="@drawable/tab_selector"
             app:tabGravity="center"
             app:tabIndicatorHeight="0dp" />
@@ -177,6 +171,8 @@
         <TextView
             android:id="@+id/more_txt"
             style="@style/TextRobotoRegular"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:padding="@dimen/size2"
             android:text="@string/more"
             android:textColor="@color/black"

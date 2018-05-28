@@ -42,5 +42,6 @@
         android:layout_below="@id/hexagonal-icon-devices"
         android:layout_centerHorizontal="true"
         android:text="@string/devices"
+        android:textSize="@dimen/text10"
         android:textColor="@color/black" />
 </RelativeLayout>

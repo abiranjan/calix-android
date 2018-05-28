@@ -3,9 +3,14 @@ package com.calix.calixgigaspireapp.utils;
 
 import com.calix.calixgigaspireapp.input.model.ScannerInputModel;
 import com.calix.calixgigaspireapp.output.model.CategoryEntity;
+import com.calix.calixgigaspireapp.output.model.DeviceEntity;
+import com.calix.calixgigaspireapp.output.model.GuestWifiEntity;
 import com.calix.calixgigaspireapp.output.model.RouterMapEntity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Locale;
 
 public class AppConstants {
 
@@ -43,7 +48,29 @@ public class AppConstants {
     public static boolean ROUTER_ON_BOARD_FROM_WELCOME = false;
 
     /*Device Details*/
-    public static CategoryEntity categoryEntity = new CategoryEntity();
+    public static CategoryEntity CATEGORY_ENTITY = new CategoryEntity();
+    public static DeviceEntity DEVICE_DETAILS_ENTITY = new DeviceEntity();
+
+    /*Date formats*/
+    static final SimpleDateFormat SERVER_DATE_TIME_FORMAT = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.US);
+    public static final SimpleDateFormat CUSTOM_DATE_FORMAT = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
+    public static final SimpleDateFormat GRAPH_DATE_FORMAT = new SimpleDateFormat("MMM-dd", Locale.US);
+    public static final SimpleDateFormat CUSTOM_12_HRS_TIME_FORMAT = new SimpleDateFormat("hh:mm aa", Locale.US);
+    public static final SimpleDateFormat CUSTOM_24_HRS_TIME_FORMAT = new SimpleDateFormat("HH:mm", Locale.US);
+    public static final SimpleDateFormat CUSTOM_DATE_TIME_FORMAT = new SimpleDateFormat("MM-dd-yyyy hh:mm aa", Locale.US);
+
+    public static final String API_DEVICE_USAGE = "https://dev.rgw.calix.ai/map/v1/mobile/device/usage/history?deviceId=%1$s&filter=%2$s";
+
+    public static GuestWifiEntity GUEST_WIFI_DETAILS = new GuestWifiEntity();
+
+    /*Guest router_map*/
+    public static LinkedHashMap<String, String> SELECTED_CONTACT_LINKED_HASH_MAP = new LinkedHashMap<>();
+
+    public static final String QR_CODE_GENERATOR ="WIFI:S:%1$s;T:%2$s;P:%3$s;";
+
+
+
+
 
 }
 

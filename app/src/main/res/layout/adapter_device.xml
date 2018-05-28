@@ -140,15 +140,10 @@
                 <android.support.v7.widget.SwitchCompat
                     android:id="@+id/connect_disconnect_switch_compat"
                     style="@style/LayoutWrap"
+                    app:switchTextAppearance="@style/SwitchTextAppearance"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:button="@null"
                     android:checked="true"
-                    android:padding="@dimen/size5"
-                    android:scaleX="0.8"
-                    android:scaleY="0.8"
-                    app:switchMinWidth="@dimen/size5"
-                    android:textColor="@color/white"
                     android:textOff="@string/off"
                     android:textOn="@string/on"
                     app:showText="true"/>

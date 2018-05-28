@@ -25,6 +25,7 @@ import com.calix.calixgigaspireapp.output.model.CategoryEntity;
 import com.calix.calixgigaspireapp.output.model.DashboardResponse;
 import com.calix.calixgigaspireapp.services.APIRequestHandler;
 import com.calix.calixgigaspireapp.ui.devices.DevicesList;
+import com.calix.calixgigaspireapp.ui.guest.GuestNetwork;
 import com.calix.calixgigaspireapp.ui.loginregconfig.Login;
 import com.calix.calixgigaspireapp.ui.router.Router;
 import com.calix.calixgigaspireapp.utils.AppConstants;
@@ -56,6 +57,9 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.header_txt)
     TextView mHeaderTxt;
+
+    @BindView(R.id.notificationCount)
+    TextView mNotificationCount;
 
     @BindView(R.id.header_right_img_lay)
     RelativeLayout mHeaderRightImgLay;
@@ -150,17 +154,15 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
         mHeaderRightImgLay.setVisibility(View.VISIBLE);
         mHeaderRightImg.setImageResource(R.drawable.ic_notification);
         mHeaderTxt.setVisibility(View.VISIBLE);
-        if (IsScreenModePortrait())
-            mHeaderTxt.setText(getString(R.string.dashboard));
-        else
-            mHeaderTxt.setText(String.format(getString(R.string.dashboard_header), mNameTxt.getText()));
+        mHeaderTxt.setText(getString(R.string.dashboard));
+
 
 
         /*Set header adjustment - status bar we applied transparent color so header tack full view*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mDashboardHeaderBgLay.post(new Runnable() {
                 public void run() {
-                    int heightInt = getResources().getDimensionPixelSize(IsScreenModePortrait() ? R.dimen.size120 : R.dimen.size45);
+                    int heightInt = getResources().getDimensionPixelSize(IsScreenModePortrait() ? R.dimen.size105 : R.dimen.size45);
                     mDashboardHeaderBgLay.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, heightInt + NumberUtil.getInstance().getStatusBarHeight(Dashboard.this)));
                     mDashboardHeaderBgLay.setPadding(0, NumberUtil.getInstance().getStatusBarHeight(Dashboard.this), 0, 0);
                     mDashboardHeaderBgLay.setBackground(IsScreenModePortrait() ? getResources().getDrawable(R.drawable.header_bg) : getResources().getDrawable(R.color.blue));
@@ -193,7 +195,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 
 
     /*View onClick*/
-    @OnClick({R.id.header_left_img_lay, R.id.dashboard_lay, R.id.iot_device_lay, R.id.device_list_lay,
+    @OnClick({R.id.header_right_img_lay, R.id.header_left_img_lay, R.id.dashboard_lay, R.id.iot_device_lay, R.id.device_list_lay,
             R.id.my_media_lay, R.id.speed_test_lay, R.id.network_usage_lay, R.id.parental_control_lay,
             R.id.guest_network_lay, R.id.settings_lay, R.id.alexa_lay, R.id.logout_lay, R.id.footer_left_btn, R.id.footer_right_btn})
     public void onClick(final View v) {
@@ -230,7 +232,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                         break;
                     case R.id.guest_network_lay:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
-//                        nextScreen(GuestNetwork.class);
+                        nextScreen(GuestNetwork.class);
                         break;
                     case R.id.settings_lay:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -250,9 +252,12 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                         break;
                     case R.id.footer_right_btn:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
-                        nextScreen(Router.class);
+                        nextScreen(RouterMap.class);
                         break;
-
+                    case R.id.header_right_img_lay:
+                        mDrawerLayout.closeDrawer(GravityCompat.START);
+                        nextScreen(Alert.class);
+                        break;
                 }
             }
         });
@@ -263,6 +268,12 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
     private void setData(DashboardResponse dashboardResponse) {
 
         mNameTxt.setText(dashboardResponse.getUser().getFirstName() + " " + dashboardResponse.getUser().getLastName());
+        if (dashboardResponse.getNotifUnreadCount() > 0) {
+            mNotificationCount.setVisibility(View.VISIBLE);
+            mNotificationCount.setText(String.valueOf(dashboardResponse.getNotifUnreadCount()));
+        } else
+            mNotificationCount.setVisibility(View.GONE);
+        Log.d("not_count", String.valueOf(dashboardResponse.getNotifUnreadCount()));
         mUploadSpeedTxt.setText(dashboardResponse.getSpeed().getUpload() + " " + getString(R.string.speed_unit));
         mDownloadSpeedTxt.setText(dashboardResponse.getSpeed().getDownload() + " " + getString(R.string.speed_unit));
 

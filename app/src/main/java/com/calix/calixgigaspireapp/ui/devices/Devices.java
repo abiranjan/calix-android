@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,7 +41,36 @@ public class Devices extends BaseActivity {
     RelativeLayout mDevicesHeaderBgLay;
 
     @BindView(R.id.devices_recycler_view)
-    RecyclerView mDeviceListRecyclerView;
+    RecyclerView mDevicesRecyclerView;
+
+    /* Footer Variables */
+    @BindView(R.id.footer_right_btn)
+    ImageButton mFooterRightBtn;
+
+    @BindView(R.id.footer_right_ic)
+    ImageView mFooterRightIcon;
+
+    @BindView(R.id.footer_right_txt)
+    TextView mFooterRightTxt;
+
+    @BindView(R.id.footer_center_btn)
+    ImageButton mFooterCenterBtn;
+
+    @BindView(R.id.footer_center_ic)
+    ImageView mFooterCenterIcon;
+
+    @BindView(R.id.footer_center_txt)
+    TextView mFooterCenterTxt;
+
+    @BindView(R.id.footer_left_btn)
+    ImageButton mFooterLeftBtn;
+
+    @BindView(R.id.footer_left_ic)
+    ImageView mFooterLeftIcon;
+
+    @BindView(R.id.footer_left_txt)
+    TextView mFooterLeftTxt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +89,7 @@ public class Devices extends BaseActivity {
         ButterKnife.bind(this);
 
         setHeaderView();
+        setFooterVIew();
 
         deviceListAPICall();
 
@@ -67,7 +99,10 @@ public class Devices extends BaseActivity {
     private void setHeaderView() {
         /*Header*/
         mHeaderTxt.setVisibility(View.VISIBLE);
-        mHeaderTxt.setText(AppConstants.categoryEntity.getName());
+        String headerTitle = Character.toUpperCase(AppConstants.CATEGORY_ENTITY.getName().charAt(0)) +
+                AppConstants.CATEGORY_ENTITY.getName().substring(1).toLowerCase();
+        mHeaderTxt.setText(headerTitle);
+
 
         /*Set header adjustment - status bar we applied transparent color so header tack full view*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -82,17 +117,30 @@ public class Devices extends BaseActivity {
         }
     }
 
+    /*Set Footer View */
+    private void setFooterVIew(){
+        mFooterLeftBtn.setBackground(getResources().getDrawable(R.drawable.footer_selection));
+        mFooterLeftIcon.setBackground(getResources().getDrawable(R.drawable.ic_default_device));
+        mFooterLeftTxt.setText(getString(R.string.devices));
+
+        mFooterCenterIcon.setBackground(getResources().getDrawable(R.drawable.ic_dashboard));
+        mFooterCenterTxt.setText(getString(R.string.dashboard));
+
+        mFooterRightIcon.setBackground(getResources().getDrawable(R.drawable.ic_search));
+        mFooterRightTxt.setText(getString(R.string.footer_search));
+    }
+
     /*View onClick*/
-    @OnClick({R.id.header_left_img_lay, R.id.footer_dashboard_btn, R.id.footer_router_btn})
+    @OnClick({R.id.header_left_img_lay,R.id.footer_center_btn,R.id.footer_right_btn})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.header_left_img_lay:
                 onBackPressed();
                 break;
-            case R.id.footer_dashboard_btn:
+            case R.id.footer_center_btn:
                 previousScreen(Dashboard.class);
                 break;
-            case R.id.footer_router_btn:
+            case R.id.footer_right_btn:
                 nextScreen(Router.class);
                 break;
         }
@@ -100,7 +148,7 @@ public class Devices extends BaseActivity {
 
     /*Device List API calls*/
     private void deviceListAPICall(){
-        APIRequestHandler.getInstance().deviceListAPICall(String.valueOf(AppConstants.categoryEntity.getType()),this);
+        APIRequestHandler.getInstance().deviceListAPICall(String.valueOf(AppConstants.CATEGORY_ENTITY.getType()),this);
     }
 
     /*API request success and failure*/
@@ -115,9 +163,9 @@ public class Devices extends BaseActivity {
 
     private void setData(ArrayList<DeviceEntity> deviceList) {
         Log.d("Device lis",deviceList.get(0).getName());
-        mDeviceListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mDeviceListRecyclerView.setNestedScrollingEnabled(false);
-        mDeviceListRecyclerView.setAdapter(new DeviceAdapter(deviceList, this));
+        mDevicesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mDevicesRecyclerView.setNestedScrollingEnabled(false);
+        mDevicesRecyclerView.setAdapter(new DeviceAdapter(deviceList, this));
     }
 
     @Override

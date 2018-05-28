@@ -5,11 +5,17 @@ import android.support.annotation.NonNull;
 
 import com.calix.calixgigaspireapp.input.model.LoginRegistrationInputModel;
 import com.calix.calixgigaspireapp.main.BaseActivity;
+import com.calix.calixgigaspireapp.output.model.AlertResponse;
+import com.calix.calixgigaspireapp.output.model.ChartDetailsResponse;
+import com.calix.calixgigaspireapp.output.model.ChartFilterResponse;
 import com.calix.calixgigaspireapp.output.model.CommonResponse;
 import com.calix.calixgigaspireapp.output.model.DashboardResponse;
 import com.calix.calixgigaspireapp.output.model.DeviceListResponse;
+import com.calix.calixgigaspireapp.output.model.DeviceRenameResponse;
 import com.calix.calixgigaspireapp.output.model.EncryptionTypeResponse;
 import com.calix.calixgigaspireapp.output.model.ErrorResponse;
+import com.calix.calixgigaspireapp.output.model.GuestWifiEntity;
+import com.calix.calixgigaspireapp.output.model.GuestWifiResponse;
 import com.calix.calixgigaspireapp.output.model.LoginResponse;
 import com.calix.calixgigaspireapp.output.model.RegistrationResponse;
 import com.calix.calixgigaspireapp.output.model.RouterMapResponse;
@@ -374,6 +380,239 @@ public class APIRequestHandler {
         });
     }
 
+    /*Device Chart Details*/
+    public void deviceChartDetailsAPICall(String deviceIdStr, String filterStr, final BaseActivity baseActivity) {
+        DialogManager.getInstance().showProgress(baseActivity);
+        mServiceInterface.deviceChartDetailsAPI(PreferenceUtil.getAuthorization(baseActivity), String.format(AppConstants.API_DEVICE_USAGE, deviceIdStr, filterStr)).enqueue(new Callback<ChartDetailsResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<ChartDetailsResponse> call, @NonNull Response<ChartDetailsResponse> response) {
+                DialogManager.getInstance().hideProgress();
+                if (response.isSuccessful() && response.body() != null) {
+                    baseActivity.onRequestSuccess(response.body());
+                } else {
+                    String errorMsgStr = response.raw().message();
+                    try {
+                        ErrorResponse errorBodyRes = new Gson().fromJson(Objects.requireNonNull(response.errorBody()).string(), ErrorResponse.class);
+                        errorMsgStr = errorBodyRes.getErrorDesc().isEmpty() ? errorMsgStr : errorBodyRes.getErrorDesc();
+                    } catch (IOException | JsonParseException e) {
+                        e.printStackTrace();
+                    }
+                    baseActivity.onRequestFailure(new ChartDetailsResponse(), new Throwable(errorMsgStr));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ChartDetailsResponse> call, @NonNull Throwable t) {
+                DialogManager.getInstance().hideProgress();
+                baseActivity.onRequestFailure(new ChartDetailsResponse(), t);
+            }
+        });
+    }
+
+    /*Device Chart Filter*/
+    public void deviceChartFilterAPICall(final BaseActivity baseActivity) {
+        DialogManager.getInstance().showProgress(baseActivity);
+        mServiceInterface.deviceChartFilterAPI(PreferenceUtil.getAuthorization(baseActivity)).enqueue(new Callback<ChartFilterResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<ChartFilterResponse> call, @NonNull Response<ChartFilterResponse> response) {
+                DialogManager.getInstance().hideProgress();
+                if (response.isSuccessful() && response.body() != null) {
+                    baseActivity.onRequestSuccess(response.body());
+                } else {
+                    String errorMsgStr = response.raw().message();
+                    try {
+                        ErrorResponse errorBodyRes = new Gson().fromJson(Objects.requireNonNull(response.errorBody()).string(), ErrorResponse.class);
+                        errorMsgStr = errorBodyRes.getErrorDesc().isEmpty() ? errorMsgStr : errorBodyRes.getErrorDesc();
+                    } catch (IOException | JsonParseException e) {
+                        e.printStackTrace();
+                    }
+                    baseActivity.onRequestFailure(new ChartDetailsResponse(), new Throwable(errorMsgStr));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ChartFilterResponse> call, @NonNull Throwable t) {
+                DialogManager.getInstance().hideProgress();
+                baseActivity.onRequestFailure(new ChartDetailsResponse(), t);
+            }
+        });
+    }
+
+    /*Rename the Device Name API*/
+    public void deviceRenameAPICalll(String deviceIdStr, String nameStr, String locationIdStr, final BaseActivity baseActivity) {
+        DialogManager.getInstance().showProgress(baseActivity);
+        mServiceInterface.deviceRenameAPI(PreferenceUtil.getAuthorization(baseActivity), deviceIdStr, nameStr, locationIdStr).enqueue(new Callback<DeviceRenameResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<DeviceRenameResponse> call, @NonNull Response<DeviceRenameResponse> response) {
+                DialogManager.getInstance().hideProgress();
+                if (response.isSuccessful() && response.code() == 200) {
+                    baseActivity.onRequestSuccess(response.body());
+                } else {
+                    String errorMsgStr = response.raw().message();
+                    try {
+                        ErrorResponse errorBodyRes = new Gson().fromJson(Objects.requireNonNull(response.errorBody()).string(), ErrorResponse.class);
+                        errorMsgStr = errorBodyRes.getErrorDesc().isEmpty() ? errorMsgStr : errorBodyRes.getErrorDesc();
+                    } catch (IOException | JsonParseException e) {
+                        e.printStackTrace();
+                    }
+                    baseActivity.onRequestFailure(new DeviceRenameResponse(), new Throwable(errorMsgStr));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DeviceRenameResponse> call, @NonNull Throwable t) {
+                DialogManager.getInstance().hideProgress();
+                baseActivity.onRequestFailure(new DeviceRenameResponse(), t);
+            }
+        });
+    }
+
+    /*alert API*/
+    public void alertAPICall(final BaseActivity baseActivity) {
+        DialogManager.getInstance().showProgress(baseActivity);
+        mServiceInterface.alertAPI(PreferenceUtil.getAuthorization(baseActivity)).enqueue(new Callback<AlertResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<AlertResponse> call, @NonNull Response<AlertResponse> response) {
+                DialogManager.getInstance().hideProgress();
+                if (response.isSuccessful() && response.body() != null) {
+                    baseActivity.onRequestSuccess(response.body());
+                } else {
+                    String errorMsgStr = response.raw().message();
+                    try {
+                        ErrorResponse errorBodyRes = new Gson().fromJson(Objects.requireNonNull(response.errorBody()).string(), ErrorResponse.class);
+                        errorMsgStr = errorBodyRes.getErrorDesc().isEmpty() ? errorMsgStr : errorBodyRes.getErrorDesc();
+                    } catch (IOException | JsonParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    baseActivity.onRequestFailure(new AlertResponse(), new Throwable(errorMsgStr));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<AlertResponse> call, @NonNull Throwable t) {
+                DialogManager.getInstance().hideProgress();
+                baseActivity.onRequestFailure(new AlertResponse(), t);
+            }
+        });
+    }
+
+    /*Guest Wifi List API*/
+    public void guestWifiListAPICall(final BaseActivity baseActivity) {
+        DialogManager.getInstance().showProgress(baseActivity);
+        mServiceInterface.guestWifiListAPI(PreferenceUtil.getAuthorization(baseActivity)).enqueue(new Callback<GuestWifiResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<GuestWifiResponse> call, @NonNull Response<GuestWifiResponse> response) {
+                DialogManager.getInstance().hideProgress();
+                if (response.isSuccessful() && response.body() != null) {
+                    baseActivity.onRequestSuccess(response.body());
+                } else {
+                    String errorMsgStr = response.raw().message();
+                    try {
+                        ErrorResponse errorBodyRes = new Gson().fromJson(Objects.requireNonNull(response.errorBody()).string(), ErrorResponse.class);
+                        errorMsgStr = errorBodyRes.getErrorDesc().isEmpty() ? errorMsgStr : errorBodyRes.getErrorDesc();
+                    } catch (IOException | JsonParseException e) {
+                        e.printStackTrace();
+                    }
+                    baseActivity.onRequestFailure(new GuestWifiResponse(), new Throwable(errorMsgStr));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<GuestWifiResponse> call, @NonNull Throwable t) {
+                DialogManager.getInstance().hideProgress();
+                baseActivity.onRequestFailure(new GuestWifiResponse(), t);
+            }
+        });
+    }
+
+    /*Add Guest Wifi API*/
+    public void addGuestNetworkAPICall(GuestWifiEntity guestWifiEntityInputModel, final BaseActivity baseActivity) {
+        DialogManager.getInstance().showProgress(baseActivity);
+        mServiceInterface.addGuestNetworkAPI(PreferenceUtil.getAuthorization(baseActivity), guestWifiEntityInputModel).enqueue(new Callback<GuestWifiEntity>() {
+            @Override
+            public void onResponse(@NonNull Call<GuestWifiEntity> call, @NonNull Response<GuestWifiEntity> response) {
+                DialogManager.getInstance().hideProgress();
+                if (response.isSuccessful() && response.body() != null) {
+                    baseActivity.onRequestSuccess(response.body());
+                } else {
+                    String errorMsgStr = response.raw().message();
+                    try {
+                        ErrorResponse errorBodyRes = new Gson().fromJson(Objects.requireNonNull(response.errorBody()).string(), ErrorResponse.class);
+                        errorMsgStr = errorBodyRes.getErrorDesc().isEmpty() ? errorMsgStr : errorBodyRes.getErrorDesc();
+                    } catch (IOException | JsonParseException e) {
+                        e.printStackTrace();
+                    }
+                    baseActivity.onRequestFailure(new GuestWifiEntity(), new Throwable(errorMsgStr));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<GuestWifiEntity> call, @NonNull Throwable t) {
+                DialogManager.getInstance().hideProgress();
+                baseActivity.onRequestFailure(new GuestWifiEntity(), t);
+            }
+        });
+    }
+
+    /*Update Guest Wifi API*/
+    public void updateGuestNetworkAPICall(GuestWifiEntity guestWifiEntityInputModel, final BaseActivity baseActivity) {
+        DialogManager.getInstance().showProgress(baseActivity);
+        mServiceInterface.updateGuestNetworkAPI(PreferenceUtil.getAuthorization(baseActivity), guestWifiEntityInputModel).enqueue(new Callback<GuestWifiEntity>() {
+            @Override
+            public void onResponse(@NonNull Call<GuestWifiEntity> call, @NonNull Response<GuestWifiEntity> response) {
+                DialogManager.getInstance().hideProgress();
+                if (response.isSuccessful() && response.body() != null) {
+                    baseActivity.onRequestSuccess(response.body());
+                } else {
+                    String errorMsgStr = response.raw().message();
+                    try {
+                        ErrorResponse errorBodyRes = new Gson().fromJson(Objects.requireNonNull(response.errorBody()).string(), ErrorResponse.class);
+                        errorMsgStr = errorBodyRes.getErrorDesc().isEmpty() ? errorMsgStr : errorBodyRes.getErrorDesc();
+                    } catch (IOException | JsonParseException e) {
+                        e.printStackTrace();
+                    }
+                    baseActivity.onRequestFailure(new GuestWifiEntity(), new Throwable(errorMsgStr));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<GuestWifiEntity> call, @NonNull Throwable t) {
+                DialogManager.getInstance().hideProgress();
+                baseActivity.onRequestFailure(new GuestWifiEntity(), t);
+            }
+        });
+    }
+
+
+    /*Delete Guest Wifi API*/
+    public void deleteGuestNetworkAPICall(String eventId, final BaseActivity baseActivity) {
+        DialogManager.getInstance().showProgress(baseActivity);
+        mServiceInterface.deleteGuestNetworkAPI(PreferenceUtil.getAuthorization(baseActivity), eventId).enqueue(new Callback<CommonResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<CommonResponse> call, @NonNull Response<CommonResponse> response) {
+                DialogManager.getInstance().hideProgress();
+                if (response.isSuccessful() && response.body() != null) {
+                    baseActivity.onRequestSuccess(response.body());
+                } else {
+                    String errorMsgStr = response.raw().message();
+                    try {
+                        ErrorResponse errorBodyRes = new Gson().fromJson(Objects.requireNonNull(response.errorBody()).string(), ErrorResponse.class);
+                        errorMsgStr = errorBodyRes.getErrorDesc().isEmpty() ? errorMsgStr : errorBodyRes.getErrorDesc();
+                    } catch (IOException | JsonParseException e) {
+                        e.printStackTrace();
+                    }
+                    baseActivity.onRequestFailure(new CommonResponse(), new Throwable(errorMsgStr));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<CommonResponse> call, @NonNull Throwable t) {
+                DialogManager.getInstance().hideProgress();
+                baseActivity.onRequestFailure(new CommonResponse(), t);
+            }
+        });
+    }
 
 }
 

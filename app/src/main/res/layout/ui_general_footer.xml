@@ -14,7 +14,8 @@
 
         <ImageButton
             android:id="@+id/footer_left_btn"
-            style="@style/LayoutMatch"
+            android:layout_height="@dimen/size40"
+            android:layout_width="@dimen/size80"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="@null"
@@ -50,7 +51,8 @@
 
         <ImageButton
             android:id="@+id/footer_center_btn"
-            style="@style/LayoutMatch"
+            android:layout_height="@dimen/size45"
+            android:layout_width="@dimen/size80"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="@null"
@@ -86,7 +88,8 @@
 
         <ImageButton
             android:id="@+id/footer_right_btn"
-            style="@style/LayoutMatch"
+            android:layout_height="@dimen/size40"
+            android:layout_width="@dimen/size80"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="@null"

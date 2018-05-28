@@ -15,6 +15,7 @@ import com.calix.calixgigaspireapp.R;
 import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.output.model.CategoryEntity;
 import com.calix.calixgigaspireapp.ui.devices.Devices;
+import com.calix.calixgigaspireapp.ui.devices.DevicesList;
 import com.calix.calixgigaspireapp.utils.AppConstants;
 import com.calix.calixgigaspireapp.utils.CircularLayout;
 
@@ -42,10 +43,20 @@ public class DashboardAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup collection, final int position) {
         LayoutInflater inflater = (LayoutInflater) collection.getContext()
                 .getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
-        View hcRow = inflater.inflate(R.layout.adapter_dashboard, null);
-        CircularLayout circularLayout = hcRow.findViewById(R.id.circular_layout);
+        View centerNode = inflater.inflate(R.layout.adapter_dashboard, null);
+        CircularLayout circularLayout = centerNode.findViewById(R.id.circular_layout);
+        ImageView mCenterHexIcon = centerNode.findViewById(R.id.center_hex_icon);
+        TextView totalDeviceCount = centerNode.findViewById(R.id.deviceCount);
 
-        TextView totalDeviceCount = hcRow.findViewById(R.id.deviceCount);
+        if (totalDevicesCount > 0) {
+            mCenterHexIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((BaseActivity) mContext).nextScreen(DevicesList.class);
+                }
+            });
+        }
+
         totalDeviceCount.setText(String.valueOf(totalDevicesCount));
         circularLayout.setCapacity(8);
         for (int i = 0; i < categories.get(position).size(); i++) {
@@ -55,14 +66,13 @@ public class DashboardAdapter extends PagerAdapter {
             ImageView deviceIcon = myView.findViewById(R.id.deviceIcon);
             deviceIcon.setBackground(mContext.getResources().getDrawable(deviceListImg(categories.get(position).get(i).getType())));
 
-
             final int finalI = i;
             /* Click listener for devices list in the honeycomb outer */
             if (categories.get(position).get(finalI).getCount() > 0) {
                 deviceIcon.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AppConstants.categoryEntity = categories.get(position).get(finalI);
+                        AppConstants.CATEGORY_ENTITY = categories.get(position).get(finalI);
                         ((BaseActivity) mContext).nextScreen(Devices.class);
                     }
                 });
@@ -83,8 +93,8 @@ public class DashboardAdapter extends PagerAdapter {
 
             circularLayout.addView(myView);
         }
-        collection.addView(hcRow, 0);
-        return hcRow;
+        collection.addView(centerNode, 0);
+        return centerNode;
     }
 
     /*find the IOT device Image*/

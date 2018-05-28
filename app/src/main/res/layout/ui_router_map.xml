@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/router_map_par_lay"
+    style="@style/LayoutMatch"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/router_map_header_bg_lay"
+        style="@style/LayoutWidMatch_HeiWrap"
+        android:background="@color/blue">
+
+        <include layout="@layout/ui_general_header" />
+    </RelativeLayout>
+
+    <LinearLayout style="@style/LayoutWidMatch_HeiWrap"
+        android:layout_below="@id/router_map_header_bg_lay"
+        android:id="@+id/router_map_label_header"
+        android:background="@color/gray_light"
+        android:padding="@dimen/size10"
+        tools:ignore="UseCompoundDrawables">
+
+        <RelativeLayout
+            style="@style/LayoutWidMatch_HeiWrap"
+            android:layout_marginStart="@dimen/size100">
+
+            <TextView
+                style="@style/TextRobotoMedium"
+                android:gravity="start"
+                android:layout_marginStart="@dimen/size10"
+                android:text="@string/mode"/>
+
+            <TextView
+                style="@style/TextRobotoMedium"
+                android:gravity="end"
+                android:layout_marginEnd="@dimen/size25"
+                android:textStyle="italic"
+                android:text="@string/speed"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <ScrollView
+        style="@style/LayoutMatch"
+        android:layout_below="@+id/router_map_label_header"
+        android:scrollbars="none">
+
+        <android.support.v7.widget.CardView
+            style="@style/LayoutWidMatch_HeiWrap"
+            app:cardElevation="0dp"
+            >
+
+            <LinearLayout
+                style="@style/LayoutWidMatch_HeiWrap"
+                android:orientation="vertical"
+                android:padding="@dimen/size5">
+
+                <LinearLayout style="@style/LayoutWidMatch_HeiWrap"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="@dimen/size80"
+                        android:layout_height="@dimen/size80"
+                        android:layout_margin="@dimen/size10"
+                        android:layout_marginBottom="0dp"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_internet_globe" />
+
+                    <RelativeLayout
+                        style="@style/LayoutWidMatch_HeiWrap"
+                        android:layout_height="@dimen/size80"
+                        android:layout_marginTop="@dimen/size10"
+                        android:id="@+id/internet_label_header"
+                        android:padding="@dimen/size10"
+                        android:background="@drawable/gray_border_btn">
+
+                        <TextView
+                            style="@style/TextRobotoMedium"
+                            android:gravity="start"
+                            android:layout_marginStart="@dimen/size10"
+                            android:text="@string/internet_cap"/>
+
+                        <TextView
+                            style="@style/TextRobotoRegular"
+                            android:gravity="end"
+                            android:layout_marginEnd="@dimen/size20"
+                            android:textStyle="italic"
+                            android:text="@string/strong"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/router_recycler_view"
+                    style="@style/LayoutWidMatch_HeiWrap"/>
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </ScrollView>
+
+</RelativeLayout>
+

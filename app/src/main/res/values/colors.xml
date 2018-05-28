@@ -12,6 +12,12 @@
 
     <color name="green">#26c117</color>
     <color name="orange">#ec851d</color>
+    <color name="red">#FF4747</color>
+
+    <color name="graph_downloaded_color">#00FE6C</color>
+    <color name="graph_uploaded_color">#f40925</color>
+
+    <color name="red_light">#FF5959</color>
 
 
 </resources>

@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.calix.calixgigaspireapp.ui.dashboard.Dashboard;
+import com.calix.calixgigaspireapp.ui.loginregconfig.Login;
 import com.calix.calixgigaspireapp.ui.loginregconfig.Splash;
 import com.calix.calixgigaspireapp.utils.AppConstants;
+import com.calix.calixgigaspireapp.utils.PreferenceUtil;
 import com.crashlytics.android.Crashlytics;
 
 import java.lang.Thread.UncaughtExceptionHandler;
@@ -53,11 +56,11 @@ public class CalixApplication extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        final Fabric fabric = new Fabric.Builder(this)
-                .kits(new Crashlytics())
-                .debuggable(true)
-                .build();
-        Fabric.with(fabric);
+//        final Fabric fabric = new Fabric.Builder(this)
+//                .kits(new Crashlytics())
+//                .debuggable(true)
+//                .build();
+//        Fabric.with(fabric);
         mInstance = this;
 
         /*init UncaughtException*/
@@ -80,14 +83,15 @@ public class CalixApplication extends android.app.Application {
 
             /*Restart application*/
             if (activityVisible) {
-//                Class<?> nextScreenClass = Login.class;
-                Class<?> nextScreenClass = Splash.class;
-//
+                Class<?> nextScreenClass = Login.class;
+//                Class<?> nextScreenClass = Splash.class;
+
 //                if (PreferenceUtil.getBoolPreferenceValue(mInstance, AppConstants.PASS_CODE_ENABLE_STATUS)) {
 //                    nextScreenClass = PinCodeFingerPrintLogin.class;
-//                } else if (PreferenceUtil.getBoolPreferenceValue(mInstance, AppConstants.LOGIN_STATUS)) {
-//                    nextScreenClass = Dashboard.class;
-//                }
+//                } else
+                    if (PreferenceUtil.getBoolPreferenceValue(mInstance, AppConstants.LOGIN_STATUS)) {
+                    nextScreenClass = Dashboard.class;
+                }
 
                 /*for back screen process*/
                 AppConstants.PREVIOUS_SCREEN = new ArrayList<>();
