@@ -119,12 +119,11 @@ public class Devices extends BaseActivity {
 
     /*Set Footer View */
     private void setFooterVIew(){
-        mFooterLeftBtn.setBackground(getResources().getDrawable(R.drawable.footer_selection));
-        mFooterLeftIcon.setBackground(getResources().getDrawable(R.drawable.ic_default_device));
-        mFooterLeftTxt.setText(getString(R.string.devices));
+        mFooterLeftIcon.setBackground(getResources().getDrawable(R.drawable.ic_dashboard));
+        mFooterLeftTxt.setText(getString(R.string.dashboard));
 
-        mFooterCenterIcon.setBackground(getResources().getDrawable(R.drawable.ic_dashboard));
-        mFooterCenterTxt.setText(getString(R.string.dashboard));
+        mFooterCenterIcon.setBackground(getResources().getDrawable(R.drawable.ic_notification));
+        mFooterCenterTxt.setText(getString(R.string.alert));
 
         mFooterRightIcon.setBackground(getResources().getDrawable(R.drawable.ic_search));
         mFooterRightTxt.setText(getString(R.string.footer_search));

@@ -67,7 +67,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ControlHol
             public void onClick(View v) {
                 boolean isDetailsShowingBool = holder.mDeviceDetailsLay.getVisibility() == View.VISIBLE;
                 holder.mDeviceDetailsLay.setVisibility(isDetailsShowingBool ? View.GONE : View.VISIBLE);
-                holder.mVisibleInvisibleImg.setImageResource(isDetailsShowingBool ? R.drawable.ic_up_arrow : R.drawable.ic_down_arrow);
+                holder.mVisibleInvisibleImg.setImageResource(isDetailsShowingBool ? R.drawable.ic_down_arrow : R.drawable.ic_up_arrow);
 
             }
         });

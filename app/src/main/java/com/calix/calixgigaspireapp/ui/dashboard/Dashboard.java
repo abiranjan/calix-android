@@ -196,8 +196,8 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 
     /*View onClick*/
     @OnClick({R.id.header_right_img_lay, R.id.header_left_img_lay, R.id.dashboard_lay, R.id.iot_device_lay, R.id.device_list_lay,
-            R.id.my_media_lay, R.id.speed_test_lay, R.id.network_usage_lay, R.id.parental_control_lay,
-            R.id.guest_network_lay, R.id.settings_lay, R.id.alexa_lay, R.id.logout_lay, R.id.footer_left_btn, R.id.footer_right_btn})
+            R.id.network_usage_lay, R.id.parental_control_lay,R.id.logout_lay,
+            R.id.guest_network_lay, R.id.footer_left_btn, R.id.footer_right_btn})
     public void onClick(final View v) {
         runOnUiThread(new Runnable() {
             @Override
@@ -214,13 +214,13 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 //                        nextScreen(IOTDeviceList.class);
                         break;
                     case R.id.device_list_lay:
-                    case R.id.my_media_lay:
-                        mDrawerLayout.closeDrawer(GravityCompat.START);
-//                        nextScreenWithFinish(MyMedia.class);
-                        break;
-                    case R.id.speed_test_lay:
-                        mDrawerLayout.closeDrawer(GravityCompat.START);
-//                        nextScreenWithFinish(SpeedTest.class);
+//                    case R.id.my_media_lay:
+//                        mDrawerLayout.closeDrawer(GravityCompat.START);
+////                        nextScreenWithFinish(MyMedia.class);
+//                        break;
+//                    case R.id.speed_test_lay:
+//                        mDrawerLayout.closeDrawer(GravityCompat.START);
+////                        nextScreenWithFinish(SpeedTest.class);
                         break;
                     case R.id.network_usage_lay:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -234,21 +234,20 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         nextScreen(GuestNetwork.class);
                         break;
-                    case R.id.settings_lay:
-                        mDrawerLayout.closeDrawer(GravityCompat.START);
-//                        nextScreen(Settings.class);
-                        break;
-                    case R.id.alexa_lay:
-                        mDrawerLayout.closeDrawer(GravityCompat.START);
-//                        routerMapAPICall();
-                        break;
+//                    case R.id.settings_lay:
+//                        mDrawerLayout.closeDrawer(GravityCompat.START);
+////                        nextScreen(Settings.class);
+//                        break;
+//                    case R.id.alexa_lay:
+//                        mDrawerLayout.closeDrawer(GravityCompat.START);
+////                        routerMapAPICall();
+//                        break;
                     case R.id.logout_lay:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         logoutFromApp();
-                        break;
                     case R.id.footer_left_btn:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
-                        nextScreen(DevicesList.class);
+//                        nextScreen(DevicesList.class);
                         break;
                     case R.id.footer_right_btn:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
