@@ -434,11 +434,11 @@
 
                         <ImageView
                             android:id="@+id/wifi_img"
-                            android:layout_width="@dimen/size35"
-                            android:layout_height="@dimen/size35"
+                            android:layout_width="@dimen/size30"
+                            android:layout_height="@dimen/size30"
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/app_name"
-                            android:padding="@dimen/size7"
+                            android:padding="@dimen/size4"
                             android:src="@drawable/ic_signal_strength" />
 
                         <TextView
@@ -473,12 +473,12 @@
                         android:visibility="visible">
 
                         <ImageView
-                            android:layout_width="@dimen/size35"
-                            android:layout_height="@dimen/size35"
+                            android:layout_width="@dimen/size30"
+                            android:layout_height="@dimen/size30"
                             android:layout_gravity="center"
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/app_name"
-                            android:padding="@dimen/size7"
+                            android:padding="@dimen/size4"
                             android:src="@drawable/ic_ip_addr" />
 
                         <TextView
@@ -509,12 +509,12 @@
                         android:visibility="visible">
 
                         <ImageView
-                            android:layout_width="@dimen/size35"
-                            android:layout_height="@dimen/size35"
+                            android:layout_width="@dimen/size30"
+                            android:layout_height="@dimen/size30"
                             android:layout_gravity="center"
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/app_name"
-                            android:padding="@dimen/size8"
+                            android:padding="@dimen/size4"
                             android:src="@drawable/ic_band" />
 
                         <TextView
@@ -545,12 +545,12 @@
                         android:visibility="visible">
 
                         <ImageView
-                            android:layout_width="@dimen/size35"
-                            android:layout_height="@dimen/size35"
+                            android:layout_width="@dimen/size30"
+                            android:layout_height="@dimen/size30"
                             android:layout_gravity="center"
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/app_name"
-                            android:padding="@dimen/size8"
+                            android:padding="@dimen/size4"
                             android:src="@drawable/ic_channel" />
 
                         <TextView
@@ -583,11 +583,11 @@
 
                         <ImageView
                             android:id="@+id/connect_disconnect_img"
-                            android:layout_width="@dimen/size35"
-                            android:layout_height="@dimen/size35"
+                            android:layout_width="@dimen/size30"
+                            android:layout_height="@dimen/size30"
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/app_name"
-                            android:padding="@dimen/size8" />
+                            android:padding="@dimen/size4" />
 
                         <TextView
                             android:id="@+id/connect_disconnect_txt"
@@ -605,13 +605,13 @@
 
                         <android.support.v7.widget.SwitchCompat
                             android:id="@+id/connect_disconnect_switch_compat"
-                            style="@style/LayoutWrap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/size30"
                             app:switchTextAppearance="@style/SwitchTextAppearance"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:button="@null"
                             android:checked="true"
-                            android:padding="@dimen/size5"
                             android:scaleX="0.8"
                             android:scaleY="0.8"
                             android:textOff="@string/off"

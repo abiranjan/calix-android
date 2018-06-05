@@ -63,23 +63,37 @@
                 android:background="@color/green"
                 android:padding="@dimen/size2">
 
+                <RelativeLayout
+                    style="@style/LayoutWrap"
+                    android:layout_centerHorizontal="true"
+                    >
+
                 <TextView
                     android:id="@+id/download_speed_txt"
                     style="@style/TextRobotoRegular"
                     android:layout_width="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:text="@string/defaultSpeed"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text13" />
+                    android:textSize="@dimen/text18" />
+
+                <TextView
+                    style="@style/TextRobotoRegular"
+                    android:layout_toEndOf="@id/download_speed_txt"
+                    android:layout_width="wrap_content"
+                    android:text="@string/speed_unit"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/size10"
+                    android:textSize="@dimen/text9" />
 
                 <TextView
                     style="@style/TextRobotoRegular"
                     android:layout_width="wrap_content"
                     android:layout_below="@id/download_speed_txt"
-                    android:layout_centerHorizontal="true"
                     android:text="@string/download"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text11" />
+                    android:textSize="@dimen/text9" />
+
+                </RelativeLayout>
 
                 <ImageView
                     android:layout_width="@dimen/size40"
@@ -87,7 +101,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_margin="@dimen/size2"
                     android:tint="@color/white"
-                    app:srcCompat="@drawable/download" />
+                    app:srcCompat="@drawable/download"
+                    android:contentDescription="@string/download" />
 
             </RelativeLayout>
 
@@ -98,23 +113,37 @@
                 android:background="@color/green"
                 android:padding="@dimen/size2">
 
-                <TextView
-                    android:id="@+id/upload_speed_txt"
-                    style="@style/TextRobotoRegular"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    style="@style/LayoutWrap"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/defaultSpeed"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text13" />
+                    >
 
-                <TextView
-                    style="@style/TextRobotoRegular"
-                    android:layout_width="wrap_content"
-                    android:layout_below="@id/upload_speed_txt"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/upload"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text11" />
+                    <TextView
+                        android:id="@+id/upload_speed_txt"
+                        style="@style/TextRobotoRegular"
+                        android:layout_width="wrap_content"
+                        android:text="@string/defaultSpeed"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text18" />
+
+                    <TextView
+                        style="@style/TextRobotoRegular"
+                        android:layout_toEndOf="@id/upload_speed_txt"
+                        android:layout_width="wrap_content"
+                        android:text="@string/speed_unit"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/size10"
+                        android:textSize="@dimen/text9" />
+
+                    <TextView
+                        style="@style/TextRobotoRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_below="@id/upload_speed_txt"
+                        android:text="@string/upload"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text9" />
+
+                </RelativeLayout>
 
                 <ImageView
                     android:layout_width="@dimen/size40"
@@ -122,7 +151,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_margin="@dimen/size2"
                     android:tint="@color/white"
-                    app:srcCompat="@drawable/upload" />
+                    app:srcCompat="@drawable/upload"
+                    android:contentDescription="@string/upload" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -138,8 +168,7 @@
 
         <RelativeLayout
             style="@style/LayoutMatch"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             >
 
             <android.support.v4.view.ViewPager

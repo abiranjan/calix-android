@@ -196,7 +196,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 
     /*View onClick*/
     @OnClick({R.id.header_right_img_lay, R.id.header_left_img_lay, R.id.dashboard_lay, R.id.iot_device_lay, R.id.device_list_lay,
-            R.id.network_usage_lay, R.id.parental_control_lay,R.id.logout_lay,
+            R.id.network_usage_lay, R.id.parental_control_lay,R.id.logout_lay,R.id.device_list,
             R.id.guest_network_lay, R.id.footer_left_btn, R.id.footer_right_btn})
     public void onClick(final View v) {
         runOnUiThread(new Runnable() {
@@ -213,7 +213,6 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                         mDrawerLayout.closeDrawer(GravityCompat.START);
 //                        nextScreen(IOTDeviceList.class);
                         break;
-                    case R.id.device_list_lay:
 //                    case R.id.my_media_lay:
 //                        mDrawerLayout.closeDrawer(GravityCompat.START);
 ////                        nextScreenWithFinish(MyMedia.class);
@@ -221,7 +220,6 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 //                    case R.id.speed_test_lay:
 //                        mDrawerLayout.closeDrawer(GravityCompat.START);
 ////                        nextScreenWithFinish(SpeedTest.class);
-                        break;
                     case R.id.network_usage_lay:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
 //                        nextScreen(NetworkUsage.class);
@@ -246,8 +244,9 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         logoutFromApp();
                     case R.id.footer_left_btn:
+                    case R.id.device_list:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
-//                        nextScreen(DevicesList.class);
+                        nextScreen(DevicesList.class);
                         break;
                     case R.id.footer_right_btn:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -273,8 +272,8 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
         } else
             mNotificationCount.setVisibility(View.GONE);
         Log.d("not_count", String.valueOf(dashboardResponse.getNotifUnreadCount()));
-        mUploadSpeedTxt.setText(dashboardResponse.getSpeed().getUpload() + " " + getString(R.string.speed_unit));
-        mDownloadSpeedTxt.setText(dashboardResponse.getSpeed().getDownload() + " " + getString(R.string.speed_unit));
+        mUploadSpeedTxt.setText(dashboardResponse.getSpeed().getUpload());
+        mDownloadSpeedTxt.setText(dashboardResponse.getSpeed().getDownload());
 
         if (dashboardResponse.getUser().getAvatarURL().isEmpty()) {
             mUserProfileImg.setImageResource(R.drawable.default_profile_white);

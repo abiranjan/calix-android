@@ -59,7 +59,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ControlHol
         holder.mConnectedDeviceSignalTxt.setText(deviceListResponse.getSignalStrength()+mContext.getString(R.string.percentage_sys));
 
         holder.mConnectDisconnectImg.setImageResource(ImageUtil.getInstance().connectedStatusViaRouterImg(!isDeviceConnectedBool,deviceListResponse.getIfType()));
-        holder.mConnectDisconnectTxt.setText(String.format(mContext.getString(isDeviceConnectedBool ? R.string.connect_device : R.string.disconnect_device), deviceListResponse.getRouter().getName()));
+        holder.mConnectDisconnectTxt.setText(String.format(mContext.getString(isDeviceConnectedBool ? R.string.connect_device_list : R.string.disconnect_device_list), deviceListResponse.getRouter().getName()));
         holder.mConnectDisconnectSwitchCompat.setChecked(isDeviceConnectedBool);
 
         holder.mVisibleInvisibleImg.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +77,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ControlHol
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 holder.mConnectDisconnectImg.setImageResource(ImageUtil.getInstance().connectedStatusViaRouterImg(!isChecked,mDeviceListResponse.get(holder.getAdapterPosition()).getIfType()));
-                holder.mConnectDisconnectTxt.setText(String.format(mContext.getString(isChecked ? R.string.connect_device : R.string.disconnect_device), mDeviceListResponse.get(holder.getAdapterPosition()).getRouter().getName()));
+                holder.mConnectDisconnectTxt.setText(String.format(mContext.getString(isChecked ? R.string.connect_device_list : R.string.disconnect_device_list), mDeviceListResponse.get(holder.getAdapterPosition()).getRouter().getName()));
 
                 if (isChecked)
                     APIRequestHandler.getInstance().deviceConnectAPICall(mDeviceListResponse.get(holder.getAdapterPosition()).getDeviceId(), ((BaseActivity) mContext));

@@ -79,8 +79,11 @@
             android:name="io.fabric.ApiKey"
             android:value="4ed2936e78c0de47af5684f24a561bd1618ae511" />
 
-        <activity android:name=".ui.devices.Devices" />
-        <activity android:name=".ui.devices.DeviceDetails" />
+        <activity android:name=".ui.devices.Devices"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+
+        <activity android:name=".ui.devices.DeviceDetails"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 
         <activity
             android:name=".ui.dashboard.Alert"

@@ -18,6 +18,7 @@ import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.output.model.DeviceEntity;
 import com.calix.calixgigaspireapp.output.model.DeviceListResponse;
 import com.calix.calixgigaspireapp.services.APIRequestHandler;
+import com.calix.calixgigaspireapp.ui.dashboard.Alert;
 import com.calix.calixgigaspireapp.ui.dashboard.Dashboard;
 import com.calix.calixgigaspireapp.ui.router.Router;
 import com.calix.calixgigaspireapp.utils.AppConstants;
@@ -130,17 +131,20 @@ public class Devices extends BaseActivity {
     }
 
     /*View onClick*/
-    @OnClick({R.id.header_left_img_lay,R.id.footer_center_btn,R.id.footer_right_btn})
+    @OnClick({R.id.header_left_img_lay,R.id.footer_left_btn,R.id.footer_center_btn,R.id.footer_right_btn})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.header_left_img_lay:
                 onBackPressed();
                 break;
-            case R.id.footer_center_btn:
+            case R.id.footer_left_btn:
                 previousScreen(Dashboard.class);
                 break;
+            case R.id.footer_center_btn:
+                nextScreen(Alert.class);
+                break;
             case R.id.footer_right_btn:
-                nextScreen(Router.class);
+//                nextScreen(Router.class);
                 break;
         }
     }

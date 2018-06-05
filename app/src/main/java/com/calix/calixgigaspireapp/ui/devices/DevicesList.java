@@ -15,6 +15,7 @@ import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.output.model.DeviceEntity;
 import com.calix.calixgigaspireapp.output.model.DeviceListResponse;
 import com.calix.calixgigaspireapp.services.APIRequestHandler;
+import com.calix.calixgigaspireapp.ui.dashboard.Alert;
 import com.calix.calixgigaspireapp.ui.dashboard.Dashboard;
 import com.calix.calixgigaspireapp.ui.router.Router;
 import com.calix.calixgigaspireapp.utils.AppConstants;
@@ -110,15 +111,14 @@ public class DevicesList extends BaseActivity {
 
     /*Set Footer View */
     private void setFooterVIew(){
-        mFooterLeftBtn.setBackground(getResources().getDrawable(R.drawable.footer_selection));
-        mFooterLeftIcon.setBackground(getResources().getDrawable(R.drawable.ic_default_device));
-        mFooterLeftTxt.setText(getString(R.string.devices));
+        mFooterLeftIcon.setBackground(getResources().getDrawable(R.drawable.ic_dashboard));
+        mFooterLeftTxt.setText(getString(R.string.dashboard));
 
-        mFooterCenterIcon.setBackground(getResources().getDrawable(R.drawable.ic_dashboard));
-        mFooterCenterTxt.setText(getString(R.string.dashboard));
+        mFooterCenterIcon.setBackground(getResources().getDrawable(R.drawable.ic_notification));
+        mFooterCenterTxt.setText(getString(R.string.alert));
 
-        mFooterRightIcon.setBackground(getResources().getDrawable(R.drawable.ic_router_map));
-        mFooterRightTxt.setText(getString(R.string.footer_router_map));
+        mFooterRightIcon.setBackground(getResources().getDrawable(R.drawable.ic_search));
+        mFooterRightTxt.setText(getString(R.string.footer_search));
     }
 
     /*View onClick*/
@@ -128,11 +128,14 @@ public class DevicesList extends BaseActivity {
             case R.id.header_left_img_lay:
                 onBackPressed();
                 break;
-            case R.id.footer_center_btn:
+            case R.id.footer_left_btn:
                 previousScreen(Dashboard.class);
                 break;
+            case R.id.footer_center_btn:
+                nextScreen(Alert.class);
+                break;
             case R.id.footer_right_btn:
-                nextScreen(Router.class);
+//                nextScreen(Router.class);
                 break;
         }
     }
