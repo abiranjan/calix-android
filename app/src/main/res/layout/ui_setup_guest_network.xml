@@ -38,29 +38,25 @@
                         android:paddingEnd="@dimen/size5"
                         android:paddingStart="@dimen/size5">
 
-                        <android.support.design.widget.TextInputLayout
-                            style="@style/LayoutWidMatch_HeiWrap"
+                        <EditText
+                            android:id="@+id/search_name_edit_txt"
+                            style="@style/EditTextRobotoRegular"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/size5"
-                            android:textColorHint="@color/gray">
-
-                            <EditText
-                                android:id="@+id/search_name_edit_txt"
-                                style="@style/EditTextRobotoRegular"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="end"
-                                android:hint="@string/event_name"
-                                android:imeOptions="actionNext|flagNoExtractUi"
-                                android:inputType="textCapSentences"
-                                android:maxLines="1"
-                                android:minHeight="@dimen/size37" />
-                        </android.support.design.widget.TextInputLayout>
+                            android:ellipsize="end"
+                            android:hint="@string/event_name"
+                            android:imeOptions="actionNext|flagNoExtractUi"
+                            android:inputType="textCapSentences"
+                            android:maxLines="1"
+                            android:minHeight="@dimen/size37"
+                            android:textColorHint="@color/gray" />
 
                         <ImageView
                             android:id="@+id/setup_guest_edit_img"
-                            android:layout_margin="@dimen/size20"
                             android:layout_width="@dimen/size30"
                             android:layout_height="@dimen/size30"
                             android:layout_alignParentEnd="true"
+                            android:layout_margin="@dimen/size10"
                             android:adjustViewBounds="true"
                             android:contentDescription="@string/app_name"
                             android:padding="@dimen/size3"
@@ -74,23 +70,18 @@
                         android:paddingEnd="@dimen/size5"
                         android:paddingStart="@dimen/size5">
 
-                        <android.support.design.widget.TextInputLayout
-                            style="@style/LayoutWidMatch_HeiWrap"
+                        <EditText
+                            android:id="@+id/guest_network_name_edt"
+                            style="@style/EditTextRobotoRegular"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/size5"
-                            android:textColorHint="@color/gray">
-
-                            <EditText
-                                android:id="@+id/guest_network_name_edt"
-                                style="@style/EditTextRobotoRegular"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="end"
-                                android:hint="@string/guest_network_name"
-                                android:imeOptions="actionNext|flagNoExtractUi"
-                                android:inputType="textCapSentences"
-                                android:maxLines="1"
-                                android:minHeight="@dimen/size37" />
-                        </android.support.design.widget.TextInputLayout>
-
+                            android:ellipsize="end"
+                            android:hint="@string/guest_network_name"
+                            android:imeOptions="actionNext|flagNoExtractUi"
+                            android:inputType="textCapSentences"
+                            android:maxLines="1"
+                            android:minHeight="@dimen/size37"
+                            android:textColorHint="@color/gray" />
 
                     </RelativeLayout>
 
@@ -111,13 +102,15 @@
 
                         <RelativeLayout
                             style="@style/LayoutWidMatch_HeiWrap"
-                            android:layout_height="@dimen/size37">
+                            android:layout_height="@dimen/size37"
+                            android:layout_marginTop="@dimen/size10"
+                            android:background="@drawable/rounded_bg_blue">
 
                             <Spinner
                                 android:id="@+id/auth_type_spinner"
                                 style="@style/LayoutMatch"
                                 android:layout_toStartOf="@+id/spinner_drop_down_img"
-                                android:background="@null"
+                                android:background="@drawable/rounded_bg_blue"
                                 android:gravity="start|center"
                                 android:padding="0dip"
                                 android:textAlignment="textStart" />
@@ -135,106 +128,96 @@
                                 android:src="@drawable/ic_down_arrow" />
                         </RelativeLayout>
 
-
                     </RelativeLayout>
 
-                    <android.support.v7.widget.CardView
+                    <LinearLayout
+                        android:id="@+id/passwordLay"
                         style="@style/LayoutWidMatch_HeiWrap"
-                        android:layout_marginBottom="@dimen/size5"
-                        android:layout_marginEnd="@dimen/size5"
-                        android:layout_marginStart="@dimen/size5"
-                        android:visibility="gone"
-                        app:cardCornerRadius="@dimen/size3">
+                        android:orientation="vertical"
+                        android:padding="@dimen/size10">
 
                         <LinearLayout
+                            android:id="@+id/pwd_confirm_pwd_lay"
                             style="@style/LayoutWidMatch_HeiWrap"
                             android:orientation="vertical"
-                            android:padding="@dimen/size10">
+                            >
 
-                            <LinearLayout
-                                android:id="@+id/pwd_confirm_pwd_lay"
+                            <android.support.design.widget.TextInputLayout
                                 style="@style/LayoutWidMatch_HeiWrap"
-                                android:orientation="vertical"
-                                android:visibility="gone">
+                                android:layout_marginTop="@dimen/size7"
+                                android:textColorHint="@color/gray"
+                                app:passwordToggleEnabled="true">
 
-                                <android.support.design.widget.TextInputLayout
-                                    style="@style/LayoutWidMatch_HeiWrap"
-                                    android:layout_marginTop="@dimen/size7"
-                                    android:textColorHint="@color/gray"
-                                    app:passwordToggleEnabled="true">
+                                <EditText
+                                    android:id="@+id/guest_network_pwd_edt"
+                                    style="@style/EditTextRobotoRegular"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:hint="@string/password"
+                                    android:imeOptions="actionNext|flagNoExtractUi"
+                                    android:inputType="textPassword"
+                                    android:maxLines="1"
+                                    android:minHeight="@dimen/size37" />
+                            </android.support.design.widget.TextInputLayout>
 
-                                    <EditText
-                                        android:id="@+id/guest_network_pwd_edt"
-                                        style="@style/EditTextRobotoRegular"
-                                        android:layout_height="wrap_content"
-                                        android:ellipsize="end"
-                                        android:hint="@string/password"
-                                        android:imeOptions="actionNext|flagNoExtractUi"
-                                        android:inputType="textPassword"
-                                        android:maxLines="1"
-                                        android:minHeight="@dimen/size37" />
-                                </android.support.design.widget.TextInputLayout>
+                            <android.support.design.widget.TextInputLayout
+                                style="@style/LayoutWidMatch_HeiWrap"
+                                android:layout_marginTop="@dimen/size10"
+                                android:textColorHint="@color/gray">
 
-                                <View
-                                    style="@style/LayoutWidMatch_HeiWrap"
-                                    android:layout_height="@dimen/size0.5"
-                                    android:background="@color/gray" />
+                                <EditText
+                                    android:id="@+id/guest_network_confirm_pwd_edt"
+                                    style="@style/EditTextRobotoRegular"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/confirm_pwd"
+                                    android:imeOptions="actionDone|flagNoExtractUi"
+                                    android:inputType="textPassword"
+                                    android:maxLines="1"
+                                    android:minHeight="@dimen/size37" />
+                            </android.support.design.widget.TextInputLayout>
 
-                                <android.support.design.widget.TextInputLayout
-                                    style="@style/LayoutWidMatch_HeiWrap"
-                                    android:layout_marginTop="@dimen/size10"
-                                    android:textColorHint="@color/gray">
-
-                                    <EditText
-                                        android:id="@+id/guest_network_confirm_pwd_edt"
-                                        style="@style/EditTextRobotoRegular"
-                                        android:layout_height="wrap_content"
-                                        android:hint="@string/confirm_pwd"
-                                        android:imeOptions="actionDone|flagNoExtractUi"
-                                        android:inputType="textPassword"
-                                        android:maxLines="1"
-                                        android:minHeight="@dimen/size37" />
-                                </android.support.design.widget.TextInputLayout>
-
-                                <View
-                                    style="@style/LayoutWidMatch_HeiWrap"
-                                    android:layout_height="@dimen/size0.5"
-                                    android:background="@color/gray" />
-
-                            </LinearLayout>
+                            <View
+                                style="@style/LayoutWidMatch_HeiWrap"
+                                android:layout_height="@dimen/size0.5"
+                                android:background="@color/gray" />
 
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
 
-                    <RelativeLayout
-                        style="@style/LayoutWidMatch_HeiWrap"
-                        android:padding="@dimen/size5">
-
-                        <TextView
-                            style="@style/TextRobotoRegular"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/size5"
-                            android:layout_toStartOf="@+id/indefinite_switch_compat"
-                            android:gravity="start"
-                            android:text="@string/indefinite_network"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/size13" />
-
-                        <android.support.v7.widget.SwitchCompat
-                            android:id="@+id/indefinite_switch_compat"
-                            style="@style/LayoutWrap"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:background="@android:color/transparent"
-                            android:button="@null"
-                            android:padding="@dimen/size5"
-                            app:switchMinWidth="@dimen/size5" />
-
-                    </RelativeLayout>
+                    </LinearLayout>
 
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
+            <RelativeLayout
+                style="@style/LayoutWidMatch_HeiWrap"
+                android:layout_margin="@dimen/size5"
+                android:padding="@dimen/size5">
+
+                <TextView
+                    style="@style/TextRobotoMedium"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/size5"
+                    android:layout_toStartOf="@+id/indefinite_switch_compat"
+                    android:gravity="start"
+                    android:text="@string/indefinite_network"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size13" />
+
+                <ToggleButton
+                    android:id="@+id/indefinite_switch_compat"
+                    android:layout_width="@dimen/size40"
+                    android:layout_height="@dimen/size23"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/size10"
+                    android:background="@drawable/toggle_button"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size10"
+
+                    />
+
+            </RelativeLayout>
 
             <android.support.v7.widget.CardView
                 android:id="@+id/setup_guest_indefinite_network_lay"
@@ -248,20 +231,11 @@
                     style="@style/LayoutWidMatch_HeiWrap"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/setup_time_duration_txt"
-                        style="@style/TextRobotoMedium"
-                        android:padding="@dimen/size4"
-                        android:text="@string/time_duration_cap"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/size13" />
-
                     <LinearLayout
                         style="@style/LayoutWidMatch_HeiWrap"
-                        android:layout_below="@+id/setup_time_duration_txt"
                         android:layout_centerInParent="true"
-                        android:layout_marginEnd="@dimen/size30"
-                        android:layout_marginStart="@dimen/size30"
+                        android:layout_marginEnd="@dimen/size10"
+                        android:layout_marginStart="@dimen/size10"
                         android:orientation="vertical"
                         android:paddingBottom="@dimen/size10">
 
@@ -297,21 +271,42 @@
                                 android:id="@+id/setup_guest_start_time"
                                 style="@style/LayoutWidMatch_HeiWrap">
 
-                                <TextView
-                                    android:id="@+id/start_time_txt"
-                                    style="@style/TextRobotoMedium"
-                                    android:layout_width="@dimen/size80"
-                                    android:background="@drawable/blue_bg"
-                                    android:padding="@dimen/size7"
-                                    android:text="@string/seven_thiry"
-                                    android:textColor="@color/white"
+                                <LinearLayout
+                                    style="@style/LayoutWrap"
                                     android:layout_alignParentEnd="true"
-                                    android:textSize="@dimen/text11" />
+                                    android:background="@drawable/blue_bg"
+                                    android:orientation="horizontal"
+                                    tools:ignore="UseCompoundDrawables">
+
+                                    <TextView
+                                        android:id="@+id/start_time_txt"
+                                        style="@style/TextRobotoMedium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
+                                        android:padding="@dimen/size7"
+                                        android:text="@string/seven_thiry"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/text11" />
+
+                                    <ImageView
+                                        android:id="@+id/startTimeImg"
+                                        android:layout_width="@dimen/size35"
+                                        android:layout_height="@dimen/size35"
+                                        android:adjustViewBounds="true"
+                                        android:contentDescription="@string/app_name"
+                                        android:paddingBottom="@dimen/size8"
+                                        android:paddingEnd="@dimen/size8"
+                                        android:paddingStart="0dp"
+                                        android:paddingTop="@dimen/size8"
+                                        android:src="@drawable/ic_time_white" />
+
+                                </LinearLayout>
 
                                 <TextView
                                     style="@style/TextRobotoRegular"
-                                    android:gravity="start"
                                     android:layout_alignParentStart="true"
+                                    android:gravity="start"
                                     android:paddingTop="@dimen/size3"
                                     android:text="@string/start_time"
                                     android:textColor="@color/gray"
@@ -320,20 +315,41 @@
 
                             <RelativeLayout
                                 android:id="@+id/setup_guest_end_time"
-                                android:layout_marginTop="@dimen/size20"
                                 style="@style/LayoutWrap"
-                                android:layout_below="@+id/setup_guest_start_time">
+                                android:layout_below="@+id/setup_guest_start_time"
+                                android:layout_marginTop="@dimen/size20">
 
-                                <TextView
-                                    android:id="@+id/end_time_txt"
-                                    style="@style/TextRobotoMedium"
-                                    android:layout_width="@dimen/size80"
-                                    android:background="@drawable/blue_bg"
-                                    android:padding="@dimen/size7"
+                                <LinearLayout
+                                    style="@style/LayoutWrap"
                                     android:layout_alignParentEnd="true"
-                                    android:text="@string/nine_thirty"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/text11" />
+                                    android:background="@drawable/blue_bg"
+                                    android:orientation="horizontal"
+                                    tools:ignore="UseCompoundDrawables">
+
+                                    <TextView
+                                        android:id="@+id/end_time_txt"
+                                        style="@style/TextRobotoMedium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
+                                        android:padding="@dimen/size7"
+                                        android:text="@string/seven_thiry"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/text11" />
+
+                                    <ImageView
+                                        android:id="@+id/endTimeImg"
+                                        android:layout_width="@dimen/size35"
+                                        android:layout_height="@dimen/size35"
+                                        android:adjustViewBounds="true"
+                                        android:contentDescription="@string/app_name"
+                                        android:paddingBottom="@dimen/size8"
+                                        android:paddingEnd="@dimen/size8"
+                                        android:paddingStart="0dp"
+                                        android:paddingTop="@dimen/size8"
+                                        android:src="@drawable/ic_time_white" />
+
+                                </LinearLayout>
 
                                 <TextView
                                     style="@style/TextRobotoRegular"
@@ -377,19 +393,39 @@
                                 android:id="@+id/setup_guest_start_date"
                                 style="@style/LayoutWrap"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginBottom="@dimen/size20"
-                                >
+                                android:layout_marginBottom="@dimen/size20">
 
-                                <TextView
-                                    android:id="@+id/start_date_txt"
-                                    style="@style/TextRobotoMedium"
+                                <LinearLayout
+                                    style="@style/LayoutWrap"
                                     android:layout_alignParentEnd="true"
-                                    android:layout_width="@dimen/size80"
                                     android:background="@drawable/blue_bg"
-                                    android:padding="@dimen/size7"
-                                    android:text="@string/one_date"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/text11" />
+                                    android:orientation="horizontal"
+                                    tools:ignore="UseCompoundDrawables">
+
+                                    <TextView
+                                        android:id="@+id/start_date_txt"
+                                        style="@style/TextRobotoMedium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
+                                        android:padding="@dimen/size7"
+                                        android:text="@string/one_date"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/text11" />
+
+                                    <ImageView
+                                        android:id="@+id/startDateImg"
+                                        android:layout_width="@dimen/size35"
+                                        android:layout_height="@dimen/size35"
+                                        android:adjustViewBounds="true"
+                                        android:contentDescription="@string/app_name"
+                                        android:paddingBottom="@dimen/size8"
+                                        android:paddingEnd="@dimen/size8"
+                                        android:paddingStart="0dp"
+                                        android:paddingTop="@dimen/size8"
+                                        android:src="@drawable/ic_calendar_white" />
+
+                                </LinearLayout>
 
                                 <TextView
                                     style="@style/TextRobotoRegular"
@@ -403,20 +439,40 @@
 
                             <RelativeLayout
                                 android:id="@+id/setup_guest_end_date"
-                                android:layout_below="@id/setup_guest_start_date"
                                 style="@style/LayoutWrap"
-                                >
+                                android:layout_below="@id/setup_guest_start_date">
 
-                                <TextView
-                                    android:id="@+id/end_date_txt"
-                                    style="@style/TextRobotoMedium"
-                                    android:layout_width="@dimen/size80"
-                                    android:background="@drawable/blue_bg"
-                                    android:padding="@dimen/size7"
-                                    android:text="@string/one_date"
+                                <LinearLayout
+                                    style="@style/LayoutWrap"
                                     android:layout_alignParentEnd="true"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/text11" />
+                                    android:background="@drawable/blue_bg"
+                                    android:orientation="horizontal"
+                                    tools:ignore="UseCompoundDrawables">
+
+                                    <TextView
+                                        android:id="@+id/end_date_txt"
+                                        style="@style/TextRobotoMedium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
+                                        android:padding="@dimen/size7"
+                                        android:text="@string/one_date"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/text11" />
+
+                                    <ImageView
+                                        android:id="@+id/endDateImg"
+                                        android:layout_width="@dimen/size35"
+                                        android:layout_height="@dimen/size35"
+                                        android:adjustViewBounds="true"
+                                        android:contentDescription="@string/app_name"
+                                        android:paddingBottom="@dimen/size8"
+                                        android:paddingEnd="@dimen/size8"
+                                        android:paddingStart="0dp"
+                                        android:paddingTop="@dimen/size8"
+                                        android:src="@drawable/ic_calendar_white" />
+
+                                </LinearLayout>
 
                                 <TextView
                                     style="@style/TextRobotoRegular"

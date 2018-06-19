@@ -58,17 +58,37 @@
             android:background="@null"
             android:scaleType="centerCrop" />
 
+
         <LinearLayout
             style="@style/LayoutMatch"
             android:orientation="vertical"
             android:padding="@dimen/size5"
             >
 
+            <RelativeLayout
+                style="@style/LayoutWrap"
+                android:layout_gravity="center">
+
             <ImageView
                 android:id="@+id/footer_center_ic"
                 android:layout_width="@dimen/size20"
                 android:layout_height="@dimen/size20"
                 android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/notification_count_footer"
+                android:visibility="invisible"
+                android:layout_width="@dimen/size10"
+                android:layout_height="@dimen/size10"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/size10"
+                android:adjustViewBounds="true"
+                android:background="@drawable/notification_badge_background"
+                android:gravity="center"
+                android:text="@string/default_count"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text8" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/footer_center_txt"

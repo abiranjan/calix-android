@@ -59,17 +59,17 @@
         <TextView
             android:id="@+id/notificationCount"
             android:visibility="invisible"
-            android:layout_width="@dimen/size14"
-            android:layout_height="@dimen/size14"
+            android:layout_width="@dimen/size10"
+            android:layout_height="@dimen/size10"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/size20"
-            android:layout_marginTop="@dimen/size8"
+            android:layout_marginTop="@dimen/size12"
             android:adjustViewBounds="true"
             android:background="@drawable/notification_badge_background"
             android:gravity="center"
             android:text="@string/default_count"
             android:textColor="@color/white"
-            android:textSize="@dimen/text10" />
+            android:textSize="@dimen/text8" />
 
     </RelativeLayout>
 

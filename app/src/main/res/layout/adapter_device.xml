@@ -52,6 +52,17 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/size11" />
 
+                    <TextView
+                        android:id="@+id/device_subtype_txt"
+                        style="@style/TextRobotoMedium"
+                        android:layout_width="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="start"
+                        android:maxLines="1"
+                        android:maxWidth="@dimen/size100"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/size11" />
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -65,8 +76,8 @@
 
                 <ImageView
                     android:id="@+id/connected_device_img"
-                    android:layout_width="@dimen/size30"
-                    android:layout_height="@dimen/size30"
+                    android:layout_width="@dimen/size20"
+                    android:layout_height="@dimen/size20"
                     android:layout_gravity="center"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/app_name"
@@ -129,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/connect_disconnect_img"
-                    android:layout_toStartOf="@+id/connect_disconnect_switch_compat"
+                    android:layout_toStartOf="@+id/connect_disconnect_toggle"
                     android:ellipsize="end"
                     android:gravity="start"
                     android:maxLines="2"
@@ -137,16 +148,17 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text10" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/connect_disconnect_switch_compat"
-                    style="@style/LayoutWrap"
-                    app:switchTextAppearance="@style/SwitchTextAppearance"
+                <ToggleButton
+                    android:layout_width="@dimen/size40"
+                    android:layout_height="@dimen/size23"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true"
-                    android:textOff="@string/off"
-                    android:textOn="@string/on"
-                    app:showText="true"/>
+                    android:id="@+id/connect_disconnect_toggle"
+                    android:textSize="@dimen/size10"
+                    android:textColor="@color/white"
+                    android:background="@drawable/toggle_button"
+
+                    />
 
             </RelativeLayout>
 

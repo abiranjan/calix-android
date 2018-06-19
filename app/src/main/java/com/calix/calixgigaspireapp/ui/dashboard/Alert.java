@@ -45,9 +45,6 @@ public class Alert extends BaseActivity {
     @BindView(R.id.header_right_img)
     ImageView mHeaderRightImg;
 
-    @BindView(R.id.header_right_img_lay)
-    RelativeLayout mHeaderRightImgLay;
-
     @BindView(R.id.alert_recycler_view)
     RecyclerView mAlertRecyclerView;
 
@@ -126,8 +123,8 @@ public class Alert extends BaseActivity {
 
         /*set header changes*/
         mHeaderTxt.setVisibility(View.VISIBLE);
-        mHeaderRightImgLay.setVisibility(View.VISIBLE);
-        mHeaderRightImg.setImageResource(R.drawable.ic_close);
+//        mHeaderRightImgLay.setVisibility(View.VISIBLE);
+//        mHeaderRightImg.setImageResource(R.drawable.ic_close);
         mHeaderTxt.setText(getString(R.string.notify));
 
          /*Set header adjustment - status bar we applied transparent color so header tack full view*/
@@ -145,14 +142,11 @@ public class Alert extends BaseActivity {
     }
 
     /*View onClick*/
-    @OnClick({R.id.header_right_img_lay,R.id.header_left_img_lay})
+    @OnClick({R.id.header_left_img_lay})
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.header_right_img_lay:
-                onBackPressed();
-                break;
             case R.id.header_left_img_lay:
-                onBackPressed();
+                previousScreen(Dashboard.class);
                 break;
         }
     }

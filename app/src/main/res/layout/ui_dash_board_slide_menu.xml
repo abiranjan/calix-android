@@ -29,7 +29,8 @@
 
                 <RelativeLayout
                     style="@style/LayoutWrap"
-                    android:id="@+id/dashboardLay">
+                    android:id="@+id/dashboardLay"
+                    >
                     <ImageView
                         android:id="@+id/hexagonal-icon-devices"
                         android:layout_width="@dimen/size60"
@@ -75,7 +76,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size0.5"
+                    android:layout_height="@dimen/size1"
                     android:layout_marginStart="@dimen/size30"
                     android:layout_alignParentBottom="true"
                     android:background="@color/gray" />
@@ -140,7 +141,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size0.5"
+                android:layout_height="@dimen/size1"
                 android:layout_marginStart="@dimen/size30"
                 android:layout_alignParentBottom="true"
                 android:background="@color/gray" />
@@ -205,7 +206,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size0.5"
+                    android:layout_height="@dimen/size1"
                     android:layout_marginStart="@dimen/size30"
                     android:layout_alignParentBottom="true"
                     android:background="@color/gray" />
@@ -270,7 +271,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size0.5"
+                    android:layout_height="@dimen/size1"
                     android:layout_marginStart="@dimen/size30"
                     android:layout_alignParentBottom="true"
                     android:background="@color/gray" />
@@ -335,7 +336,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size0.5"
+                    android:layout_height="@dimen/size1"
                     android:layout_marginStart="@dimen/size30"
                     android:layout_alignParentBottom="true"
                     android:background="@color/gray" />
@@ -400,7 +401,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size0.5"
+                    android:layout_height="@dimen/size1"
                     android:layout_marginStart="@dimen/size30"
                     android:layout_alignParentBottom="true"
                     android:background="@color/gray" />
@@ -465,7 +466,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size0.5"
+                    android:layout_height="@dimen/size1"
                     android:layout_marginStart="@dimen/size30"
                     android:layout_alignParentBottom="true"
                     android:background="@color/gray" />
@@ -530,7 +531,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size0.5"
+                    android:layout_height="@dimen/size1"
                     android:layout_marginStart="@dimen/size30"
                     android:layout_alignParentBottom="true"
                     android:background="@color/gray" />
@@ -595,7 +596,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size0.5"
+                    android:layout_height="@dimen/size1"
                     android:layout_marginStart="@dimen/size30"
                     android:layout_alignParentBottom="true"
                     android:background="@color/gray" />
@@ -662,7 +663,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size0.5"
+                    android:layout_height="@dimen/size1"
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="@dimen/size30"
                     android:background="@color/gray" />

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.ToggleButton;
 
 import com.calix.calixgigaspireapp.R;
 import com.calix.calixgigaspireapp.main.BaseActivity;
@@ -32,6 +34,7 @@ import com.calix.calixgigaspireapp.services.APIRequestHandler;
 import com.calix.calixgigaspireapp.utils.AppConstants;
 import com.calix.calixgigaspireapp.utils.DateUtil;
 import com.calix.calixgigaspireapp.utils.DialogManager;
+import com.calix.calixgigaspireapp.utils.ImageUtil;
 import com.calix.calixgigaspireapp.utils.InterfaceBtnCallback;
 import com.calix.calixgigaspireapp.utils.NumberUtil;
 
@@ -40,6 +43,7 @@ import net.glxn.qrgen.android.QRCode;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -59,9 +63,6 @@ public class SetupGuestNetwork extends BaseActivity {
 
     @BindView(R.id.setup_guest_header_bg_lay)
     RelativeLayout mSetupGuestHeaderBgLay;
-
-    @BindView(R.id.indefinite_switch_compat)
-    SwitchCompat mIndefiniteSwitchCompat;
 
     @BindView(R.id.setup_guest_indefinite_network_lay)
     CardView mSetupGuestIndefiniteNetworkLay;
@@ -101,6 +102,9 @@ public class SetupGuestNetwork extends BaseActivity {
 
     @BindView(R.id.auth_type_spinner)
     Spinner mAuthTypeSpinner;
+
+    @BindView(R.id.indefinite_switch_compat)
+    ToggleButton mToggleWifi;
 
     private LinkedHashMap<String, Integer> mEncryptionTypeHasMap = new LinkedHashMap<>();
     private ArrayList<String> mEncryptionTypStrArrList = new ArrayList<>();
@@ -162,7 +166,7 @@ public class SetupGuestNetwork extends BaseActivity {
         APIRequestHandler.getInstance().encryptionTypeAPICall(this);
     }
 
-    /*Show data picker*/
+    /*Show date picker*/
     private void showDatePickerDialog(String dateStr) {
 
 
@@ -177,13 +181,13 @@ public class SetupGuestNetwork extends BaseActivity {
         mDatePicker = new DatePickerDialog(this, mDateSetListener,
                 mYear, mMonth, mDate);
 
-//        if ((isStartDateBool && AppConstants.GUEST_WIFI_DETAILS.getEventId().isEmpty()) || (isStartDateBool && AppConstants.GUEST_WIFI_DETAILS.isIndefinite())) {
-//            mDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
-//        }
-//
-//        if (!isStartDateBool) {
-//            mDatePicker.getDatePicker().setMinDate(DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT));
-//        }
+        if ((isStartDateBool && AppConstants.GUEST_WIFI_DETAILS.getEventId().isEmpty()) || (isStartDateBool && AppConstants.GUEST_WIFI_DETAILS.isIndefinite())) {
+            mDatePicker.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+        }
+
+        if (!isStartDateBool) {
+            mDatePicker.getDatePicker().setMinDate(DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT));
+        }
 
         mDatePicker.show();
 
@@ -206,8 +210,8 @@ public class SetupGuestNetwork extends BaseActivity {
             String mDateStr = "";
 
             try {
-                selectedDate = new SimpleDateFormat("MM-dd-yyyy", Locale.US).parse(dateStr);
-                mDateStr = new SimpleDateFormat("MM-dd-yyyy", Locale.US).format(selectedDate);
+                selectedDate = new SimpleDateFormat("MM/dd/yyyy", Locale.US).parse(dateStr);
+                mDateStr = new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(selectedDate);
 
             } catch (Exception e) {
                 Log.e(AppConstants.TAG, e.getMessage());
@@ -216,23 +220,23 @@ public class SetupGuestNetwork extends BaseActivity {
 
             if (isStartDateBool) {
                 mStartDateTxt.setText(mDateStr);
-//                if (DateUtil.getMileSecFromDate(mDateStr, AppConstants.CUSTOM_DATE_FORMAT) > DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT)) {
-//                    mEndDateTxt.setText(mDateStr);
-//                }
-//                if ((DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT).equals(DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT)))
-//                        && (DateUtil.getMileSecFromDate(mStartTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT) > DateUtil.getMileSecFromDate(mEndTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT))) {
-//                    mEndTimeTxt.setText(mStartTimeTxt.getText().toString().trim());
-//                }
+                if (DateUtil.getMileSecFromDate(mDateStr, AppConstants.CUSTOM_DATE_FORMAT) > DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT)) {
+                    mEndDateTxt.setText(mDateStr);
+                }
+                if ((DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT).equals(DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT)))
+                        && (DateUtil.getMileSecFromDate(mStartTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT) > DateUtil.getMileSecFromDate(mEndTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT))) {
+                    mEndTimeTxt.setText(mStartTimeTxt.getText().toString().trim());
+                }
             } else {
-//                if (DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT) > DateUtil.getMileSecFromDate(mDateStr, AppConstants.CUSTOM_DATE_FORMAT)) {
-//                    DialogManager.getInstance().showToast(SetupGuestNetwork.this, getString(R.string.select_feature_date));
-//                } else {
+                if (DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT) > DateUtil.getMileSecFromDate(mDateStr, AppConstants.CUSTOM_DATE_FORMAT)) {
+                    DialogManager.getInstance().showToast(SetupGuestNetwork.this, getString(R.string.select_future_date));
+                } else {
                 mEndDateTxt.setText(mDateStr);
-//                    if ((DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT).equals(DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT)))
-//                            && (DateUtil.getMileSecFromDate(mStartTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT) > DateUtil.getMileSecFromDate(mEndTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT))) {
-//                        mEndTimeTxt.setText(mStartTimeTxt.getText().toString().trim());
-//                    }
-//                }
+                    if ((DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT).equals(DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT)))
+                            && (DateUtil.getMileSecFromDate(mStartTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT) > DateUtil.getMileSecFromDate(mEndTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT))) {
+                        mEndTimeTxt.setText(mStartTimeTxt.getText().toString().trim());
+                    }
+                }
             }
         }
 
@@ -274,17 +278,17 @@ public class SetupGuestNetwork extends BaseActivity {
 
             if (isStartTimeBool) {
                 mStartTimeTxt.setText(returnStr);
-//                if ((DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT).equals(DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT)))
-//                        && (DateUtil.getMileSecFromDate(returnStr, AppConstants.CUSTOM_12_HRS_TIME_FORMAT) > DateUtil.getMileSecFromDate(mEndTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT))) {
-//                    mEndTimeTxt.setText(returnStr);
-//                }
+                if ((DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT).equals(DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT)))
+                        && (DateUtil.getMileSecFromDate(returnStr, AppConstants.CUSTOM_12_HRS_TIME_FORMAT) > DateUtil.getMileSecFromDate(mEndTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT))) {
+                    mEndTimeTxt.setText(returnStr);
+                }
             } else {
-//                if ((DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT).equals(DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT)))
-//                        && (DateUtil.getMileSecFromDate(mStartTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT) > DateUtil.getMileSecFromDate(returnStr, AppConstants.CUSTOM_12_HRS_TIME_FORMAT))) {
-//                    DialogManager.getInstance().showToast(SetupGuestNetwork.this, getString(R.string.select_feature_time));
-//                } else {
+                if ((DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT).equals(DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_FORMAT)))
+                        && (DateUtil.getMileSecFromDate(mStartTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT) > DateUtil.getMileSecFromDate(returnStr, AppConstants.CUSTOM_12_HRS_TIME_FORMAT))) {
+                    DialogManager.getInstance().showToast(SetupGuestNetwork.this, getString(R.string.select_future_time));
+                } else {
                 mEndTimeTxt.setText(returnStr);
-//                }
+                }
             }
         }
 
@@ -292,7 +296,7 @@ public class SetupGuestNetwork extends BaseActivity {
 
 
     /*View onClick*/
-    @OnClick({R.id.header_left_img_lay, R.id.setup_guest_edit_img, R.id.start_date_txt, R.id.end_date_txt, R.id.start_time_txt, R.id.end_time_txt, R.id.spinner_drop_down_img, R.id.cont_btn, R.id.delete_btn})
+    @OnClick({R.id.startTimeImg,R.id.endTimeImg, R.id.startDateImg, R.id.endDateImg, R.id.header_left_img_lay, R.id.setup_guest_edit_img, R.id.start_date_txt, R.id.end_date_txt, R.id.start_time_txt, R.id.end_time_txt, R.id.spinner_drop_down_img, R.id.cont_btn, R.id.delete_btn})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.header_left_img_lay:
@@ -303,19 +307,23 @@ public class SetupGuestNetwork extends BaseActivity {
                 mEventNameEdtTxt.setEnabled(true);
                 break;
             case R.id.start_date_txt:
+            case R.id.startDateImg :
                 isStartDateBool = true;
                 showDatePickerDialog(mStartDateTxt.getText().toString().trim());
                 break;
             case R.id.end_date_txt:
+            case R.id.endDateImg:
                 isStartDateBool = false;
                 showDatePickerDialog(mEndDateTxt.getText().toString().trim());
                 break;
             case R.id.start_time_txt:
+            case R.id.startTimeImg:
                 isStartTimeBool = true;
                 showTimePickerDialog(mStartDateTxt.getText().toString().trim() + " " + mStartTimeTxt.getText().toString().trim());
 
                 break;
             case R.id.end_time_txt:
+            case R.id.endTimeImg:
                 isStartTimeBool = false;
                 showTimePickerDialog(mEndDateTxt.getText().toString().trim() + " " + mEndTimeTxt.getText().toString().trim());
                 break;
@@ -340,8 +348,8 @@ public class SetupGuestNetwork extends BaseActivity {
         switch (buttonView.getId()) {
             case R.id.indefinite_switch_compat:
                 mSetupGuestIndefiniteNetworkLay.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+                setToggleView(isChecked);
                 break;
-
         }
     }
 
@@ -352,8 +360,10 @@ public class SetupGuestNetwork extends BaseActivity {
         boolean isNewGuestBool = guestWifiDetails.getEventId().isEmpty();
         mEventNameEdtTxt.setText(guestWifiDetails.getEventName());
         mSetupGuestEditImg.setVisibility(isNewGuestBool ? View.GONE : View.VISIBLE);
+        mPwdConfirmPwdLay.setVisibility(isNewGuestBool ? View.VISIBLE : View.GONE);
         mEventNameEdtTxt.setEnabled(isNewGuestBool);
-        mIndefiniteSwitchCompat.setChecked(guestWifiDetails.isIndefinite());
+        mToggleWifi.setChecked(guestWifiDetails.isIndefinite());
+        setToggleView(guestWifiDetails.isIndefinite());
         mSetupGuestIndefiniteNetworkLay.setVisibility(guestWifiDetails.isIndefinite() ? View.GONE : View.VISIBLE);
 
         mStartDateTxt.setText(DateUtil.getCustomDateAndTimeFormat(guestWifiDetails.getDuration().getStartTime(), AppConstants.CUSTOM_DATE_FORMAT));
@@ -366,6 +376,24 @@ public class SetupGuestNetwork extends BaseActivity {
         mDeleteBtn.setVisibility(isNewGuestBool ? View.GONE : View.VISIBLE);
 
         encryptionTypeAPICall();
+    }
+
+    private void setToggleView(boolean isChecked) {
+        if (isChecked) {
+            // The toggle is enabled
+            mToggleWifi.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);// Set left padding
+            int padding = getResources().getDimensionPixelSize(R.dimen.size2);
+            int paddingBottom = getResources().getDimensionPixelSize(R.dimen.size3);
+            int paddingLeft = getResources().getDimensionPixelSize(R.dimen.size5);
+            mToggleWifi.setPadding(paddingLeft, padding, padding, paddingBottom);
+        } else {
+            // The toggle is disabled
+            mToggleWifi.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);// Set left padding
+            int padding = getResources().getDimensionPixelSize(R.dimen.size2);
+            int paddingTop = getResources().getDimensionPixelSize(R.dimen.size3);
+            int paddingRight = getResources().getDimensionPixelSize(R.dimen.size3);
+            mToggleWifi.setPadding(padding, paddingTop, paddingRight, padding);
+        }
     }
 
     /*validate fields*/
@@ -391,11 +419,11 @@ public class SetupGuestNetwork extends BaseActivity {
         } else if (mPwdConfirmPwdLay.getVisibility() == View.VISIBLE && !guestNetworkPwdStr.equals(guestNetworkConfirmPwdStr)) {
             mGuestNetworkConfirmPwdEdt.requestFocus();
             DialogManager.getInstance().showAlertPopup(this, getString(R.string.pwd_does_not_match), this);
-        } else if (!mIndefiniteSwitchCompat.isChecked() && AppConstants.GUEST_WIFI_DETAILS.getEventId().isEmpty() && DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim() + " " + mStartTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_TIME_FORMAT) < System.currentTimeMillis() - 120000) {
+        } else if (!mToggleWifi.isChecked() && AppConstants.GUEST_WIFI_DETAILS.getEventId().isEmpty() && DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim() + " " + mStartTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_TIME_FORMAT) < System.currentTimeMillis() - 120000) {
             DialogManager.getInstance().showAlertPopup(this, getString(R.string.select_feature_date_time), this);
-        } else if (!mIndefiniteSwitchCompat.isChecked() && DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim() + " " + mEndTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_TIME_FORMAT) < System.currentTimeMillis() - 120000) {
+        } else if (!mToggleWifi.isChecked() && DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim() + " " + mEndTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_TIME_FORMAT) < System.currentTimeMillis() - 120000) {
             DialogManager.getInstance().showAlertPopup(this, getString(R.string.select_feature_date_time), this);
-        } else if (!mIndefiniteSwitchCompat.isChecked() && DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim() + " " + mStartTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_TIME_FORMAT) >
+        } else if (!mToggleWifi.isChecked() && DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim() + " " + mStartTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_TIME_FORMAT) >
                 DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim() + " " + mEndTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_TIME_FORMAT)) {
             DialogManager.getInstance().showAlertPopup(this, getString(R.string.select_valid_date_time), this);
         } else {
@@ -409,7 +437,7 @@ public class SetupGuestNetwork extends BaseActivity {
             guestWifiInputModel.setGuestWifiName(guestNetworkNameStr);
             guestWifiInputModel.setGuestWifiPassword(guestNetworkPwdStr);
             guestWifiInputModel.setEncryptionType(String.valueOf(mEncryptionTypeInt));
-            guestWifiInputModel.setIndefinite(mIndefiniteSwitchCompat.isChecked());
+            guestWifiInputModel.setIndefinite(mToggleWifi.isChecked());
 
             durationWifiInputModel.setStartTime(DateUtil.getMileSecFromDate(mStartDateTxt.getText().toString().trim() + " " + mStartTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_TIME_FORMAT));
             durationWifiInputModel.setEndTime(DateUtil.getMileSecFromDate(mEndDateTxt.getText().toString().trim() + " " + mEndTimeTxt.getText().toString().trim(), AppConstants.CUSTOM_DATE_TIME_FORMAT));

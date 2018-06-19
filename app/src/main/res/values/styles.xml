@@ -6,8 +6,7 @@
         <item name="colorAccent">@color/blue</item>
         <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
-        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
-        </item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
         <item name="android:windowBackground">@color/white</item>
     </style>
 
@@ -122,7 +121,6 @@
     </style>
 
 
-
     <!--Button text style OpenSans-Bold-->
     <style name="ButtonRobotoMedium" parent="android:Widget.Button">
         <item name="android:layout_width">match_parent</item>
@@ -142,6 +140,14 @@
     <style name="PopupBottomAnimation">
         <item name="android:windowEnterAnimation">@anim/anim_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/anim_in_top</item>
+    </style>
+
+    <!-- Overwrite the ToggleButton style -->
+    <style name="Widget.Button.Toggle" parent="android:Widget">
+        <item name="android:background">@drawable/toggle_button</item>
+        <item name="android:textOn">YES</item>
+        <item name="android:textOff">NO</item>
+        <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
     </style>
 
 

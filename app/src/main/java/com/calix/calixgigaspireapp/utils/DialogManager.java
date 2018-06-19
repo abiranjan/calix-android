@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.calix.calixgigaspireapp.R;
 
+import org.w3c.dom.Text;
+
 
 public class DialogManager {
 
@@ -408,7 +410,7 @@ public class DialogManager {
     }
 
 
-    public void showEdtDeviceNamePopup(final Context context, String deviceNameStr, final InterfaceEdtBtnCallback dialogAlertInterface) {
+    public void showEdtDeviceNamePopup(final Context context, String pHeader, String sHeader, String editTxtHint, String deviceNameStr, final InterfaceEdtBtnCallback dialogAlertInterface) {
         alertDismiss(mEdtDeviceNameDialog);
         mEdtDeviceNameDialog = getDialog(context, R.layout.popup_edt_device_name_alert);
 
@@ -425,15 +427,21 @@ public class DialogManager {
 
         final EditText deviceNameEdt;
         Button positiveBtn, negativeBtn;
+        TextView primaryTV, secondaryTV;
 
         /*Init view*/
         deviceNameEdt = mEdtDeviceNameDialog.findViewById(R.id.device_name_edt);
         positiveBtn = mEdtDeviceNameDialog.findViewById(R.id.positive_btn);
         negativeBtn = mEdtDeviceNameDialog.findViewById(R.id.negative_btn);
+        primaryTV = mEdtDeviceNameDialog.findViewById(R.id.primaryLabel);
+        secondaryTV = mEdtDeviceNameDialog.findViewById(R.id.secondaryLabel);
 
         /*Set data*/
         deviceNameEdt.setText(deviceNameStr);
         deviceNameEdt.setSelection(deviceNameStr.length());
+        primaryTV.setText(pHeader);
+        secondaryTV.setText(sHeader);
+        deviceNameEdt.setHint(editTxtHint);
 
         negativeBtn.setOnClickListener(new View.OnClickListener() {
             @Override

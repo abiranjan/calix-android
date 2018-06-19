@@ -28,7 +28,6 @@
             <TextView
                 style="@style/TextRobotoMedium"
                 android:gravity="start"
-                android:layout_marginStart="@dimen/size10"
                 android:text="@string/mode"/>
 
             <TextView
@@ -62,33 +61,73 @@
                 <LinearLayout style="@style/LayoutWidMatch_HeiWrap"
                     tools:ignore="UseCompoundDrawables">
 
-                    <RelativeLayout
-                        style="@style/LayoutWrap">
+                    <LinearLayout
+                        style="@style/LayoutWrap"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            style="@style/LayoutWrap">
 
-                    <ImageView
-                        android:id="@+id/internet_globe"
-                        android:layout_width="@dimen/size80"
-                        android:layout_height="@dimen/size80"
-                        android:layout_margin="@dimen/size10"
-                        android:layout_marginBottom="0dp"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@string/app_name"
-                        android:src="@drawable/ic_internet_globe" />
+                            <ImageView
+                                android:id="@+id/internet_globe"
+                                android:layout_width="@dimen/size50"
+                                android:layout_height="@dimen/size50"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/size10"
+                                android:layout_marginTop="@dimen/size10"
+                                android:layout_marginEnd="@dimen/size10"
+                                android:adjustViewBounds="true"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/ic_internet_globe" />
 
-                    <TextView
-                        android:id="@+id/notificationCount"
-                        android:layout_width="@dimen/size14"
-                        android:layout_height="@dimen/size14"
-                        android:layout_marginStart="@dimen/size60"
-                        android:layout_marginTop="@dimen/size14"
-                        android:adjustViewBounds="true"
-                        android:background="@drawable/internet_badge_background"
-                        />
-                    </RelativeLayout>
+                            <TextView
+                                android:id="@+id/notificationCount"
+                                android:layout_width="@dimen/size14"
+                                android:layout_height="@dimen/size14"
+                                android:layout_marginTop="@dimen/size30"
+                                android:layout_marginStart="@dimen/size45"
+                                android:adjustViewBounds="true"
+                                android:background="@drawable/internet_badge_background"
+                                />
+
+                            <FrameLayout
+                                style="@style/LayoutWrap"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@id/internet_globe"
+                                >
+                                <ImageView
+                                    style="@style/LayoutWrap"
+                                    android:layout_height="@dimen/size40"
+                                    android:layout_width="@dimen/size20"
+                                    android:layout_gravity="center"
+                                    android:layout_marginEnd="@dimen/size3"
+                                    android:adjustViewBounds="true"
+                                    android:contentDescription="@string/app_name"
+                                    android:src="@drawable/ic_dot_router" />
+
+                            </FrameLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/LayoutWrap"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        >
+
+                    <!--<ImageView-->
+                        <!--android:layout_width="@dimen/size20"-->
+                        <!--android:layout_height="@dimen/size20"-->
+                        <!--android:background="@color/red"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:rotation="45"-->
+                        <!--android:src="@drawable/router_triangle"-->
+                        <!--android:contentDescription="@string/arrow" />-->
 
                     <RelativeLayout
                         style="@style/LayoutWidMatch_HeiWrap"
-                        android:layout_height="@dimen/size120"
+                        android:layout_height="@dimen/size90"
                         android:layout_marginTop="@dimen/size10"
                         android:gravity="center_vertical"
                         android:id="@+id/internet_label_header"
@@ -102,12 +141,12 @@
                             android:text="@string/internet_cap"/>
 
                         <TextView
-                            style="@style/TextRobotoRegular"
+                            style="@style/TextRobotoMedium"
                             android:gravity="end"
                             android:layout_marginEnd="@dimen/size20"
-                            android:textStyle="italic"
                             android:text="@string/strong"/>
                     </RelativeLayout>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView

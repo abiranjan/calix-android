@@ -53,11 +53,11 @@ public class AppConstants {
 
     /*Date formats*/
     static final SimpleDateFormat SERVER_DATE_TIME_FORMAT = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy", Locale.US);
-    public static final SimpleDateFormat CUSTOM_DATE_FORMAT = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
+    public static final SimpleDateFormat CUSTOM_DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
     public static final SimpleDateFormat GRAPH_DATE_FORMAT = new SimpleDateFormat("MMM-dd", Locale.US);
     public static final SimpleDateFormat CUSTOM_12_HRS_TIME_FORMAT = new SimpleDateFormat("hh:mm aa", Locale.US);
     public static final SimpleDateFormat CUSTOM_24_HRS_TIME_FORMAT = new SimpleDateFormat("HH:mm", Locale.US);
-    public static final SimpleDateFormat CUSTOM_DATE_TIME_FORMAT = new SimpleDateFormat("MM-dd-yyyy hh:mm aa", Locale.US);
+    public static final SimpleDateFormat CUSTOM_DATE_TIME_FORMAT = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.US);
 
     public static final String API_DEVICE_USAGE = "https://dev.rgw.calix.ai/map/v1/mobile/device/usage/history?deviceId=%1$s&filter=%2$s";
 
@@ -67,6 +67,12 @@ public class AppConstants {
     public static LinkedHashMap<String, String> SELECTED_CONTACT_LINKED_HASH_MAP = new LinkedHashMap<>();
 
     public static final String QR_CODE_GENERATOR ="WIFI:S:%1$s;T:%2$s;P:%3$s;";
+
+    public static int DEVICE_COUNT = 0;
+    public static int ALERT_COUNT = 0;
+    public static final String API_DEVICE_FILTER_LIST = "https://dev.rgw.calix.ai/map/v1/mobile/device/listByFilter?routerId=%1$s";
+
+
 
 
 

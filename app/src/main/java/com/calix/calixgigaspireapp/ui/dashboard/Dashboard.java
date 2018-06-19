@@ -27,7 +27,6 @@ import com.calix.calixgigaspireapp.services.APIRequestHandler;
 import com.calix.calixgigaspireapp.ui.devices.DevicesList;
 import com.calix.calixgigaspireapp.ui.guest.GuestNetwork;
 import com.calix.calixgigaspireapp.ui.loginregconfig.Login;
-import com.calix.calixgigaspireapp.ui.router.Router;
 import com.calix.calixgigaspireapp.utils.AppConstants;
 import com.calix.calixgigaspireapp.utils.DialogManager;
 import com.calix.calixgigaspireapp.utils.InterfaceBtnCallback;
@@ -36,6 +35,7 @@ import com.calix.calixgigaspireapp.utils.NumberUtil;
 import com.calix.calixgigaspireapp.utils.PreferenceUtil;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,9 +52,6 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.header_left_img)
     ImageView mHeaderLeftImg;
 
-    @BindView(R.id.header_right_img)
-    ImageView mHeaderRightImg;
-
     @BindView(R.id.header_txt)
     TextView mHeaderTxt;
 
@@ -63,6 +60,9 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.header_right_img_lay)
     RelativeLayout mHeaderRightImgLay;
+
+    @BindView(R.id.header_right_img)
+    ImageView mHeaderRightImg;
 
     @BindView(R.id.dashboard_header_bg_lay)
     RelativeLayout mDashboardHeaderBgLay;
@@ -162,7 +162,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mDashboardHeaderBgLay.post(new Runnable() {
                 public void run() {
-                    int heightInt = getResources().getDimensionPixelSize(IsScreenModePortrait() ? R.dimen.size105 : R.dimen.size45);
+                    int heightInt = getResources().getDimensionPixelSize(IsScreenModePortrait() ? R.dimen.size115 : R.dimen.size45);
                     mDashboardHeaderBgLay.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, heightInt + NumberUtil.getInstance().getStatusBarHeight(Dashboard.this)));
                     mDashboardHeaderBgLay.setPadding(0, NumberUtil.getInstance().getStatusBarHeight(Dashboard.this), 0, 0);
                     mDashboardHeaderBgLay.setBackground(IsScreenModePortrait() ? getResources().getDrawable(R.drawable.header_bg) : getResources().getDrawable(R.color.blue));
@@ -243,10 +243,15 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
                     case R.id.logout_lay:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
                         logoutFromApp();
+                        break;
                     case R.id.footer_left_btn:
                     case R.id.device_list:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
-                        nextScreen(DevicesList.class);
+                        if(AppConstants.DEVICE_COUNT > 0) {
+                            nextScreen(DevicesList.class);
+                        } else {
+                            showAlertPopup();
+                        }
                         break;
                     case R.id.footer_right_btn:
                         mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -262,18 +267,29 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
 
     }
 
+    private void showAlertPopup() {
+        DialogManager.getInstance().showAlertPopup(this, getString(R.string.empty_devices_alert), new InterfaceBtnCallback() {
+            @Override
+            public void onPositiveClick() {
+
+            }
+        });
+    }
+
     /*Populate the values*/
     private void setData(DashboardResponse dashboardResponse) {
 
         mNameTxt.setText(dashboardResponse.getUser().getFirstName() + " " + dashboardResponse.getUser().getLastName());
+        Log.d("alert count", String.valueOf(dashboardResponse.getNotifUnreadCount()));
+        AppConstants.ALERT_COUNT = dashboardResponse.getNotifUnreadCount();
         if (dashboardResponse.getNotifUnreadCount() > 0) {
             mNotificationCount.setVisibility(View.VISIBLE);
             mNotificationCount.setText(String.valueOf(dashboardResponse.getNotifUnreadCount()));
         } else
             mNotificationCount.setVisibility(View.GONE);
         Log.d("not_count", String.valueOf(dashboardResponse.getNotifUnreadCount()));
-        mUploadSpeedTxt.setText(dashboardResponse.getSpeed().getUpload());
-        mDownloadSpeedTxt.setText(dashboardResponse.getSpeed().getDownload());
+        mUploadSpeedTxt.setText(new DecimalFormat("##.###").format(Double.parseDouble(dashboardResponse.getSpeed().getUpload())));
+        mDownloadSpeedTxt.setText(new DecimalFormat("##.###").format(Double.parseDouble(dashboardResponse.getSpeed().getDownload())));
 
         if (dashboardResponse.getUser().getAvatarURL().isEmpty()) {
             mUserProfileImg.setImageResource(R.drawable.default_profile_white);
@@ -289,6 +305,7 @@ public class Dashboard extends BaseActivity implements View.OnClickListener {
             }
         }
 
+        AppConstants.DEVICE_COUNT = dashboardResponse.getDeviceCount();
         setAdapter(dashboardResponse.getCategories(), dashboardResponse.getDeviceCount());
 
     }

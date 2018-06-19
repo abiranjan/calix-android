@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import com.calix.calixgigaspireapp.output.model.DurationEntity;
 import com.calix.calixgigaspireapp.output.model.GuestWifiEntity;
 import com.calix.calixgigaspireapp.output.model.GuestWifiResponse;
 import com.calix.calixgigaspireapp.services.APIRequestHandler;
+import com.calix.calixgigaspireapp.ui.dashboard.Alert;
 import com.calix.calixgigaspireapp.ui.dashboard.Dashboard;
 import com.calix.calixgigaspireapp.utils.AppConstants;
 import com.calix.calixgigaspireapp.utils.DialogManager;
@@ -46,6 +49,44 @@ public class GuestNetwork extends BaseActivity {
     @BindView(R.id.guest_network_recycler_view)
     RecyclerView mGuestNetworkRecyclerView;
 
+    @BindView(R.id.header_right_img_lay)
+    RelativeLayout mHeaderRightImgLay;
+
+    @BindView(R.id.header_right_img)
+    ImageView mHeaderRightImg;
+
+    /* Footer Variables */
+    @BindView(R.id.footer_right_btn)
+    ImageButton mFooterRightBtn;
+
+    @BindView(R.id.notification_count_footer)
+    TextView mNotificationCount;
+
+    @BindView(R.id.footer_right_ic)
+    ImageView mFooterRightIcon;
+
+    @BindView(R.id.footer_right_txt)
+    TextView mFooterRightTxt;
+
+    @BindView(R.id.footer_center_btn)
+    ImageButton mFooterCenterBtn;
+
+    @BindView(R.id.footer_center_ic)
+    ImageView mFooterCenterIcon;
+
+    @BindView(R.id.footer_center_txt)
+    TextView mFooterCenterTxt;
+
+    @BindView(R.id.footer_left_btn)
+    ImageButton mFooterLeftBtn;
+
+    @BindView(R.id.footer_left_ic)
+    ImageView mFooterLeftIcon;
+
+    @BindView(R.id.footer_left_txt)
+    TextView mFooterLeftTxt;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,16 +96,18 @@ public class GuestNetwork extends BaseActivity {
 
     /*View initialization*/
     private void initView() {
-            /*For error track purpose - log with class name*/
+        /*For error track purpose - log with class name*/
         AppConstants.TAG = this.getClass().getSimpleName();
 
-       /*ButterKnife for variable initialization*/
+        /*ButterKnife for variable initialization*/
         ButterKnife.bind(this);
 
         /*Keypad to be hidden when a touch made outside the edit text*/
         setupUI(mGuestNetworkLay);
 
         setHeaderView();
+        setFooterVIew();
+
 
         /*API call*/
         guestAPICall();
@@ -77,9 +120,17 @@ public class GuestNetwork extends BaseActivity {
         /*Header*/
         mHeaderTxt.setVisibility(View.VISIBLE);
         mHeaderTxt.setText(getString(R.string.guest_network));
+        mHeaderRightImgLay.setVisibility(View.VISIBLE);
+        mHeaderRightImg.setImageResource(R.drawable.ic_notification);
+
+        if (AppConstants.ALERT_COUNT > 0) {
+            mNotificationCount.setVisibility(View.VISIBLE);
+            mNotificationCount.setText(String.valueOf(AppConstants.ALERT_COUNT));
+        } else
+            mNotificationCount.setVisibility(View.GONE);
 
 
-         /*Set header adjustment - status bar we applied transparent color so header tack full view*/
+        /*Set header adjustment - status bar we applied transparent color so header tack full view*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             mGuestNetworkHeaderBgLay.post(new Runnable() {
                 public void run() {
@@ -92,13 +143,42 @@ public class GuestNetwork extends BaseActivity {
         }
     }
 
+    /*Set Footer View */
+    private void setFooterVIew(){
+
+        mNotificationCount.setVisibility(View.GONE);
+
+        mFooterLeftIcon.setBackground(getResources().getDrawable(R.drawable.ic_dashboard));
+        mFooterLeftTxt.setText(getString(R.string.dashboard));
+
+        mFooterCenterIcon.setBackground(getResources().getDrawable(R.drawable.ic_guest_home));
+        mFooterCenterBtn.setBackground(getResources().getDrawable(R.drawable.footer_selection));
+        mFooterCenterTxt.setText(getString(R.string.guest_home));
+
+        mFooterRightIcon.setBackground(getResources().getDrawable(R.drawable.ic_guest_settings));
+        mFooterRightTxt.setText(getString(R.string.guest_Settings));
+    }
+
 
     /*View onClick*/
-    @OnClick({R.id.header_left_img_lay, R.id.add_guest_network_lay})
+    @OnClick({R.id.header_left_img_lay, R.id.header_right_img_lay, R.id.add_guest_network_lay,
+            R.id.footer_left_btn,R.id.footer_center_btn,R.id.footer_right_btn})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.header_left_img_lay:
                 onBackPressed();
+                break;
+            case R.id.header_right_img_lay:
+                nextScreen(Alert.class);
+                break;
+            case R.id.footer_left_btn:
+                previousScreen(Dashboard.class);
+                break;
+            case R.id.footer_center_btn:
+//                nextScreen(Alert.class);
+                break;
+            case R.id.footer_right_btn:
+//                nextScreen(Router.class);
                 break;
             case R.id.add_guest_network_lay:
                 GuestWifiEntity guestWifiEntity = new GuestWifiEntity();
@@ -138,7 +218,7 @@ public class GuestNetwork extends BaseActivity {
 
     @Override
     public void onRequestFailure(Object resObj, Throwable t) {
-        super.onRequestFailure(resObj,t);
+        super.onRequestFailure(resObj, t);
 
         if (t instanceof IOException) {
             DialogManager.getInstance().showNetworkErrorPopup(this,
@@ -146,9 +226,9 @@ public class GuestNetwork extends BaseActivity {
                             .connect_time_out)), new InterfaceBtnCallback() {
                         @Override
                         public void onPositiveClick() {
-                    guestAPICall();
-                }
-            });
+                            guestAPICall();
+                        }
+                    });
         }
     }
 

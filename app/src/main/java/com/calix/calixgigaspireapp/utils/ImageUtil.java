@@ -32,7 +32,7 @@ public class ImageUtil {
             case 6:
                 return R.drawable.ic_device_television;
             default:
-                return R.drawable.ic_default_device;
+                return R.drawable.ic_filter_devices;
         }
     }
 

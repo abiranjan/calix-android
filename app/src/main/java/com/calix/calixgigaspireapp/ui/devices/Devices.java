@@ -20,7 +20,6 @@ import com.calix.calixgigaspireapp.output.model.DeviceListResponse;
 import com.calix.calixgigaspireapp.services.APIRequestHandler;
 import com.calix.calixgigaspireapp.ui.dashboard.Alert;
 import com.calix.calixgigaspireapp.ui.dashboard.Dashboard;
-import com.calix.calixgigaspireapp.ui.router.Router;
 import com.calix.calixgigaspireapp.utils.AppConstants;
 import com.calix.calixgigaspireapp.utils.DialogManager;
 import com.calix.calixgigaspireapp.utils.InterfaceBtnCallback;
@@ -47,6 +46,9 @@ public class Devices extends BaseActivity {
     /* Footer Variables */
     @BindView(R.id.footer_right_btn)
     ImageButton mFooterRightBtn;
+
+    @BindView(R.id.notification_count_footer)
+    TextView mNotificationCount;
 
     @BindView(R.id.footer_right_ic)
     ImageView mFooterRightIcon;
@@ -120,6 +122,12 @@ public class Devices extends BaseActivity {
 
     /*Set Footer View */
     private void setFooterVIew(){
+        if(AppConstants.ALERT_COUNT > 0){
+            mNotificationCount.setVisibility(View.VISIBLE);
+            mNotificationCount.setText(String.valueOf(AppConstants.ALERT_COUNT));
+        } else {
+            mNotificationCount.setVisibility(View.GONE);
+        }
         mFooterLeftIcon.setBackground(getResources().getDrawable(R.drawable.ic_dashboard));
         mFooterLeftTxt.setText(getString(R.string.dashboard));
 

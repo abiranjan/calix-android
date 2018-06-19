@@ -94,7 +94,7 @@ public class RouterMap extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.header_left_img_lay:
-                onBackPressed();
+                previousScreen(Dashboard.class);
                 break;
         }
     }

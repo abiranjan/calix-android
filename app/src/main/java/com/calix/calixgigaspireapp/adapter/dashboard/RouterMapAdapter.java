@@ -46,6 +46,10 @@ public class RouterMapAdapter extends RecyclerView.Adapter<RouterMapAdapter.Hold
 
         RouterMapEntity routerMapRes = mRouterMapResArrayList.get(position);
 
+        if(position == mRouterMapResArrayList.size() - 1){
+            holder.mBottomDot.setVisibility(View.GONE);
+        }
+
         holder.mDeviceNameTxt.setText(routerMapRes.getName());
         holder.mDownloadSpeedTxt.setText(routerMapRes.getSpeed().getDownload());
         holder.mUploadSpeedTxt.setText(routerMapRes.getSpeed().getUpload());
@@ -53,7 +57,11 @@ public class RouterMapAdapter extends RecyclerView.Adapter<RouterMapAdapter.Hold
         holder.mEditDeviceName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogManager.getInstance().showEdtDeviceNamePopup(((BaseActivity) mContext), holder.mDeviceNameTxt.getText().toString().trim(), new InterfaceEdtBtnCallback() {
+                DialogManager.getInstance().showEdtDeviceNamePopup(((BaseActivity) mContext),
+                        mContext.getString(R.string.router_edit_pheader),
+                        mContext.getString(R.string.router_edit_sheader),
+                        mContext.getString(R.string.router_edit_hint),
+                        holder.mDeviceNameTxt.getText().toString().trim(), new InterfaceEdtBtnCallback() {
                     @Override
                     public void onNegativeClick() {
 
@@ -97,6 +105,9 @@ public class RouterMapAdapter extends RecyclerView.Adapter<RouterMapAdapter.Hold
 
         @BindView(R.id.edit_device_name)
         ImageView mEditDeviceName;
+
+        @BindView(R.id.bottom_dot)
+        ImageView mBottomDot;
 
         public Holder(View itemView) {
             super(itemView);

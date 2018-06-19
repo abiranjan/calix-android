@@ -102,65 +102,6 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/FilterLay"
-                style="@style/LayoutWidMatch_HeiWrap"
-                android:layout_height="@dimen/size45"
-                android:background="@color/white"
-                android:padding="@dimen/size7"
-                android:visibility="gone">
-
-                <TextView
-                    style="@style/TextRobotoMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/size10"
-                    android:layout_toStartOf="@+id/device_spinner_lay"
-                    android:gravity="end"
-                    android:text="@string/filter"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/size13" />
-
-                <RelativeLayout
-                    android:id="@+id/device_spinner_lay"
-                    style="@style/LayoutMatch"
-                    android:layout_width="@dimen/size140"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/blue_border_btn"
-                    android:padding="@dimen/size1">
-
-                    <Spinner
-                        android:id="@+id/filter_spinner"
-                        style="@style/LayoutMatch"
-                        android:layout_toStartOf="@+id/view"
-                        android:background="@null"
-                        android:gravity="start|center"
-                        android:padding="0dip"
-                        android:paddingEnd="0dip"
-                        android:paddingStart="@dimen/size5"
-                        android:textAlignment="textStart" />
-
-                    <View
-                        android:id="@+id/view"
-                        style="@style/LayoutMatch"
-                        android:layout_width="@dimen/size0.5"
-                        android:layout_toStartOf="@+id/arrow_img"
-                        android:background="@color/blue" />
-
-
-                    <ImageView
-                        android:id="@+id/arrow_img"
-                        style="@style/LayoutMatch"
-                        android:layout_width="@dimen/size30"
-                        android:layout_alignParentEnd="true"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@string/app_name"
-                        android:padding="@dimen/size10"
-                        android:src="@drawable/ic_down_arrow" />
-                </RelativeLayout>
-            </RelativeLayout>
-
             <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                 style="@style/LayoutWidMatch_HeiWrap"
                 android:layout_margin="@dimen/size5"
@@ -232,7 +173,7 @@
                                     android:gravity="start"
                                     android:maxLines="1"
                                     android:text="@string/connected_to"
-                                    android:textColor="@color/blue"
+                                    android:textColor="@color/gray"
                                     android:textSize="@dimen/size9" />
                             </LinearLayout>
                         </LinearLayout>
@@ -595,7 +536,7 @@
                             android:layout_width="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toEndOf="@+id/connect_disconnect_img"
-                            android:layout_toStartOf="@+id/connect_disconnect_switch_compat"
+                            android:layout_toStartOf="@+id/connect_disconnect_toggle"
                             android:ellipsize="end"
                             android:gravity="start"
                             android:maxLines="2"
@@ -603,21 +544,17 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/text10" />
 
-                        <android.support.v7.widget.SwitchCompat
-                            android:id="@+id/connect_disconnect_switch_compat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/size30"
-                            app:switchTextAppearance="@style/SwitchTextAppearance"
+                        <ToggleButton
+                            android:layout_width="@dimen/size40"
+                            android:layout_height="@dimen/size23"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:button="@null"
-                            android:checked="true"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
-                            android:textOff="@string/off"
-                            android:textOn="@string/on"
-                            app:showText="true"
-                            app:switchMinWidth="@dimen/size5" />
+                            android:id="@+id/connect_disconnect_toggle"
+                            android:textSize="@dimen/size10"
+                            android:textColor="@color/white"
+                            android:background="@drawable/toggle_button"
+
+                            />
 
                     </RelativeLayout>
 
@@ -626,6 +563,32 @@
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+
+    <ImageView
+        android:id="@+id/transaprent_bg"
+        style="@style/LayoutMatch"
+        android:visibility="gone"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/transparent_bg" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/device_spinner_card_view"
+        style="@style/LayoutWrap"
+        android:visibility="gone"
+        android:layout_above="@id/general_footer"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/size220"
+        android:elevation="@dimen/size3"
+        app:cardCornerRadius="@dimen/size3"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/device_spinner_recycler_view"
+            style="@style/LayoutMatch"
+            />
+    </android.support.v7.widget.CardView>
 
     <include layout="@layout/ui_general_footer"
         android:id="@+id/general_footer"/>

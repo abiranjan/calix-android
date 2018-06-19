@@ -3,6 +3,7 @@ package com.calix.calixgigaspireapp.adapter.guest;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.calix.calixgigaspireapp.R;
 import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.output.model.DurationEntity;
@@ -17,6 +20,8 @@ import com.calix.calixgigaspireapp.output.model.GuestWifiEntity;
 import com.calix.calixgigaspireapp.ui.guest.SetupGuestNetwork;
 import com.calix.calixgigaspireapp.utils.AppConstants;
 import com.calix.calixgigaspireapp.utils.DateUtil;
+import com.calix.calixgigaspireapp.utils.DialogManager;
+import com.calix.calixgigaspireapp.utils.InterfaceEdtBtnCallback;
 
 import java.util.ArrayList;
 
@@ -28,6 +33,7 @@ public class GuestNetworkAdapter extends RecyclerView.Adapter<GuestNetworkAdapte
 
     private Context mContext;
     private ArrayList<GuestWifiEntity> mGuestWifiRes;
+    private String mEventNameStr = "";
 
     public GuestNetworkAdapter(ArrayList<GuestWifiEntity> guestWifiRes, Context context) {
         mContext = context;
@@ -49,6 +55,15 @@ public class GuestNetworkAdapter extends RecyclerView.Adapter<GuestNetworkAdapte
 
         holder.mEventNameTxt.setText(guestWifiEntityRes.getEventName().isEmpty() ? guestWifiEntityRes.getGuestWifiName() : guestWifiEntityRes.getEventName());
         if (!guestWifiEntityRes.isIndefinite()) {
+            try {
+                Glide.with(mContext)
+                        .load(guestWifiEntityRes.getGuestAvatarUrl())
+                        .apply(new RequestOptions().placeholder(R.drawable.default_profile_white).error(R.drawable.default_profile_white))
+                        .into(holder.mGuestUserImg);
+            } catch (Exception ex) {
+                holder.mGuestUserImg.setImageResource(R.drawable.default_profile_white);
+                Log.e(AppConstants.TAG, ex.getMessage());
+            }
             holder.mEventTimeTxt.setText(String.format(mContext.getString(R.string.activated_time),
                     (DateUtil.getCustomDateAndTimeFormat(mGuestWifiRes.get(position).getDuration().getStartTime(), AppConstants.CUSTOM_DATE_TIME_FORMAT) + " " + mContext.getString(R.string.to) + " " + DateUtil.getCustomDateAndTimeFormat(mGuestWifiRes.get(position).getDuration().getEndTime(), AppConstants.CUSTOM_DATE_TIME_FORMAT))));
             holder.mEventTimeTxt.setVisibility(View.GONE);
@@ -58,6 +73,8 @@ public class GuestNetworkAdapter extends RecyclerView.Adapter<GuestNetworkAdapte
             holder.mEndTimeText.setText((DateUtil.getCustomDateAndTimeFormat(mGuestWifiRes.get(position).getDuration().getEndTime(), AppConstants.CUSTOM_12_HRS_TIME_FORMAT)));
         } else {
             holder.mEventTimeTxt.setText(mContext.getText(R.string.no_time_limit));
+            holder.mVisibleInvisibleImg.setVisibility(View.GONE);
+            holder.mCollapsedView.setVisibility(View.GONE);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +101,36 @@ public class GuestNetworkAdapter extends RecyclerView.Adapter<GuestNetworkAdapte
             }
         });
 
+        holder.mEditGuestName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogManager.getInstance().showEdtDeviceNamePopup(((BaseActivity) mContext),
+                        mContext.getString(R.string.guest_edit_pheader),
+                        mContext.getString(R.string.guest_edit_sheader),
+                        mContext.getString(R.string.guest_edit_hint),
+                        holder.mEventNameTxt.getText().toString().trim(), new InterfaceEdtBtnCallback() {
+                            @Override
+                            public void onNegativeClick() {
+
+                            }
+
+                            @Override
+                            public void onPositiveClick(String edtStr) {
+                                mEventNameStr = edtStr;
+                                editEventName(mEventNameStr);
+                                holder.mEventNameTxt.setText(edtStr);
+                            }
+                        });
+            }
+        });
+
+    }
+
+
+    private void editEventName(String eventNameStr) {
+//        APIRequestHandler.getInstance().guestUpdateAPICall(AppConstants.DEVICE_DETAILS_ENTITY.getDeviceId(), eventNameStr, "1234", ((BaseActivity) mContext));
+//        mEventNameTxt.setText(eventNameStr);
+//        mEventNameTxt.setText(eventNameStr);
     }
 
     @Override
@@ -116,6 +163,12 @@ public class GuestNetworkAdapter extends RecyclerView.Adapter<GuestNetworkAdapte
 
         @BindView(R.id.collapsedView)
         RelativeLayout mCollapsedView;
+
+        @BindView(R.id.guest_user_img)
+        ImageView mGuestUserImg;
+
+        @BindView(R.id.guest_edit_img)
+        ImageView mEditGuestName;
 
 
         private ControlHolder(View itemView) {

@@ -7,9 +7,11 @@ import com.calix.calixgigaspireapp.output.model.ChartDetailsResponse;
 import com.calix.calixgigaspireapp.output.model.ChartFilterResponse;
 import com.calix.calixgigaspireapp.output.model.CommonResponse;
 import com.calix.calixgigaspireapp.output.model.DashboardResponse;
+import com.calix.calixgigaspireapp.output.model.DeviceFilterListResponse;
 import com.calix.calixgigaspireapp.output.model.DeviceListResponse;
 import com.calix.calixgigaspireapp.output.model.DeviceRenameResponse;
 import com.calix.calixgigaspireapp.output.model.EncryptionTypeResponse;
+import com.calix.calixgigaspireapp.output.model.FilterDeviceListResponse;
 import com.calix.calixgigaspireapp.output.model.GuestWifiEntity;
 import com.calix.calixgigaspireapp.output.model.GuestWifiResponse;
 import com.calix.calixgigaspireapp.output.model.LoginResponse;
@@ -112,6 +114,14 @@ public interface APICommonInterface {
     /*Delete Guest List API*/
     @DELETE("router/guest/delete?")
     Call<CommonResponse> deleteGuestNetworkAPI(@Header("Authorization") String authorizationStr, @Query("eventId") String eventId);
+
+    /*Device Filter List API*/
+    @GET("device/filter")
+    Call<DeviceFilterListResponse> deviceFilterListAPI(@Header("Authorization") String authorizationStr);
+
+    /*Device List By Filter API*/
+    @GET
+    Call<FilterDeviceListResponse> deviceListByFilterAPI(@Header("Authorization") String authorizationStr, @Url String urlStr);
 
 
 

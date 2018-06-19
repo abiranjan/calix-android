@@ -4,8 +4,12 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,8 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.calix.calixgigaspireapp.R;
+import com.calix.calixgigaspireapp.adapter.devices.DeviceDetailsSpinnerAdapter;
 import com.calix.calixgigaspireapp.main.BaseActivity;
 import com.calix.calixgigaspireapp.output.model.ChartDetailsEntity;
 import com.calix.calixgigaspireapp.output.model.ChartDetailsResponse;
@@ -27,6 +33,7 @@ import com.calix.calixgigaspireapp.output.model.CommonResponse;
 import com.calix.calixgigaspireapp.output.model.DeviceEntity;
 import com.calix.calixgigaspireapp.output.model.DeviceRenameResponse;
 import com.calix.calixgigaspireapp.services.APIRequestHandler;
+import com.calix.calixgigaspireapp.ui.dashboard.Alert;
 import com.calix.calixgigaspireapp.ui.dashboard.Dashboard;
 import com.calix.calixgigaspireapp.utils.AppConstants;
 import com.calix.calixgigaspireapp.utils.DateUtil;
@@ -65,14 +72,8 @@ public class DeviceDetails extends BaseActivity implements CompoundButton.OnChec
     @BindView(R.id.graph_header_bg_lay)
     RelativeLayout mGraphHeaderBgLay;
 
-    @BindView(R.id.FilterLay)
-    RelativeLayout mFilterLay;
-
     @BindView(R.id.line_chart)
     LineChart mLineChart;
-
-    @BindView(R.id.filter_spinner)
-    Spinner mFilterSpinner;
 
     @BindView(R.id.device_img)
     ImageView mDeviceImg;
@@ -101,8 +102,8 @@ public class DeviceDetails extends BaseActivity implements CompoundButton.OnChec
     @BindView(R.id.connect_disconnect_txt)
     TextView mConnectDisconnectTxt;
 
-    @BindView(R.id.connect_disconnect_switch_compat)
-    SwitchCompat mConnectDisconnectSwitchCompat;
+    @BindView(R.id.connect_disconnect_toggle)
+    ToggleButton mToggleWifi;
 
     @BindView(R.id.ip_address_txt)
     TextView mIpAddressTxt;
@@ -140,6 +141,15 @@ public class DeviceDetails extends BaseActivity implements CompoundButton.OnChec
 
     @BindView(R.id.footer_left_txt)
     TextView mFooterLeftTxt;
+
+    @BindView(R.id.transaprent_bg)
+    ImageView mTransaprentView;
+
+    @BindView(R.id.device_spinner_card_view)
+    CardView mDeviceSpinnerCardView;
+
+    @BindView(R.id.device_spinner_recycler_view)
+    RecyclerView mDeviceSpinnerRecyclerView;
 
     private ArrayList<String> mFilterTypStrArrList = new ArrayList<>();
     private float mGraphYAxisMaxFloat = 0;
@@ -203,24 +213,29 @@ public class DeviceDetails extends BaseActivity implements CompoundButton.OnChec
     }
 
 
-    @OnClick({R.id.header_left_img_lay, R.id.arrow_img, R.id.device_edit_img, R.id.footer_center_btn, R.id.footer_right_btn})
+    @OnClick({R.id.header_left_img_lay, R.id.device_edit_img, R.id.footer_left_btn,R.id.footer_center_btn, R.id.footer_right_btn})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.header_left_img_lay:
                 onBackPressed();
                 break;
-            case R.id.arrow_img:
-                mFilterSpinner.performClick();
-                break;
-            case R.id.footer_center_btn:
+            case R.id.footer_left_btn:
                 previousScreen(Dashboard.class);
                 break;
+            case R.id.footer_center_btn:
+                nextScreen(Alert.class);
+                break;
             case R.id.footer_right_btn:
-                mFilterLay.setVisibility(View.VISIBLE);
+                mTransaprentView.setVisibility(mDeviceSpinnerCardView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+                mDeviceSpinnerCardView.setVisibility(mDeviceSpinnerCardView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
                 break;
             case R.id.device_edit_img:
 
-                DialogManager.getInstance().showEdtDeviceNamePopup(this, mDeviceNameTxt.getText().toString().trim(), new InterfaceEdtBtnCallback() {
+                DialogManager.getInstance().showEdtDeviceNamePopup(this,
+                        getString(R.string.device_edit_pheader),
+                        getString(R.string.device_edit_sheader),
+                        getString(R.string.device_edit_hint),
+                        mDeviceNameTxt.getText().toString().trim(), new InterfaceEdtBtnCallback() {
                     @Override
                     public void onNegativeClick() {
 
@@ -241,8 +256,6 @@ public class DeviceDetails extends BaseActivity implements CompoundButton.OnChec
         boolean isDeviceConnectedBool = deviceDetailsRes.isConnected2network();
 
         mHeaderTxt.setText(deviceDetailsRes.getName());
-        mHeaderTxt.setText(String.format(deviceDetailsRes.getSubType() == 1 ? getString(R.string.android) : getString(R.string.ios),deviceDetailsRes.getName()));
-
 
         mDeviceImg.setImageResource(ImageUtil.getInstance().deviceImg(deviceDetailsRes.getType()));
         mDeviceNameTxt.setText(deviceDetailsRes.getName());
@@ -253,14 +266,14 @@ public class DeviceDetails extends BaseActivity implements CompoundButton.OnChec
         mSignalStrengthTxt.setText(deviceDetailsRes.getSignalStrength() + " " + getString(R.string.percentage_sys));
 
         mConnectDisconnectImg.setImageResource(ImageUtil.getInstance().connectedStatusViaRouterImg(!isDeviceConnectedBool, deviceDetailsRes.getIfType()));
-        mConnectDisconnectTxt.setText(String.format(getString(isDeviceConnectedBool ? R.string.connect_device : R.string.disconnect_device), deviceDetailsRes.getRouter().getName()));
-        mConnectDisconnectSwitchCompat.setChecked(isDeviceConnectedBool);
-
+        mConnectDisconnectTxt.setText(String.format(getString(isDeviceConnectedBool ? R.string.connect_device_list : R.string.disconnect_device_list), AppConstants.DEVICE_DETAILS_ENTITY.getRouter().getName()));
+        mToggleWifi.setChecked(isDeviceConnectedBool);
+        setToggleView(isDeviceConnectedBool);
         mDownloadSpeedTxt.setText(deviceDetailsRes.getSpeed().getDownload());
         mUploadSpeedTxt.setText(deviceDetailsRes.getSpeed().getUpload());
 
         mIpAddressTxt.setText(deviceDetailsRes.getIpAddress());
-        mBandTxt.setText(String.format(getString(R.string.band_unit),deviceDetailsRes.getBand()));
+        mBandTxt.setText(String.format(getString(R.string.band_unit), deviceDetailsRes.getBand()));
         mChannelTxt.setText(String.valueOf(deviceDetailsRes.getChannel()));
 
 
@@ -268,28 +281,52 @@ public class DeviceDetails extends BaseActivity implements CompoundButton.OnChec
     }
 
     /*View onCheckedChanged*/
-    @OnCheckedChanged({R.id.connect_disconnect_switch_compat})
+    @OnCheckedChanged({R.id.connect_disconnect_toggle})
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
-            case R.id.connect_disconnect_switch_compat:
+            case R.id.connect_disconnect_toggle:
                 mIsDeviceConnectBool = isChecked;
+                setToggleView(mIsDeviceConnectBool);
 
                 connectAndDisConnectDeviceAPI(mIsDeviceConnectBool);
 
                 mConnectionStatusTxt.setText(String.format(getString(isChecked ? R.string.connect_device : R.string.disconnect_device), AppConstants.DEVICE_DETAILS_ENTITY.getRouter().getName()));
                 mConnectDisconnectImg.setImageResource(ImageUtil.getInstance().connectedStatusViaRouterImg(!isChecked, AppConstants.DEVICE_DETAILS_ENTITY.getIfType()));
-                mConnectDisconnectTxt.setText(String.format(getString(isChecked ? R.string.connect_device : R.string.disconnect_device), AppConstants.DEVICE_DETAILS_ENTITY.getRouter().getName()));
+                mConnectDisconnectTxt.setText(String.format(getString(isChecked ? R.string.connect_device_list : R.string.disconnect_device_list), AppConstants.DEVICE_DETAILS_ENTITY.getRouter().getName()));
 
                 break;
         }
     }
 
+    private void setToggleView(boolean isChecked) {
+        if (isChecked) {
+            // The toggle is enabled
+            mToggleWifi.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);// Set left padding
+            int padding = getResources().getDimensionPixelSize(R.dimen.size2);
+            int paddingBottom = getResources().getDimensionPixelSize(R.dimen.size3);
+            int paddingLeft = getResources().getDimensionPixelSize(R.dimen.size5);
+            mToggleWifi.setPadding(paddingLeft, padding, padding, paddingBottom);
+        } else {
+            // The toggle is disabled
+            mToggleWifi.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);// Set left padding
+            int padding = getResources().getDimensionPixelSize(R.dimen.size2);
+            int paddingTop = getResources().getDimensionPixelSize(R.dimen.size3);
+            int paddingRight = getResources().getDimensionPixelSize(R.dimen.size3);
+            mToggleWifi.setPadding(padding, paddingTop, paddingRight, padding);
+        }
+    }
+
+    private void connectAndDisConnectDeviceAPI(boolean isChecked) {
+        if (isChecked)
+            APIRequestHandler.getInstance().deviceConnectAPICall(AppConstants.DEVICE_DETAILS_ENTITY.getDeviceId(), this);
+        else
+            APIRequestHandler.getInstance().deviceDisconnectAPICall(AppConstants.DEVICE_DETAILS_ENTITY.getDeviceId(), this);
+
+    }
+
 
     private void graphAPI(String filterNameStr) {
         mFilterNameStr = filterNameStr;
-
-//        APIRequestHandler.getInstance().deviceChartDetailsAPICall("bfaa3128-f7dc-4fa7-8fc6-8f6256741312", filterNameStr, this);
-
         APIRequestHandler.getInstance().deviceChartDetailsAPICall(AppConstants.DEVICE_DETAILS_ENTITY.getDeviceId(), filterNameStr, this);
     }
 
@@ -303,13 +340,6 @@ public class DeviceDetails extends BaseActivity implements CompoundButton.OnChec
         mHeaderTxt.setText(deviceNameStr);
     }
 
-    private void connectAndDisConnectDeviceAPI(boolean isChecked) {
-        if (isChecked)
-            APIRequestHandler.getInstance().deviceConnectAPICall(AppConstants.DEVICE_DETAILS_ENTITY.getDeviceId(), this);
-        else
-            APIRequestHandler.getInstance().deviceDisconnectAPICall(AppConstants.DEVICE_DETAILS_ENTITY.getDeviceId(), this);
-
-    }
 
     @Override
     public void onRequestSuccess(Object resObj) {
@@ -320,15 +350,10 @@ public class DeviceDetails extends BaseActivity implements CompoundButton.OnChec
                 ArrayList<ChartFilterEntity> encryptionTypeEntity = chartFilterResponse.getFilters();
                 mFilterTypStrArrList = new ArrayList<>();
 
-                int spinnerSelectedTypeInt = 0;
                 for (int i = 0; i < encryptionTypeEntity.size(); i++) {
                     mFilterTypStrArrList.add(encryptionTypeEntity.get(i).getType());
-//                    if (encryptionTypeEntity.get(i).getType().equalsIgnoreCase(getString(R.string.day))) {
-//                        spinnerSelectedTypeInt = i;
-//                    }
-
                 }
-                setSpinnerData(spinnerSelectedTypeInt);
+                setDeviceFilterListAdapter();
 
             }
         } else if (resObj instanceof ChartDetailsResponse) {
@@ -361,32 +386,23 @@ public class DeviceDetails extends BaseActivity implements CompoundButton.OnChec
         }
     }
 
-
-    private void setSpinnerData(int spinnerPosInt) {
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(DeviceDetails.this, R.layout.adap_spinner_equ_selected, mFilterTypStrArrList);
-        adapter.setDropDownViewResource(R.layout.adap_spinner_equ_list);
-        mFilterSpinner.setAdapter(adapter);
-
-
-        //Model Spinner item click
-        mFilterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    /*Set filter adapter*/
+    private void setDeviceFilterListAdapter() {
+        InterfaceEdtBtnCallback interfaceEdtBtnCallback;
+        interfaceEdtBtnCallback = new InterfaceEdtBtnCallback() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                graphAPI(mFilterTypStrArrList.get(position));
+            public void onPositiveClick(String editStr) {
+                mTransaprentView.setVisibility(View.GONE);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNegativeClick() {
 
             }
-        });
+        };
 
-        if (mFilterTypStrArrList.size() > 0) {
-            mFilterSpinner.setSelection(spinnerPosInt, true);
-        }
-
-
+        mDeviceSpinnerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mDeviceSpinnerRecyclerView.setAdapter(new DeviceDetailsSpinnerAdapter(mFilterTypStrArrList, interfaceEdtBtnCallback, mDeviceSpinnerCardView, this));
     }
 
     private void GraphSection(String filterTypeStr, ArrayList<ChartDetailsEntity> chartDetailsRes) {

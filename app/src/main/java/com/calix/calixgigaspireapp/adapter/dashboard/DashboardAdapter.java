@@ -49,15 +49,20 @@ public class DashboardAdapter extends PagerAdapter {
         TextView totalDeviceCount = centerNode.findViewById(R.id.deviceCount);
 
         if (totalDevicesCount > 0) {
+            mCenterHexIcon.setColorFilter(mContext.getResources().getColor(R.color.sky_blue));
+            totalDeviceCount.setVisibility(View.VISIBLE);
+            totalDeviceCount.setText(String.valueOf(totalDevicesCount));
+
             mCenterHexIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ((BaseActivity) mContext).nextScreen(DevicesList.class);
                 }
             });
+        } else {
+            totalDeviceCount.setVisibility(View.GONE);
         }
 
-        totalDeviceCount.setText(String.valueOf(totalDevicesCount));
         circularLayout.setCapacity(8);
         for (int i = 0; i < categories.get(position).size(); i++) {
             LayoutInflater factory = LayoutInflater.from(mContext);
@@ -79,7 +84,10 @@ public class DashboardAdapter extends PagerAdapter {
             }
 
             TextView deviceLabel = myView.findViewById(R.id.deviceLabel);
-            deviceLabel.setText(categories.get(position).get(i).getName());
+            String deviceName = Character.toUpperCase(categories.get(position).get(i).getName().charAt(0)) +
+                    categories.get(position).get(i).getName().substring(1).toLowerCase();
+            deviceLabel.setText(deviceName);
+
 
             TextView deviceCountTxtView = myView.findViewById(R.id.deviceCount);
             if (categories.get(position).get(i).getCount() > 0) {

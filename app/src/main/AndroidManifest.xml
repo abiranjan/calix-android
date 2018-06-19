@@ -65,9 +65,6 @@
         <activity
             android:name=".ui.devices.DevicesList"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity
-            android:name=".ui.router.Router"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <!-- Google vision plugin -->
         <meta-data

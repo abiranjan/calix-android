@@ -17,7 +17,17 @@ public class GuestWifiEntity implements Serializable {
     private String guestWifiName;
     private String guestWifiPassword;
     private String encryptionType;
+    private String guestAvatarUrl;
     private int encryptType;
+
+    public String getGuestAvatarUrl() {
+        return guestAvatarUrl;
+    }
+
+    public GuestWifiEntity setGuestAvatarUrl(String guestAvatarUrl) {
+        this.guestAvatarUrl = guestAvatarUrl;
+        return this;
+    }
 
     public Bitmap getQrImage() {
         return qrImage;

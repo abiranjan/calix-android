@@ -7,6 +7,8 @@ public class DeviceListResponse implements Serializable {
 
     ArrayList<DeviceEntity> devices;
 
+    int count;
+
     public DeviceListResponse(){
         devices = new ArrayList<>();
     }
@@ -17,6 +19,15 @@ public class DeviceListResponse implements Serializable {
 
     public DeviceListResponse setDevices(ArrayList<DeviceEntity> devices) {
         this.devices = devices;
+        return this;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public DeviceListResponse setCount(int count) {
+        this.count = count;
         return this;
     }
 }

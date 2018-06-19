@@ -17,6 +17,7 @@
             android:layout_height="@dimen/size50"
             android:id="@+id/center_hex_icon"
             android:layout_centerInParent="true"
+            android:tint="@color/gray_light"
             app:srcCompat="@drawable/hexgonal_icon"/>
 
         <TextView
